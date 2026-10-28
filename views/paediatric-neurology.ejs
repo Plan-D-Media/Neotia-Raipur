@@ -1,0 +1,774 @@
+<%- include('partials/header', { 
+    title: 'Paediatric Neurologist Doctors Kolkata | Neotia Bhagirathi',
+    description: 'Expert paediatric neurology care in New Town, Kolkata. Specialized diagnosis and treatment for childhood neurological disorders, epilepsy, and neurodevelopmental conditions.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Crucial Header Offset Fix so top menu is never disturbed */
+.banner-sec {
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+}
+@media (max-width: 991px) {
+    .banner-sec {
+        padding-top: 105px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+.banner-area .banner-img img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-1-rgb), 0.12);
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+}
+
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey-400);
+    font-size: 14px;
+    font-weight: 400;
+}
+.step-item.active {
+    color: var(--grey-900);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--brand-blue-1);
+}
+.speciality_banner {
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.06);
+}
+.doctors-sec .right-plus {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(var(--white-rgb), 0.9);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.15);
+}
+.doctors-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 480px;
+}
+.doctors-item img.img-fluid {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+}
+.doctors-item:hover img.img-fluid {
+    transform: scale(1.03);
+}
+
+/* Dedicated Clinic Cards */
+.cli001-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+.cli001-item {
+    background: var(--white);
+    border: 1px solid var(--grey-100);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    color: var(--brand-blue-2-tint-3);
+    box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);
+    transition: all 0.3s ease;
+}
+.cli001-item:hover {
+    border-color: var(--brand-blue-1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(var(--brand-blue-1-rgb), 0.1);
+}
+.cli001-item .clients-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--brand-blue-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.cli001-item .clients-icon svg {
+    width: 24px;
+    height: 24px;
+}
+</style>
+
+<!-- Banner Section -->
+<section class="banner-sec">
+        <div class="banner-area">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-5 col-lg-5">
+                        <h1 class="fadeInUp animatable">Paediatric Neurology in New Town, Kolkata | Expert Child Neurologists</h1>
+                        <p class="fadeInUp animatable">Our gentle care helps every child think, move, and grow freely, because every mind deserves a bright tomorrow.</p>
+                        <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="banner-img">
+                            <img src="/upload/fileManager/banner/paediatric_neurology_hero_banner.webp" alt="Paediatric Neurology" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Clinical Content Section -->
+<section class="content-tabs-sec section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-12"><!-- <div class="tablist fadeInUp animatable" role="tablist" aria-label="Paediatric Cardiac Sciences">
+                        <button class="tab" role="tab" aria-selected="true" aria-controls="tab1" id="t1">Paediatric Neurology and
+                            <br>
+                            Neurodevelopment</button>
+                        <button class="tab" role="tab" aria-selected="false" aria-controls="tab2" id="t2">Paediatric
+                            <br>
+                            Neurosurgery</button>
+                        <button class="tab" role="tab" aria-selected="false" aria-controls="tab3" id="t3">Neurophysiology and<br>Advanced Diagnostics</button>
+                    </div> -->
+<div class="panels">
+<section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+<h3 class="fadeInUp animatable">Paediatric Neurology and Neurodevelopment</h3>
+<p class="fadeInUp animatable">At our Paediatric Neurology Department, we are dedicated to the diagnosis, treatment and long-term management of disorders affecting the brain, spinal cord, nerves and muscles in children—from newborns to adolescents. With a compassionate team and cutting-edge neuroscientific technology, we provide personalised treatment plans designed to ensure every child receives the expert care they deserve.</p>
+<p class="pt-4 fadeInUp animatable">Our Specialised Services include:</p>
+<div class="workup-sec mt-5">
+<h4 class="py-3 fadeInUp animatable">Diagnostic Work Up</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Electroencephalogram (EEG)</h5>
+</div>
+<div class="mb-2">
+<p><strong>Routine and Sleep-Deprived EEG: </strong>Records the brain's electrical activity to detect abnormal patterns associated with epilepsy, seizures and other neurological conditions.</p>
+</div>
+<div class="mb-2">
+<p><strong>Video-EEG Monitoring: </strong>Continuous, long-term monitoring to capture and analyse seizure events for precise diagnosis and localisation.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div>
+<h5>Nerve Conduction Studies (NCS) and Electromyography (EMG)</h5>
+</div>
+<div class="mb-2">
+<p>Evaluates the function of peripheral nerves and muscles to diagnose neuromuscular disorders such as peripheral neuropathy, muscular dystrophy and myasthenia gravis.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Neuroimaging</h5>
+</div>
+<div class="mb-2">
+<p><strong>Dedicated Paediatric Brain CT and MRI: </strong>High-resolution scans tailored for children to assess brain structure, identify tumours, congenital malformations, stroke or signs of infection.</p>
+</div>
+<div class="mb-2">
+<p><strong>Magnetic Resonance Spectroscopy (MRS): </strong>Advanced imaging to analyse the chemical composition of brain tissue, aiding in the diagnosis of metabolic disorders.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Genetic and Metabolic Testing</h5>
+</div>
+<div class="mb-2">
+<p>Comprehensive blood and CSF (Cerebrospinal Fluid) analysis to identify underlying genetic syndromes and inborn errors of metabolism that affect neurological function.</p>
+</div>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Interventional and Advanced Management</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Intrathecal Baclofen Pump Management</h5>
+</div>
+<div class="mb-2">
+<p>Surgical placement and management of a device that delivers muscle relaxant medication (Baclofen) directly into the spinal fluid to control severe spasticity in conditions like Cerebral Palsy.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div>
+<h5>Vagal Nerve Stimulation (VNS)</h5>
+</div>
+<div class="mb-2">
+<p>Implantation and programming of a device that sends electrical pulses to the brain via the vagus nerve, used as an adjunctive therapy for drug-resistant epilepsy.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Deep Brain Stimulation (DBS) Assessment</h5>
+</div>
+<p>Evaluation for this surgical treatment, which involves implanting electrodes in specific brain areas to manage certain movement disorders in older children and teens.</p>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Neuro-Rehabilitation Planning</h5>
+</div>
+<p>Creation of integrated plans incorporating physiotherapy, occupational therapy and speech and language therapy following stroke, brain injury or for long-term conditions like Cerebral Palsy.</p>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Medical Management and Specialised Clinics</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Epilepsy and Seizure Disorders</h5>
+</div>
+<div class="mb-2">
+<p>We manage all types of epilepsy, from common forms to rare and complex syndromes. Our approach includes:</p>
+</div>
+<div class="mb-2">
+<p><strong>Antiepileptic Drug (AED) Optimisation: </strong>Individualised drug regimens to achieve seizure freedom with minimal side effects.</p>
+<p><strong>Dietary Therapies: </strong>Management of the Ketogenic Diet, Modified Atkins Diet and Low Glycaemic Index Treatment for refractory epilepsy.</p>
+</div>
+</li>
+<li class="fadeInUp animatable speciality_banner_no"><img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/PaediatricNeurology.png"></li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Neurodevelopmental Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Comprehensive care for conditions affecting a child's development, including:</p>
+</div>
+<div class="mb-2">
+<p><strong>Autism Spectrum Disorder (ASD): </strong>Integrated management focusing on co-occurring neurological issues, such as anxiety or seizures.</p>
+<p><strong>Attention-Deficit/Hyperactivity Disorder (ADHD): </strong>Medical and behavioural interventions.</p>
+<div class="mb-2">
+<p>Learning Disabilities and Global Developmental Delay.</p>
+</div>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Movement Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Diagnosis and treatment of conditions causing involuntary movements, such as Dystonia, Tremors and Tics/Tourette Syndrome.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Headache and Migraine Clinic</h5>
+</div>
+<div class="mb-2">
+<p>Specialised diagnosis and management of chronic or debilitating headaches and migraines in children and adolescents, including acute treatment and long-term prophylactic strategies.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Neuromuscular Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Care for progressive muscle weakness and loss of function, including Spinal Muscular Atrophy (SMA), Muscular Dystrophies and Myasthenia Gravis. Treatment may involve novel gene therapies and supportive care.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Neuro-Oncology and Neurofibromatosis</h5>
+</div>
+<div class="mb-2">
+<p>In collaboration with oncology, we manage the neurological complications of brain and spinal cord tumours and provide specialised surveillance for Neurofibromatosis and other neurocutaneous syndromes.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Cerebral Palsy and Spasticity Management</h5>
+</div>
+<div class="mb-2">
+<p>A multidisciplinary programme for managing the motor and associated neurological impairments of Cerebral Palsy, including medication, Botox injections for focal spasticity and rehabilitation planning.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Autoimmune and Inflammatory CNS Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Diagnosis and treatment of conditions where the immune system attacks the central nervous system, such as Multiple Sclerosis and Acute Disseminated Encephalomyelitis (ADEM).</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Stroke and Vascular Neurology</h5>
+</div>
+<div class="mb-2">
+<p>Rapid diagnosis and management of paediatric stroke, focusing on acute intervention and long-term recovery and prevention.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Sleep Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Assessment and management of neurologically-related sleep issues, including narcolepsy, restless legs syndrome and complex parasomnias.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-5 fadeInUp animatable">
+<h4>We have dedicated clinic for</h4>
+</div>
+<div class="clientoo1 owl-carousel">
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Epilepsy and Seizure Disorders</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Neurodevelopmental Disorders</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Movement Disorders</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Headache and Migraine</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Neuromuscular Disorders</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Neuro-Oncology and Neurofibromatosis</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Cerebral Palsy and Spasticity Management</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Autoimmune and Inflammatory CNS Disorders</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Stroke and Vascular Neurology</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Sleep Disorders</div>
+</div>
+</section>
+<section id="tab2" class="panel" role="tabpanel" aria-labelledby="t2">
+<h3>Paediatric Neurosurgery</h3>
+</section>
+<section id="tab3" class="panel" role="tabpanel" aria-labelledby="t3">
+<h3>Neurophysiology and Advanced Diagnostics</h3>
+</section>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Case Studies Video Section -->
+<section class="doctors-sec section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="workup-sec pb-3 fadeInUp animatable">
+<h4>Case Studies</h4>
+</div>
+<div class="doctors-area owl-carousel">
+<div class="doctors-item fadeInUp animatable"><a href="https://youtu.be/MKZ95-u9-Fk?si=f-_GII-qBmAi1rGw" data-fancybox="doctor1"> <img class="img-fluid" src="/upload/fileManager/thumbnail/deboppriya-indrasish-thumb.png" alt=""></a>
+<div class="right-plus"><img src="/img/plus.png" alt=""></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2-Step Appointment Booking Section -->
+<section class="app-sec p-bottom" id="book_sectio">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class=" mb-4 text-center fade-up animatable">
+                        <h2 class="step_heading">Book Your Appointment</h2>
+                    </div>
+                    <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+                <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required="">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+
+                                <input type="hidden" name="hlink" value="https://newtown.neotiahospital.com/paediatric-neurology">
+                                <input type="hidden" name="ip" value="116.193.136.40">
+                                <input name="step" type="hidden" value="1">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
+                                <button type="submit" id="appointsubmitTriger" class="submit-btn">Next →</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics start -->
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required="">
+
+                                                                    <select class="form-select " disabled="">
+                                    <option value="3##Paediatric Neurology" selected="">Paediatric Neurology</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="3##Paediatric Neurology">
+                                 
+                            </div>
+
+                            <div class="col-lg-6">
+                                                                    <select class="form-select " name="consultant" id="consultant" required="">
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option><option value="35##Dr. Arijit Chattopadhay">Dr. Arijit Chattopadhay</option><option value="6##Dr. Debapriya Roy">Dr. Debapriya Roy</option><option value="10##Dr. Indrasish Ray Chaudhuri">Dr. Indrasish Ray Chaudhuri</option>    
+                                    </select>
+
+                                  
+
+                                <div class="date-wrapper position-relative">
+                                    <input type="date" class="form-control" placeholder="Date" min="2026-10-19" name="preffered_date" id="preffered_date" required="">
+                                    <span class="calendar-icon"><i class="fa-solid fa-calendar-days calendar-icon"></i></span>
+                                </div>
+
+                                <input type="hidden" name="hospital_center" class="form-control readonly-field" value="NBWCCC, New Town" readonly="">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-between appoint">
+                                <input name="step" type="hidden" value="2">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details End -->
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+<!-- Paediatric Neurology Doctors Carousel -->
+<section class="special-doctor-sec p-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="workup-sec fadeInUp animatable">
+                        <h4 class="">Paediatric Neurology Doctors</h4>
+                    </div>
+                    <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/DrDebapriya-list.png" alt="Dr. Debapriya Roy">
+                            <h4 class="doctor-name">Dr. Debapriya Roy </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Neurology</h5>
+                            <span>8+ years experience</span>
+                            <p>MBBS, MD (Paediatric Medicine), Postdoctoral Fellowship (Paediatric Neurology)</p>
+                            <p>Reg. No. WBMC 74081</p><a href="/doctor/dr-debapriya-roy">View Profile</a></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-debapriya-roy">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/DrIndrasis-list.png" alt="Dr. Indrasish Ray Chaudhuri">
+                            <h4 class="doctor-name">Dr. Indrasish Ray Chaudhuri </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Neurology</h5>
+                            <span>9+ years experience</span>
+                            <p>DM (Paediatric Neurology), MD (Paediatrics), MBBS</p>
+                            <p></p><a href="/doctor/dr-indrasish-ray-chaudhuri">View Profile</a></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-indrasish-ray-chaudhuri">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/dr_arijit.jpg" alt="Dr. Arijit Chattopadhay">
+                            <h4 class="doctor-name">Dr. Arijit Chattopadhay </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Neurology</h5>
+                            <span></span>
+                            <p>MBBS, DCH, MD (Paed), MRCP (Paed), MRCPCH, CCST (Pediatric Neurology, UK)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-arijit-chattopadhay">Book Appointment</a>
+                    </div>                        
+                    
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Enquiry Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel">Book Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Callback Modal -->
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-labelledby="requestcallbackLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestcallbackLabel">Request a Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+$(document).ready(function() {
+    // Initialize Fancybox for video playback
+    if (typeof Fancybox !== "undefined") {
+        Fancybox.bind("[data-fancybox]", {
+            Toolbar: true
+        });
+    }
+
+    // Initialize Video Carousel
+    if ($(".doctors-area").length) {
+        $(".doctors-area").owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 2 }
+            }
+        });
+    }
+
+    // Initialize Doctor Slider
+    if ($('#doctorSliderWp').length) {
+        $('#doctorSliderWp').owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                576: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 3 }
+            }
+        });
+    }
+
+    // Two-step appointment form handling
+    const step1Form = document.getElementById('book-appointment-form-step-1');
+    const step2Form = document.getElementById('book-appointment-form-step-2');
+    const step1Div = document.getElementById('booking-step-1');
+    const step2Div = document.getElementById('booking-step-2');
+    const ind1 = document.getElementById('step-indicator-1');
+    const ind2 = document.getElementById('step-indicator-2');
+    const prevBtn = document.getElementById('step2-prev-btn');
+
+    if (step1Form) {
+        step1Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fname').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            if (!name || !mobile) {
+                alert('Please enter patient name and mobile number.');
+                return;
+            }
+
+            step1Div.style.display = 'none';
+            step2Div.style.display = 'block';
+            if (ind1) {
+                ind1.classList.remove('active');
+                ind1.classList.add('done');
+            }
+            if (ind2) {
+                ind2.classList.add('active');
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            step2Div.style.display = 'none';
+            step1Div.style.display = 'block';
+            if (ind2) ind2.classList.remove('active');
+            if (ind1) {
+                ind1.classList.remove('done');
+                ind1.classList.add('active');
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loading = document.getElementById('loading_appointment_img');
+            const msg = document.getElementById('mess_appointment');
+            
+            const formData = {
+                fname: document.getElementById('fname') ? document.getElementById('fname').value : '',
+                mobile: document.getElementById('mobile') ? document.getElementById('mobile').value : '',
+                email: document.getElementById('email') ? document.getElementById('email').value : '',
+                department: document.getElementById('department') ? document.getElementById('department').value : '3##Paediatric Neurology',
+                consultant: document.getElementById('consultant') ? document.getElementById('consultant').value : '',
+                preffered_date: document.getElementById('preffered_date') ? document.getElementById('preffered_date').value : '',
+                hospital_center: 'NBWCCC, New Town'
+            };
+
+            if (loading) loading.style.display = 'block';
+            if (msg) msg.innerHTML = '';
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted successfully.</div>';
+                }
+                step2Form.reset();
+                if (step1Form) step1Form.reset();
+                setTimeout(() => {
+                    step2Div.style.display = 'none';
+                    step1Div.style.display = 'block';
+                    if (ind2) ind2.classList.remove('active');
+                    if (ind1) {
+                        ind1.classList.remove('done');
+                        ind1.classList.add('active');
+                    }
+                }, 4000);
+            })
+            .catch(err => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted.</div>';
+                }
+            });
+        });
+    }
+
+    // Modal remote loading
+    $(document).on('click', '.open_modal_enquiry', function() {
+        var url = $(this).data('remote');
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        $('#enquiryModal').modal('show');
+        $.get(url, function(data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="alert alert-danger">Unable to load appointment form. Please try calling us directly.</div>');
+        });
+    });
+});
+</script>

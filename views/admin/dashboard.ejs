@@ -1,0 +1,167 @@
+<!-- Stats Row -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-sm-6">
+        <div class="stat-card d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 56px; height: 56px; background: var(--grey-bg); color: var(--brand-blue-1); font-size: 24px;">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <div>
+                <span class="text-muted small text-uppercase fw-bold">Appointments</span>
+                <h3 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.totalAppointments %></h3>
+                <small class="text-success"><%= stats.newAppointments %> pending review</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+        <div class="stat-card d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 56px; height: 56px; background: var(--grey-bg); color: var(--brand-blue-1); font-size: 24px;">
+                <i class="fas fa-phone-volume"></i>
+            </div>
+            <div>
+                <span class="text-muted small text-uppercase fw-bold">Callbacks &amp; Leads</span>
+                <h3 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.totalEnquiries %></h3>
+                <small class="text-warning"><%= stats.newEnquiries %> new requests</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+        <div class="stat-card d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 56px; height: 56px; background: var(--grey-bg); color: var(--ui-success); font-size: 24px;">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <div>
+                <span class="text-muted small text-uppercase fw-bold">Specialist Doctors</span>
+                <h3 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.totalDoctors %></h3>
+                <small class="text-muted">Faculty profiles</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-sm-6">
+        <div class="stat-card d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 56px; height: 56px; background: var(--grey-bg); color: var(--brand-blue-1-tint-3); font-size: 24px;">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <div>
+                <span class="text-muted small text-uppercase fw-bold">Clinical Services</span>
+                <h3 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.totalDepartments %></h3>
+                <small class="text-muted">Active departments</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="d-flex gap-3 mb-4 flex-wrap">
+    <a href="/admin/pages" class="btn btn-sm btn-dark py-2 px-3" style="border-radius: 8px;">
+        <i class="fas fa-layer-group me-1 text-warning"></i> Manage Website Pages
+    </a>
+    <a href="/admin/doctors/new" class="btn btn-sm btn-primary py-2 px-3" style="border-radius: 8px;">
+        <i class="fas fa-plus me-1"></i> Add Doctor
+    </a>
+    <a href="/admin/blogs/new" class="btn btn-sm btn-outline-primary py-2 px-3" style="border-radius: 8px;">
+        <i class="fas fa-plus me-1"></i> Write Article
+    </a>
+    <a href="/admin/settings" class="btn btn-sm btn-outline-secondary py-2 px-3" style="border-radius: 8px;">
+        <i class="fas fa-cog me-1"></i> Edit Emergency Lines
+    </a>
+</div>
+
+<!-- Recent Appointments & Callbacks Grid -->
+<div class="row g-4">
+    <!-- Recent Appointments -->
+    <div class="col-lg-7">
+        <div class="table-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="mb-0 fw-bold" style="font-size: 16px; color: var(--brand-blue-2-tint-3);">
+                    <i class="fas fa-calendar-alt text-primary me-2"></i> Recent OPD Appointments
+                </h6>
+                <a href="/admin/appointments" class="small fw-bold text-decoration-none">View All (<%= stats.totalAppointments %>)</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light small">
+                        <tr>
+                            <th>Patient</th>
+                            <th>Doctor / Dept</th>
+                            <th>Date &amp; Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="small">
+                        <% if (recentAppointments.length === 0) { %>
+                            <tr><td colspan="4" class="text-center py-4 text-muted">No appointments recorded yet.</td></tr>
+                        <% } else { %>
+                            <% recentAppointments.forEach(appt => { %>
+                                <tr>
+                                    <td>
+                                        <strong><%= appt.name %></strong>
+                                        <div class="text-muted" style="font-size: 11px;"><i class="fas fa-phone-alt"></i> <%= appt.phone %></div>
+                                    </td>
+                                    <td>
+                                        <div><%= appt.doctor_name || 'Any Doctor' %></div>
+                                        <small class="text-muted"><%= appt.department_name %></small>
+                                    </td>
+                                    <td>
+                                        <%= appt.appointment_date %><br>
+                                        <small class="text-muted"><%= appt.appointment_time %></small>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-status-<%= appt.status %> px-2 py-1"><%= appt.status %></span>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Enquiries -->
+    <div class="col-lg-5">
+        <div class="table-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="mb-0 fw-bold" style="font-size: 16px; color: var(--brand-blue-2-tint-3);">
+                    <i class="fas fa-phone-volume text-warning me-2"></i> Recent Callback Requests
+                </h6>
+                <a href="/admin/enquiries" class="small fw-bold text-decoration-none">View All (<%= stats.totalEnquiries %>)</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light small">
+                        <tr>
+                            <th>Lead</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="small">
+                        <% if (recentEnquiries.length === 0) { %>
+                            <tr><td colspan="3" class="text-center py-4 text-muted">No callback requests yet.</td></tr>
+                        <% } else { %>
+                            <% recentEnquiries.forEach(enq => { %>
+                                <tr>
+                                    <td>
+                                        <strong><%= enq.name %></strong>
+                                        <div class="text-muted" style="font-size: 11px;"><%= enq.message ? enq.message.substring(0, 30) + '...' : 'Quick enquiry' %></div>
+                                    </td>
+                                    <td>
+                                        <a href="tel:<%= enq.phone %>" class="text-primary text-decoration-none"><%= enq.phone %></a>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-status-<%= enq.status %> px-2 py-1"><%= enq.status %></span>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

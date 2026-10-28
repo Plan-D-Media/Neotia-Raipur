@@ -1,0 +1,27 @@
+<%#
+  Site-wide actions: doctor search + "Book An Appointment" + "Request a Callback".
+  Desktop/tablet (>= 769px): sticky bar directly under the header. On the homepage it only
+  appears once the hero's own search and buttons have scrolled away (see public/js/action-bar.js).
+  Mobile (<= 768px): this bar becomes the search panel opened from the header's search icon,
+  and the two buttons sit in the fixed bottom bar below.
+%>
+<% const actionBarOnHome = typeof bodyClass !== 'undefined' && bodyClass && bodyClass.includes('index-main'); %>
+<div class="action-bar<%= actionBarOnHome ? ' action-bar--after-hero' : '' %>" id="actionBar" role="region" aria-label="Quick actions">
+    <div class="container action-bar-inner">
+        <form class="action-search" action="/find-a-doctor" method="GET" role="search" data-site-search>
+            <label for="actionSearchInput" class="visually-hidden">Search for a doctor or speciality</label>
+            <i class="fas fa-magnifying-glass action-search-icon" aria-hidden="true"></i>
+            <input type="search" id="actionSearchInput" name="search" autocomplete="off" placeholder="Search For Doctor & Specialties..." data-search-input aria-controls="actionSearchSuggestions">
+            <div class="search-suggestions" id="actionSearchSuggestions" data-search-suggestions></div>
+        </form>
+        <div class="action-buttons">
+            <a href="/book-an-appointment" class="btn btn-brand-primary">Book An Appointment</a>
+            <button type="button" class="btn btn-brand-secondary" data-callback-trigger>Request a Callback</button>
+        </div>
+    </div>
+</div>
+
+<nav class="mobile-action-bar" aria-label="Book or request a callback">
+    <a href="/book-an-appointment" class="btn btn-brand-primary">Book An Appointment</a>
+    <button type="button" class="btn btn-brand-secondary" data-callback-trigger>Request a Callback</button>
+</nav>

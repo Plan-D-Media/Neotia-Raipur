@@ -1,0 +1,625 @@
+<!-- Page Management & Content Optimization CMS Dashboard -->
+<div class="container-fluid p-0">
+
+    <!-- Top Action Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+            <h4 class="fw-bold mb-1" style="color: var(--brand-blue-2-tint-3);">Website Page Management &amp; Content Optimization</h4>
+            <p class="text-muted small mb-0">Centralized control to discover, edit, categorize, optimize, clone, and republish all 37+ website pages.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/admin/pages/export?format=csv" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2" style="border-radius: 8px;">
+                <i class="fas fa-file-csv"></i> Export Inventory (CSV)
+            </a>
+            <a href="/admin/pages/export?format=json" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-2" style="border-radius: 8px;">
+                <i class="fas fa-file-code"></i> Export (JSON)
+            </a>
+            <a href="/admin/pages/new" class="btn btn-primary btn-sm d-flex align-items-center gap-2" style="border-radius: 8px; background: var(--brand-blue-2); border-color: var(--brand-blue-2);">
+                <i class="fas fa-plus-circle"></i> Create New Page
+            </a>
+        </div>
+    </div>
+
+    <!-- Alert Notifications -->
+    <% if (typeof message !== 'undefined' && message) { %>
+        <div class="alert alert-<%= messageType || 'success' %> alert-dismissible fade show d-flex align-items-center gap-2" role="alert" style="border-radius: 10px;">
+            <i class="fas <%= messageType === 'danger' ? 'fa-exclamation-triangle' : 'fa-check-circle' %>"></i>
+            <div><%= message %></div>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+
+    <!-- 4A. Live Summary Statistics Cards -->
+    <div class="row g-3 mb-4">
+        <!-- Total Pages -->
+        <div class="col-xl col-md-4 col-sm-6">
+            <a href="/admin/pages?status=all" class="text-decoration-none">
+                <div class="stat-card p-3 d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 48px; height: 48px; background: var(--grey-bg); color: var(--brand-blue-1); font-size: 20px;">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small text-uppercase fw-bold" style="font-size: 11px;">Total Pages</span>
+                        <h4 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.total %></h4>
+                        <small class="text-muted" style="font-size: 11px;">Active in directory</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Published Pages -->
+        <div class="col-xl col-md-4 col-sm-6">
+            <a href="/admin/pages?status=published" class="text-decoration-none">
+                <div class="stat-card p-3 d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 48px; height: 48px; background: var(--grey-bg); color: var(--ui-success); font-size: 20px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small text-uppercase fw-bold" style="font-size: 11px;">Published</span>
+                        <h4 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.published %></h4>
+                        <small class="text-success" style="font-size: 11px;">Live on website</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Draft Pages -->
+        <div class="col-xl col-md-4 col-sm-6">
+            <a href="/admin/pages?status=draft" class="text-decoration-none">
+                <div class="stat-card p-3 d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 48px; height: 48px; background: var(--grey-bg); color: var(--brand-orange); font-size: 20px;">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small text-uppercase fw-bold" style="font-size: 11px;">Drafts</span>
+                        <h4 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.draft %></h4>
+                        <small class="text-warning" style="font-size: 11px;">Unpublished changes</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Trashed Pages -->
+        <div class="col-xl col-md-4 col-sm-6">
+            <a href="/admin/pages?status=trashed" class="text-decoration-none">
+                <div class="stat-card p-3 d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 48px; height: 48px; background: var(--grey-bg); color: var(--ui-error); font-size: 20px;">
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div>
+                        <span class="text-muted small text-uppercase fw-bold" style="font-size: 11px;">Trashed</span>
+                        <h4 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.trashed %></h4>
+                        <small class="text-danger" style="font-size: 11px;">In soft trash</small>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Updated Recently -->
+        <div class="col-xl col-md-4 col-sm-6">
+            <div class="stat-card p-3 d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center justify-content-center rounded-3" style="width: 48px; height: 48px; background: var(--grey-bg); color: var(--brand-blue-1-tint-3); font-size: 20px;">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </div>
+                <div>
+                    <span class="text-muted small text-uppercase fw-bold" style="font-size: 11px;">Updated Recently</span>
+                    <h4 class="mb-0 fw-bold" style="color: var(--brand-blue-2-tint-3);"><%= stats.recentlyUpdated %></h4>
+                    <small class="text-muted" style="font-size: 11px;">Last 7 days</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4B. Search and Filtering Toolbar -->
+    <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+        <div class="card-body p-3">
+            <form method="GET" action="/admin/pages" class="row g-2 align-items-center" id="filterForm">
+                <!-- Search input with exact required placeholder -->
+                <div class="col-lg-5 col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 text-muted" style="border-radius: 8px 0 0 8px;">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" 
+                               name="search" 
+                               class="form-control border-start-0 ps-0" 
+                               placeholder="Search by page title, URL, category, or SEO title..."
+                               value="<%= currentFilters.search || '' %>"
+                               style="border-radius: 0 8px 8px 0; font-size: 14px;">
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <select name="category" class="form-select form-select-sm py-2" style="border-radius: 8px; font-size: 13px;" onchange="this.form.submit()">
+                        <option value="all">All Categories</option>
+                        <% categories.forEach(function(cat) { %>
+                            <option value="<%= cat %>" <%= currentFilters.category === cat ? 'selected' : '' %>><%= cat %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <!-- Page Type Filter -->
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <select name="type" class="form-select form-select-sm py-2" style="border-radius: 8px; font-size: 13px;" onchange="this.form.submit()">
+                        <option value="all">All Page Types</option>
+                        <option value="Core Page" <%= currentFilters.type === 'Core Page' ? 'selected' : '' %>>Core Page</option>
+                        <option value="Clinical Department" <%= currentFilters.type === 'Clinical Department' ? 'selected' : '' %>>Clinical Department</option>
+                        <option value="Specialist Profile" <%= currentFilters.type === 'Specialist Profile' ? 'selected' : '' %>>Doctor / Specialist</option>
+                        <option value="Health Article" <%= currentFilters.type === 'Health Article' ? 'selected' : '' %>>Health Article</option>
+                        <option value="Facilities" <%= currentFilters.type === 'Facilities' ? 'selected' : '' %>>Facilities &amp; Tech</option>
+                        <option value="Legal Page" <%= currentFilters.type === 'Legal Page' ? 'selected' : '' %>>Legal &amp; Policy</option>
+                        <option value="Utility / Landing Page" <%= currentFilters.type === 'Utility / Landing Page' ? 'selected' : '' %>>Utility &amp; Confirmation</option>
+                    </select>
+                </div>
+
+                <!-- Sort Order -->
+                <div class="col-lg-2 col-md-4 col-sm-12 d-flex gap-2">
+                    <select name="sort" class="form-select form-select-sm py-2" style="border-radius: 8px; font-size: 13px;" onchange="this.form.submit()">
+                        <option value="modified_desc" <%= currentFilters.sort === 'modified_desc' ? 'selected' : '' %>>Recently Modified</option>
+                        <option value="title_asc" <%= currentFilters.sort === 'title_asc' ? 'selected' : '' %>>Title (A-Z)</option>
+                        <option value="title_desc" <%= currentFilters.sort === 'title_desc' ? 'selected' : '' %>>Title (Z-A)</option>
+                        <option value="modified_asc" <%= currentFilters.sort === 'modified_asc' ? 'selected' : '' %>>Oldest Modified</option>
+                    </select>
+                    <% if (currentFilters.search || (currentFilters.category && currentFilters.category !== 'all') || (currentFilters.type && currentFilters.type !== 'all') || currentFilters.status) { %>
+                        <a href="/admin/pages" class="btn btn-sm btn-outline-danger d-flex align-items-center" title="Reset Filters" style="border-radius: 8px;">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    <% } %>
+                </div>
+
+                <input type="hidden" name="status" id="statusInput" value="<%= currentFilters.status || '' %>">
+            </form>
+        </div>
+
+        <!-- Status Filter Tabs -->
+        <div class="card-footer bg-light p-2 px-3 border-top d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div class="nav nav-pills" style="font-size: 13px;">
+                <a href="#" class="nav-link py-1 px-3 <%= !currentFilters.status || currentFilters.status === 'active' ? 'active bg-primary' : 'text-dark' %>" onclick="filterByStatus('active'); return false;">
+                    Active Pages <span class="badge bg-white text-dark ms-1"><%= stats.total %></span>
+                </a>
+                <a href="#" class="nav-link py-1 px-3 <%= currentFilters.status === 'published' ? 'active bg-success' : 'text-dark' %>" onclick="filterByStatus('published'); return false;">
+                    Published <span class="badge bg-white text-dark ms-1"><%= stats.published %></span>
+                </a>
+                <a href="#" class="nav-link py-1 px-3 <%= currentFilters.status === 'draft' ? 'active bg-warning text-dark' : 'text-dark' %>" onclick="filterByStatus('draft'); return false;">
+                    Drafts <span class="badge bg-dark text-white ms-1"><%= stats.draft %></span>
+                </a>
+                <a href="#" class="nav-link py-1 px-3 <%= currentFilters.status === 'trashed' ? 'active bg-danger' : 'text-dark' %>" onclick="filterByStatus('trashed'); return false;">
+                    <i class="fas fa-trash-alt me-1"></i> Trash <span class="badge bg-white text-dark ms-1"><%= stats.trashed %></span>
+                </a>
+                <a href="#" class="nav-link py-1 px-3 <%= currentFilters.status === 'all' ? 'active bg-secondary' : 'text-dark' %>" onclick="filterByStatus('all'); return false;">
+                    All Inventory <span class="badge bg-white text-dark ms-1"><%= stats.allIncludingTrashed %></span>
+                </a>
+            </div>
+
+            <div class="text-muted small">
+                Showing <strong><%= pages.length %></strong> of <strong><%= totalFilteredCount %></strong> pages
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Bulk Actions Bar (Appears when items selected) -->
+    <div id="bulkActionsBar" class="alert alert-secondary py-2 px-3 mb-3 d-none align-items-center justify-content-between flex-wrap gap-2" style="border-radius: 8px;">
+        <div class="d-flex align-items-center gap-2">
+            <i class="fas fa-check-square text-primary"></i>
+            <span class="fw-bold small"><span id="selectedCount">0</span> page(s) selected</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <!-- Change Category -->
+            <div class="input-group input-group-sm" style="width: 220px;">
+                <select id="bulkCategorySelect" class="form-select form-select-sm">
+                    <option value="">Move to Category...</option>
+                    <% categories.forEach(function(cat) { %>
+                        <option value="<%= cat %>"><%= cat %></option>
+                    <% }); %>
+                </select>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="applyBulkAction('changeCategory')">Apply</button>
+            </div>
+
+            <!-- Set Draft -->
+            <button type="button" class="btn btn-sm btn-outline-warning text-dark" onclick="applyBulkAction('setDraft')">
+                <i class="fas fa-pencil-alt me-1"></i> Unpublish / Draft
+            </button>
+
+            <!-- Set Published -->
+            <button type="button" class="btn btn-sm btn-outline-success" onclick="applyBulkAction('setPublished')">
+                <i class="fas fa-check me-1"></i> Publish
+            </button>
+
+            <!-- Trash or Restore -->
+            <% if (currentFilters.status === 'trashed') { %>
+                <button type="button" class="btn btn-sm btn-success" onclick="applyBulkAction('restore')">
+                    <i class="fas fa-trash-arrow-up me-1"></i> Restore Selected
+                </button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="applyBulkAction('deletePermanent')">
+                    <i class="fas fa-times-circle me-1"></i> Delete Permanently
+                </button>
+            <% } else { %>
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="applyBulkAction('trash')">
+                    <i class="fas fa-trash-alt me-1"></i> Move to Trash
+                </button>
+            <% } %>
+
+            <button type="button" class="btn btn-sm btn-link text-muted p-0 ms-2" onclick="clearSelection()">Deselect All</button>
+        </div>
+    </div>
+
+    <!-- 4C. Page Listing Table -->
+    <div class="table-card mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" style="font-size: 13.5px;">
+                <thead class="table-light text-uppercase text-muted" style="font-size: 11px; letter-spacing: 0.5px;">
+                    <tr>
+                        <th style="width: 40px;" class="text-center">
+                            <input type="checkbox" id="selectAllCheckbox" class="form-check-input" onchange="toggleSelectAll(this)">
+                        </th>
+                        <th style="min-width: 260px;">Page Title &amp; ID</th>
+                        <th style="min-width: 170px;">URL / Slug</th>
+                        <th style="min-width: 150px;">Category</th>
+                        <th style="min-width: 120px;">Type</th>
+                        <th style="min-width: 95px;">Status</th>
+                        <th style="min-width: 130px;">SEO Health</th>
+                        <th style="min-width: 140px;">Last Modified</th>
+                        <th style="min-width: 210px;" class="text-end pe-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (pages.length === 0) { %>
+                        <tr>
+                            <td colspan="9" class="text-center py-5 text-muted">
+                                <i class="fas fa-folder-open mb-3" style="font-size: 40px; color: var(--white);"></i>
+                                <h6 class="fw-bold">No Pages Found</h6>
+                                <p class="small mb-3">No website pages matched your search or active filter criteria.</p>
+                                <a href="/admin/pages" class="btn btn-sm btn-outline-primary" style="border-radius: 8px;">
+                                    <i class="fas fa-sync-alt me-1"></i> Reset Filters
+                                </a>
+                            </td>
+                        </tr>
+                    <% } else { %>
+                        <% pages.forEach(function(page) { %>
+                            <% 
+                                // Calculate real SEO Health score based on actual data
+                                var seoPassCount = 0;
+                                var seoTotalChecks = 5;
+                                if (page.title && page.title.length >= 10) seoPassCount++;
+                                if (page.metaDescription && page.metaDescription.length >= 25) seoPassCount++;
+                                if (page.altText && page.altText.length >= 5) seoPassCount++;
+                                if (page.canonicalUrl && page.canonicalUrl.startsWith('http')) seoPassCount++;
+                                if (page.indexing && page.indexing.includes('index')) seoPassCount++;
+
+                                var seoBadgeClass = 'badge-seo-complete';
+                                var seoLabel = 'SEO Complete';
+                                var seoIcon = 'fa-check-circle';
+                                if (seoPassCount <= 2) {
+                                    seoBadgeClass = 'badge-seo-incomplete';
+                                    seoLabel = 'Incomplete';
+                                    seoIcon = 'fa-exclamation-circle';
+                                } else if (seoPassCount < 5) {
+                                    seoBadgeClass = 'badge-seo-attention';
+                                    seoLabel = 'Needs Attention';
+                                    seoIcon = 'fa-triangle-exclamation';
+                                }
+                            %>
+                            <tr id="page-row-<%= page.id %>" class="<%= page.status === 'trashed' ? 'table-light text-muted' : '' %>">
+                                <!-- Checkbox -->
+                                <td class="text-center">
+                                    <input type="checkbox" class="form-check-input page-checkbox" value="<%= page.id %>" onchange="handleRowCheckboxChange()">
+                                </td>
+
+                                <!-- Page Thumbnail & Title -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="position-relative flex-shrink-0" style="width: 44px; height: 44px;">
+                                            <% if (page.thumbnail || page.heroImage) { %>
+                                                <img src="<%= page.thumbnail || page.heroImage %>" 
+                                                     alt="<%= page.altText || page.title %>"
+                                                     class="rounded-2 border object-fit-cover w-100 h-100"
+                                                     onerror="this.onerror=null; this.src='/img/about-img.png';">
+                                            <% } else { %>
+                                                <div class="w-100 h-100 rounded-2 bg-light border d-flex align-items-center justify-content-center text-muted">
+                                                    <i class="fas fa-file-alt"></i>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                        <div class="overflow-hidden">
+                                            <a href="/admin/pages/edit/<%= page.id %>" class="fw-bold text-decoration-none text-dark d-block text-truncate" title="<%= page.title %>" style="max-width: 250px;">
+                                                <%= page.title %>
+                                            </a>
+                                            <div class="text-muted small" style="font-size: 11px;">
+                                                <span class="badge bg-light text-secondary border py-0 px-1 me-1">ID: #<%= page.id %></span>
+                                                <% if (page.isSystem) { %>
+                                                    <span class="badge bg-info-subtle text-info-emphasis border py-0 px-1 me-1" title="Core System Route">System</span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- URL / Slug -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <code class="text-primary text-truncate" style="max-width: 160px; font-size: 12px;" title="<%= page.url %>">
+                                            <%= page.url %>
+                                        </code>
+                                        <button type="button" class="btn btn-sm btn-link text-muted p-0" title="Copy URL" onclick="copyToClipboard('<%= page.url %>')">
+                                            <i class="fas fa-copy" style="font-size: 12px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+
+                                <!-- Category -->
+                                <td>
+                                    <span class="badge bg-light text-dark border px-2 py-1" style="font-size: 11px; font-weight: 400;">
+                                        <%= page.category || 'Other Pages' %>
+                                    </span>
+                                </td>
+
+                                <!-- Type -->
+                                <td>
+                                    <span class="badge text-secondary border px-2 py-1" style="font-size: 11px; background: var(--grey-bg);">
+                                        <%= page.type || 'Core Page' %>
+                                    </span>
+                                </td>
+
+                                <!-- Status Badge -->
+                                <td>
+                                    <span class="badge rounded-pill badge-status-<%= page.status %> px-2 py-1" style="font-size: 11px;">
+                                        <i class="fas <%= page.status === 'published' ? 'fa-circle-check' : (page.status === 'draft' ? 'fa-clock' : 'fa-trash-alt') %> me-1"></i>
+                                        <%= page.status ? (page.status.charAt(0).toUpperCase() + page.status.slice(1)) : 'Published' %>
+                                    </span>
+                                </td>
+
+                                <!-- SEO Completeness Indicator -->
+                                <td>
+                                    <span class="badge rounded-pill <%= seoBadgeClass %> px-2 py-1" 
+                                          data-bs-toggle="tooltip" 
+                                          title="Checks passed: <%= seoPassCount %>/<%= seoTotalChecks %> (Title, Meta, Alt, Canonical, Indexing)">
+                                        <i class="fas <%= seoIcon %> me-1"></i>
+                                        <%= seoLabel %> (<%= seoPassCount %>/<%= seoTotalChecks %>)
+                                    </span>
+                                </td>
+
+                                <!-- Last Modified -->
+                                <td>
+                                    <div style="font-size: 12px;" class="fw-medium text-dark">
+                                        <%= new Date(page.lastModified || Date.now()).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                                    </div>
+                                    <div class="text-muted" style="font-size: 11px;">
+                                        <%= new Date(page.lastModified || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+                                    </div>
+                                </td>
+
+                                <!-- 5. Mandatory Actions for EVERY Manageable Page -->
+                                <td class="text-end pe-3">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <!-- 1. Edit Action -->
+                                        <a href="/admin/pages/edit/<%= page.id %>" class="btn btn-outline-primary" title="Full Page Editor" style="border-radius: 6px 0 0 6px;">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+
+                                        <!-- 3. View / Preview Action -->
+                                        <% if (page.status === 'published') { %>
+                                            <a href="<%= page.url %>" target="_blank" class="btn btn-outline-secondary" title="View Public Page (New Tab)">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                        <% } else { %>
+                                            <a href="<%= page.url %>?preview=admin" target="_blank" class="btn btn-outline-secondary" title="Secure Draft Preview">
+                                                <i class="fas fa-eye text-warning"></i>
+                                            </a>
+                                        <% } %>
+
+                                        <!-- 5. Rewrite & Republish Workspace Action -->
+                                        <a href="/admin/pages/rewrite/<%= page.id %>" class="btn btn-outline-info text-dark" title="Rewrite &amp; Content Optimization Workspace">
+                                            <i class="fas fa-wand-magic-sparkles text-primary"></i>
+                                        </a>
+
+                                        <!-- 4. Clone Action -->
+                                        <form method="POST" action="/admin/pages/clone/<%= page.id %>" class="d-inline" onsubmit="return confirm('Clone page \\'<%= page.title.replace(/'/g, '\\\'') %>\\'? A new draft copy will be created.');">
+                                            <button type="submit" class="btn btn-outline-secondary" title="Clone Page as Draft">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </form>
+
+                                        <!-- 6. Toggle Draft / Publish Action -->
+                                        <% if (page.status === 'published') { %>
+                                            <form method="POST" action="/admin/pages/save" class="d-inline">
+                                                <input type="hidden" name="id" value="<%= page.id %>">
+                                                <input type="hidden" name="status" value="draft">
+                                                <button type="submit" class="btn btn-outline-warning text-dark" title="Unpublish / Save as Draft">
+                                                    <i class="fas fa-pause-circle"></i>
+                                                </button>
+                                            </form>
+                                        <% } else if (page.status === 'draft') { %>
+                                            <form method="POST" action="/admin/pages/save" class="d-inline">
+                                                <input type="hidden" name="id" value="<%= page.id %>">
+                                                <input type="hidden" name="status" value="published">
+                                                <button type="submit" class="btn btn-outline-success" title="Publish Live">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </button>
+                                            </form>
+                                        <% } %>
+
+                                        <!-- 2. Trash / Restore Action -->
+                                        <% if (page.status === 'trashed') { %>
+                                            <form method="POST" action="/admin/pages/restore/<%= page.id %>" class="d-inline">
+                                                <button type="submit" class="btn btn-outline-success" title="Restore Page from Trash" style="border-radius: 0 6px 6px 0;">
+                                                    <i class="fas fa-trash-arrow-up"></i>
+                                                </button>
+                                            </form>
+                                        <% } else { %>
+                                            <form method="POST" action="/admin/pages/trash/<%= page.id %>" class="d-inline" onsubmit="return confirm('Move \\'<%= page.title.replace(/'/g, '\\\'') %>\\' to Trash?');">
+                                                <button type="submit" class="btn btn-outline-danger" title="Move to Trash" style="border-radius: 0 6px 6px 0;">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination and selectable page-size -->
+        <div class="p-3 border-top d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-2">
+                <span class="small text-muted">Items per page:</span>
+                <select class="form-select form-select-sm" style="width: 80px;" onchange="changeLimit(this.value)">
+                    <option value="15" <%= pagination.limit === 15 ? 'selected' : '' %>>15</option>
+                    <option value="25" <%= pagination.limit === 25 ? 'selected' : '' %>>25</option>
+                    <option value="50" <%= pagination.limit === 50 ? 'selected' : '' %>>50</option>
+                    <option value="100" <%= pagination.limit === 100 ? 'selected' : '' %>>All</option>
+                </select>
+                <span class="small text-muted ms-2">
+                    Showing <%= (pagination.page - 1) * pagination.limit + (pages.length > 0 ? 1 : 0) %> - <%= Math.min(pagination.page * pagination.limit, totalFilteredCount) %> of <%= totalFilteredCount %> records
+                </span>
+            </div>
+
+            <% if (pagination.totalPages > 1) { %>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item <%= pagination.page <= 1 ? 'disabled' : '' %>">
+                            <a class="page-link" href="#" onclick="goToPage(<%= pagination.page - 1 %>); return false;">Previous</a>
+                        </li>
+                        <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+                            <li class="page-item <%= pagination.page === i ? 'active' : '' %>">
+                                <a class="page-link" href="#" onclick="goToPage(<%= i %>); return false;"><%= i %></a>
+                            </li>
+                        <% } %>
+                        <li class="page-item <%= pagination.page >= pagination.totalPages ? 'disabled' : '' %>">
+                            <a class="page-link" href="#" onclick="goToPage(<%= pagination.page + 1 %>); return false;">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Actions Form Submission Target -->
+<form id="bulkActionForm" method="POST" action="/admin/pages/bulk" class="d-none">
+    <input type="hidden" name="action" id="bulkActionInput">
+    <input type="hidden" name="category" id="bulkCategoryInput">
+    <div id="bulkSelectedIdsContainer"></div>
+</form>
+
+<script>
+    // Copy URL to Clipboard
+    function copyToClipboard(url) {
+        navigator.clipboard.writeText(window.location.origin + url).then(function() {
+            alert('Copied URL: ' + window.location.origin + url);
+        }).catch(function() {
+            alert('URL: ' + url);
+        });
+    }
+
+    // Status Filter helper
+    function filterByStatus(status) {
+        document.getElementById('statusInput').value = status;
+        document.getElementById('filterForm').submit();
+    }
+
+    // Pagination helper
+    function goToPage(page) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.location.href = url.toString();
+    }
+
+    function changeLimit(limit) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('limit', limit);
+        url.searchParams.set('page', 1);
+        window.location.href = url.toString();
+    }
+
+    // Multi-Select & Bulk Actions
+    function toggleSelectAll(masterCheckbox) {
+        var checkboxes = document.querySelectorAll('.page-checkbox');
+        checkboxes.forEach(function(cb) {
+            cb.checked = masterCheckbox.checked;
+        });
+        updateBulkBar();
+    }
+
+    function handleRowCheckboxChange() {
+        var allChecked = true;
+        var checkboxes = document.querySelectorAll('.page-checkbox');
+        checkboxes.forEach(function(cb) {
+            if (!cb.checked) allChecked = false;
+        });
+        document.getElementById('selectAllCheckbox').checked = allChecked && (checkboxes.length > 0);
+        updateBulkBar();
+    }
+
+    function getSelectedIds() {
+        var ids = [];
+        document.querySelectorAll('.page-checkbox:checked').forEach(function(cb) {
+            ids.push(cb.value);
+        });
+        return ids;
+    }
+
+    function updateBulkBar() {
+        var ids = getSelectedIds();
+        var bar = document.getElementById('bulkActionsBar');
+        var countSpan = document.getElementById('selectedCount');
+        countSpan.textContent = ids.length;
+
+        if (ids.length > 0) {
+            bar.classList.remove('d-none');
+            bar.classList.add('d-flex');
+        } else {
+            bar.classList.add('d-none');
+            bar.classList.remove('d-flex');
+        }
+    }
+
+    function clearSelection() {
+        document.querySelectorAll('.page-checkbox').forEach(function(cb) {
+            cb.checked = false;
+        });
+        document.getElementById('selectAllCheckbox').checked = false;
+        updateBulkBar();
+    }
+
+    function applyBulkAction(action) {
+        var ids = getSelectedIds();
+        if (ids.length === 0) {
+            alert('Please select at least one page.');
+            return;
+        }
+
+        var confirmMsg = 'Are you sure you want to perform this bulk operation on ' + ids.length + ' page(s)?';
+        if (action === 'trash') {
+            confirmMsg = 'Move ' + ids.length + ' page(s) to Trash?';
+        } else if (action === 'deletePermanent') {
+            confirmMsg = 'CAUTION: Permanently delete ' + ids.length + ' page(s)? This cannot be undone!';
+        } else if (action === 'changeCategory') {
+            var selectedCat = document.getElementById('bulkCategorySelect').value;
+            if (!selectedCat) {
+                alert('Please select a category from the dropdown.');
+                return;
+            }
+            confirmMsg = 'Assign category "' + selectedCat + '" to ' + ids.length + ' page(s)?';
+            document.getElementById('bulkCategoryInput').value = selectedCat;
+        }
+
+        if (!confirm(confirmMsg)) return;
+
+        var container = document.getElementById('bulkSelectedIdsContainer');
+        container.innerHTML = '';
+        ids.forEach(function(id) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'ids[]';
+            input.value = id;
+            container.appendChild(input);
+        });
+
+        document.getElementById('bulkActionInput').value = action;
+        document.getElementById('bulkActionForm').submit();
+    }
+</script>

@@ -1,0 +1,31 @@
+<%- include('partials/header', { 
+    title: 'Disclaimer | Neotia Bhagirathi Hospital Raipur',
+    description: 'Medical and legal disclaimer regarding information provided on Neotia Bhagirathi Hospital website.'
+}) %>
+
+<section class="banner-sec position-relative" style="background: linear-gradient(135deg, var(--brand-blue-2) 0%, var(--brand-blue-2-tint-1) 100%); padding: 120px 0 60px; color: var(--white);">
+    <div class="container">
+        <h1 style="font-size: 36px; font-weight: 700; color: var(--white); margin-bottom: 8px;">Medical Disclaimer</h1>
+        <p style="color: var(--white);">General Medical Guidance &amp; Emergency Advisory</p>
+    </div>
+</section>
+
+<section class="section-padding" style="background: var(--white);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" style="color: var(--brand-blue-2-tint-3); line-height: 1.8; font-size: 15px;">
+                <h3 style="color: var(--theme-color); font-weight: 700; margin-bottom: 15px;">Educational Purpose Only</h3>
+                <p>The health articles, clinical overviews, and symptom descriptions available on this website are provided strictly for general informational and educational purposes. They do not constitute formal medical diagnoses or individualized medical treatment advice.</p>
+                
+                <h3 style="color: var(--theme-color); font-weight: 700; margin-top: 30px; margin-bottom: 15px;">Emergency Situations</h3>
+                <p>In case of acute medical emergencies, sudden high fever with convulsions, breathing difficulty, or critical symptoms in an infant or child, please immediately contact our 24x7 Emergency line at <strong><%= siteInfo.emergencyNumbers.join(' / ') %></strong> or report to our emergency trauma room in New Town, Kolkata.</p>
+
+                <div class="mt-4 p-4 rounded-3" style="background: var(--grey-bg); border-left: 4px solid var(--theme-color);">
+                    <strong>Appointment Notice:</strong> Online appointment bookings are subject to final confirmation by our hospital OPD reception. You will receive an SMS and phone call confirmation.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

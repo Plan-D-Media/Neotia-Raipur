@@ -1,0 +1,820 @@
+<%- include('partials/header', { 
+    title: 'Paediatric Nephrology in New Town, Kolkata | Neotia Bhagirathi',
+    description: 'Neotia Bhagirathi offers expert paediatric nephrology care New Town, Kolkata. Specialized treatment for children’s kidney disorders with advanced care.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--grey-700);
+}
+.step-item.active {
+    color: var(--brand-blue-2);
+    font-weight: 700;
+}
+h2.step_heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--brand-blue-2-tint-1);
+    font-weight: 700;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .booking-steps {
+        width: 100%;
+        margin: auto;
+    }
+}
+/* Ensure Fancybox thumbnails and hover plus work cleanly */
+.doctors-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.doctors-item .right-plus {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    background: rgba(var(--white-rgb), 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+.doctors-item:hover .right-plus {
+    transform: scale(1.15) rotate(90deg);
+}
+.doctors-item .right-plus img {
+    width: 18px;
+    height: 18px;
+}
+/* Callback Button */
+.callback-btn {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right bottom;
+    background: var(--brand-orange);
+    color: var(--brand-blue-2-tint-3);
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 999;
+    text-decoration: none;
+    box-shadow: -2px 0 10px rgba(var(--black-rgb), 0.15);
+}
+.callback-btn:hover {
+    background: var(--brand-blue-2);
+    color: var(--white);
+}
+</style>
+
+<!-- Request a Call Back Button -->
+<a href="javascript:void(0)" class="callback-btn open_modal_callback" data-remote="/request-a-callback">
+    Request a CallBack
+</a>
+
+<!-- banner sec start -->
+<section class="banner-sec">
+    <div class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-5 col-lg-5">
+                    <h1 class="fadeInUp animatable">Paediatric Nephrology in New Town | Expert Child Kidney Care</h1>
+                    <p class="fadeInUp animatable">Specialist care restoring strength, stability and lifelong renal health.</p>
+                    <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="banner-img text-center">
+                        <img src="/upload/fileManager/banner/paediatric_nephrology_banner.jpg" alt="Paediatric Nephrology" class="img-fluid" style="max-height: 480px; border-radius: 16px; box-shadow: 0 10px 30px rgba(var(--brand-blue-2-rgb), 0.08);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner sec end -->
+
+<!-- content tabs sec start -->
+<section class="content-tabs-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panels">
+                    <section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+                        <h3 class="fadeInUp animatable">Paediatric Nephrology</h3>
+                        <p class="fadeInUp animatable">At our Paediatric Nephrology Department, we specialise in the diagnosis, treatment and long-term management of kidney and urinary tract disorders in children&mdash;from infancy through adolescence. With a team committed to clinical excellence and child-centred care, we combine advanced diagnostic technology with compassionate expertise to ensure every young patient receives the highest standard of renal care.</p>
+                        <p class="pt-4 fadeInUp animatable">Our Specialised Services Include:</p>
+                        
+                        <div class="workup-sec mt-3">
+                            <h4 class="py-3 fadeInUp animatable">Diagnostic Work Up</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable first_class">
+                                    <div class="mb-2">
+                                        <h5>Renal Function Assessment</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Comprehensive evaluation of kidney health through blood tests, urine analysis and biochemical profiling to detect early signs of renal impairment, electrolyte imbalance, or metabolic dysfunction.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Ultrasound and Doppler Imaging</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Non-invasive imaging to assess kidney structure, detect congenital abnormalities, reflux, obstruction, scarring, or vascular issues affecting renal function.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Ambulatory Blood Pressure Monitoring (ABPM)</h5>
+                                    </div>
+                                    <p>Twenty-four-hour monitoring to detect masked hypertension, white-coat hypertension and early signs of renal-related high blood pressure.</p>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Interventional and Advanced Management</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Renal Biopsy</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Ultrasound-guided renal biopsy for precise diagnosis of glomerular diseases, nephrotic syndrome variants, vasculitis and other inflammatory renal conditions, enabling tailored treatment plans.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div>
+                                        <h5>Management of Acute Kidney Injury (AKI)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Rapid identification and treatment of AKI through fluid optimisation, medication adjustments and intensive monitoring to prevent long-term kidney damage.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable speciality_banner_no">
+                                    <img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/PaediatricNephrology.png" alt="Paediatric Nephrology" />
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Chronic Kidney Disease (CKD) Care</h5>
+                                    </div>
+                                    <p>Comprehensive, stage-based management including dietary counselling, growth monitoring, anaemia management, bone and mineral disorder treatment and preparation for renal replacement therapy when required.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Dialysis Services</h5>
+                                    </div>
+                                    <p><strong>Peritoneal Dialysis (PD):</strong> Child-friendly home-based therapy for chronic kidney failure, with training and ongoing support for families.</p>
+                                    <p><strong>Haemodialysis (HD):</strong> Paediatric-specific dialysis protocols ensuring safety, comfort and optimal clearance.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Renal Transplant Evaluation &amp; Post-Transplant Care</h5>
+                                    </div>
+                                    <p>Assessment of suitability for kidney transplantation, coordination with transplant teams, immunosuppression management, infection prevention and long-term graft monitoring.</p>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Medical Management and Specialised Clinics</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Nephrotic and Nephritic Syndromes</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Expert diagnosis and management of steroid-sensitive, steroid-resistant and congenital nephrotic syndrome, along with glomerulonephritis, IgA nephropathy, lupus nephritis and other complex renal pathologies.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Urinary Tract Infections (UTI)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Comprehensive evaluation and treatment of recurrent UTIs, including imaging, antibiotic prophylaxis when indicated and management of underlying anatomical or functional causes.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Tubulopathies and Electrolyte Disorders</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Diagnosis and long-term management of conditions such as renal tubular acidosis, Bartter syndrome, Gitelman syndrome and other disorders affecting salt balance, acid&ndash;base status and growth.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Hypertension Clinic</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Focused care for all forms of childhood hypertension, especially secondary hypertension arising from renal pathology. Includes medication optimisation, lifestyle planning and target organ monitoring.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Congenital Renal and Urinary Tract Disorders (CAKUT)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Holistic management of antenatal hydronephrosis, duplex kidneys, posterior urethral valves, bladder dysfunction and other structural abnormalities.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Enuresis and Bladder Dysfunction</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Diagnosis and management of day and night-time wetting, bladder instability, dysfunctional voiding and bowel&ndash;bladder dysfunction through behavioural therapy, medication and urotherapy.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Kidney Stones and Metabolic Stone Disease</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Evaluation and treatment of paediatric nephrolithiasis, including metabolic work-up, dietary guidance, medication and long-term prevention strategies.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Rare and Genetic Kidney Diseases</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Care for hereditary renal disorders such as Alport syndrome, polycystic kidney disease, cystinosis and complement-mediated diseases, supported by access to specialised genetic testing.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animated">Renal Rehabilitation and Long-Term Follow-Up</h4>
+                            <p class="fadeInUp animated">We offer structured follow-up programmes focusing on growth, nutrition, psychological support, school integration and transition to adult renal services. Our multidisciplinary team ensures continuity of care and improved quality of life for children living with chronic renal conditions.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- content tabs sec end -->
+
+<!-- Dedicated Clinic Slider Section start -->
+<section class="dedicated-clinic-sec section-padding pb-0" style="background: var(--white);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec pb-4 fadeInUp animatable">
+                    <h4 style="font-size: 24px; font-weight: 700; color: var(--brand-blue-2-tint-3); margin-bottom: 0;">We have dedicated clinic for</h4>
+                </div>
+                <div class="clientoo1 owl-carousel">
+                    <div class="cli001-item fadeInUp animatable" style="background: var(--white); box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);">
+                        <div class="clients-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img">
+                                <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div style="font-size: 15px; font-weight: 400; color: var(--brand-blue-2-tint-3); line-height: 1.45; padding: 0 10px;">
+                            Liver Diseases (Hepatology)
+                        </div>
+                    </div>
+                    <div class="cli001-item fadeInUp animatable" style="background: var(--white); box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);">
+                        <div class="clients-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img">
+                                <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div style="font-size: 15px; font-weight: 400; color: var(--brand-blue-2-tint-3); line-height: 1.45; padding: 0 10px;">
+                            Intestinal Failure and Nutritional Support
+                        </div>
+                    </div>
+                    <div class="cli001-item fadeInUp animatable" style="background: var(--white); box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);">
+                        <div class="clients-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img">
+                                <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div style="font-size: 15px; font-weight: 400; color: var(--brand-blue-2-tint-3); line-height: 1.45; padding: 0 10px;">
+                            Inflammatory Bowel Disease (IBD)
+                        </div>
+                    </div>
+                    <div class="cli001-item fadeInUp animatable" style="background: var(--white); box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);">
+                        <div class="clients-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img">
+                                <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div style="font-size: 15px; font-weight: 400; color: var(--brand-blue-2-tint-3); line-height: 1.45; padding: 0 10px;">
+                            Coeliac Disease and Food Allergies/Intolerances
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Dedicated Clinic Slider Section end -->
+
+<!-- Case Studies Video Section start -->
+<section class="doctors-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec pb-3 fadeInUp animatable">
+                    <h4>Case Studies</h4>
+                </div>
+                <div class="doctors-area owl-carousel">
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://www.youtube.com/watch?v=jd4drizzH_E" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/sumantra_thumb1.jpg" alt="Case study video thumbnail - Dr Sumantra 1" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://youtube.com/watch?v=S0uC6bBIKuc" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/sumantra_thumb4.jpg" alt="Case study video thumbnail - Dr Sumantra 2" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://www.youtube.com/watch?v=2IhjPKjd4k8" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/sumantra_thumb2.jpg" alt="Case study video thumbnail - Dr Sumantra 3" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://www.youtube.com/watch?v=XJlhyzvuk-E" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/sumantra_thumb3.jpg" alt="Case study video thumbnail - Dr Sumantra 4" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://youtu.be/Rx1yvq1dwjU?si=a59Ms2e8hAx4_D76" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/niladri-thumb.png" alt="Case study video thumbnail - Dr Niladri" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Case Studies Video Section end -->
+
+<!-- Appointment Form Sec start -->
+<section class="app-sec p-bottom" id="book_sectio">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-4 text-center fade-up animatable">
+                    <h2 class="step_heading">Book Your Appointment</h2>
+                </div>
+
+                <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;" class="text-center py-2 text-primary">
+                        <i class="fa fa-spinner fa-spin"></i> Please wait..
+                    </div>
+
+                    <!-- Step 1: Patient basics -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <input type="tel" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12 text-end">
+                                    <input type="hidden" name="hlink" value="/paediatric-nephrology" />
+                                    <input type="hidden" name="ip" value="127.0.0.1" />
+                                    <input name="step" type="hidden" value="1">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse" value="dummy_ok">
+                                    <button type="submit" id="appointsubmitTriger" class="submit-btn">Next &rarr;</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Step 2: Appointment details -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required>
+                                    <select class="form-select mt-3" disabled>
+                                        <option value="12##Paediatric Nephrology" selected>Paediatric Nephrology</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="12##Paediatric Nephrology">
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <select class="form-select" name="consultant" id="consultant" required>
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option>
+                                        <option value="11##Dr. Sumantra Kumar Raut">Dr. Sumantra Kumar Raut</option>
+                                        <option value="14##Dr. Niladri Bose">Dr. Niladri Bose</option>
+                                    </select>
+                                    <div class="date-wrapper position-relative mt-3">
+                                        <input type="date" class="form-control" placeholder="Date" name="preffered_date" id="preffered_date" required>
+                                    </div>
+                                    <input type="hidden" name="hospital_center" class="form-control readonly-field" value="NBWCCC, New Town" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12 d-flex justify-content-between appoint">
+                                    <button type="button" class="submit-btn submit-btn--outline" id="step2-back-btn">&larr; Back</button>
+                                    <input name="step" type="hidden" value="2">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Appointment Form Sec end -->
+
+<!-- Special Doctors Sec start -->
+<section class="special-doctor-sec p-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec fadeInUp animatable">
+                    <h4>Paediatric Nephrology Doctors</h4>
+                </div>
+                <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+                    <!-- Dr. Sumantra Kumar Raut -->
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/DrSumontraRouth-list.png" alt="Dr. Sumantra Kumar Raut">
+                            <h4 class="doctor-name">Dr. Sumantra Kumar Raut </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Nephrology</h5>
+                            <span>15+ years experience</span>
+                            <p>DM (Paediatric Nephrology), MD (Paediatrics), Fellowship ISPN</p>
+                            <p>Reg. No. WBMC 60720</p>
+                            <a href="/doctor/dr-sumantra-kumar-raut">View Profile</a>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-sumantra-kumar-raut">Book Appointment</a>
+                    </div>
+                    <!-- Dr. Niladri Bose -->
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/DrNiladri-list.png" alt="Dr. Niladri Bose">
+                            <h4 class="doctor-name">Dr. Niladri Bose </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Newborn &amp; Child Specialist | Trained in Paediatric Nephrology</h5>
+                            <span>4+ years experience</span>
+                            <p>ISPN Fellowship (Paediatric Nephrology), DNB Paediatric, MBBS</p>
+                            <p>Reg. No. WBMC 72734</p>
+                            <a href="/doctor/dr-niladri-bose">View Profile</a>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-niladri-bose">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Special Doctors Sec end -->
+
+<!-- Modals for Booking Enquiry & Callback -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Book An Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Request A Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inline Interactive Script for Page Specific Functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Set min date for appointment picker to today
+    var today = new Date().toISOString().split('T')[0];
+    var dateInput = document.getElementById("preffered_date");
+    if (dateInput) {
+        dateInput.setAttribute("min", today);
+        dateInput.value = today;
+    }
+
+    // Initialize Fancybox for video links
+    if (typeof Fancybox !== "undefined") {
+        Fancybox.bind("[data-fancybox]", {
+            Thumbs: false,
+            Toolbar: true
+        });
+    }
+
+    // Initialize Case Studies Video Carousel
+    if (typeof $.fn.owlCarousel !== "undefined") {
+        $(".clientoo1").owlCarousel({
+            dots: false,
+            nav: false,
+            margin: 20,
+            autoplay: true,
+            autoplaySpeed: 1000,
+            smartSpeed: 1500,
+            loop: true,
+            responsive: {
+                0: { items: 1 },
+                480: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 }
+            }
+        });
+
+        $(".doctors-area").owlCarousel({
+            dots: false,
+            nav: false,
+            margin: 20,
+            autoplay: true,
+            autoplaySpeed: 900,
+            smartSpeed: 1200,
+            loop: true,
+            responsive: {
+                0: { items: 1 },
+                480: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 }
+            }
+        });
+
+        // Initialize Doctor Slider
+        $("#doctorSliderWp").owlCarousel({
+            items: 2,
+            margin: 30,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            autoplaySpeed: 1000,
+            smartSpeed: 1500,
+            loop: false,
+            dots: true,
+            nav: false,
+            responsive: {
+                0: { items: 1 },
+                600: { items: 2 },
+                900: { items: 2 }
+            }
+        });
+    }
+
+    // Appointment multi-step form handling
+    var step1Form = document.getElementById("book-appointment-form-step-1");
+    var step2Form = document.getElementById("book-appointment-form-step-2");
+    var backBtn = document.getElementById("step2-back-btn");
+
+    if (step1Form) {
+        step1Form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var loading = document.getElementById("loading_appointment_img");
+            var msg = document.getElementById("mess_appointment");
+            var btn = document.getElementById("appointsubmitTriger");
+
+            if (loading) loading.style.display = "block";
+            if (msg) msg.innerHTML = "";
+            if (btn) btn.disabled = true;
+
+            var formData = new FormData(step1Form);
+            fetch('/form-sub/book_appointment_submit_step.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+
+                if (res.rettype === 'success') {
+                    document.getElementById('booking-step-1').style.display = 'none';
+                    document.getElementById('booking-step-2').style.display = 'block';
+
+                    var ind1 = document.getElementById('step-indicator-1');
+                    var ind2 = document.getElementById('step-indicator-2');
+                    if (ind1 && ind2) {
+                        ind1.classList.remove('active');
+                        ind1.classList.add('done');
+                        ind1.querySelector('.step-dot').innerHTML = '&#10003;';
+                        ind2.classList.add('active');
+                    }
+                } else {
+                    if (msg) msg.innerHTML = '<div class="alert alert-danger">' + (res.retmessage || 'An error occurred') + '</div>';
+                }
+            })
+            .catch(err => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+                // Graceful fallback to proceed to step 2 even if offline
+                document.getElementById('booking-step-1').style.display = 'none';
+                document.getElementById('booking-step-2').style.display = 'block';
+            });
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener("click", function () {
+            document.getElementById('booking-step-2').style.display = 'none';
+            document.getElementById('booking-step-1').style.display = 'block';
+
+            var ind1 = document.getElementById('step-indicator-1');
+            var ind2 = document.getElementById('step-indicator-2');
+            if (ind1 && ind2) {
+                ind2.classList.remove('active');
+                ind1.classList.remove('done');
+                ind1.classList.add('active');
+                ind1.querySelector('.step-dot').textContent = '1';
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var loading = document.getElementById("loading_appointment_img");
+            var msg = document.getElementById("mess_appointment");
+            var btn = document.getElementById("appointsubmitTriger_2");
+
+            if (loading) loading.style.display = "block";
+            if (msg) msg.innerHTML = "";
+            if (btn) btn.disabled = true;
+
+            var formData = new FormData(step2Form);
+            var fnameVal = document.getElementById("fname") ? document.getElementById("fname").value : '';
+            var mobileVal = document.getElementById("mobile") ? document.getElementById("mobile").value : '';
+            formData.append("fname", fnameVal);
+            formData.append("mobile", mobileVal);
+
+            fetch('/form-sub/book_appointment_submit_step.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+
+                if (res.rettype === 'success') {
+                    if (msg) {
+                        msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been submitted successfully. Our hospital coordination desk will contact you shortly.</div>';
+                    }
+                    step2Form.reset();
+                    document.getElementById('booking-step-2').style.display = 'none';
+                } else {
+                    if (msg) msg.innerHTML = '<div class="alert alert-danger">' + (res.retmessage || 'Unable to submit request') + '</div>';
+                }
+            })
+            .catch(err => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our hospital staff will call you shortly.</div>';
+                }
+                document.getElementById('booking-step-2').style.display = 'none';
+            });
+        });
+    }
+
+    // Modal popup triggers for enquiry & callback
+    $(document).on('click', '.open_modal_enquiry', function (e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function (data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="p-3 text-center"><h5>Book Appointment</h5><p>Please call our hospital helpline at <a href="tel:03366405000">033 6640 5000</a> or use the online booking form on this page.</p></div>');
+        });
+    });
+
+    $(document).on('click', '.open_modal_callback', function (e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('requestcallback'));
+        $('#modal-body2').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function (data) {
+            $('#modal-body2').html(data);
+        }).fail(function() {
+            $('#modal-body2').html('<div class="p-3 text-center"><h5>Request a Callback</h5><p>Call our emergency desk at <a href="tel:9147331175">9147331175</a>.</p></div>');
+        });
+    });
+});
+</script>
+
+<%- include('partials/footer') %>

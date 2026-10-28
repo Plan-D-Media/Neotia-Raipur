@@ -1,0 +1,49 @@
+<%# Request-a-callback modal: used by modals.ejs and, as a <template>, by footer.ejs for pages without it %>
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-labelledby="requestcallbackLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 16px; overflow: hidden; border: none; box-shadow: 0 10px 40px rgba(var(--black-rgb), 0.2);">
+      <div class="modal-header" style="background: var(--theme-color); color: var(--white); border-bottom: none; padding: 18px 25px;">
+        <h5 class="modal-title font-weight-bold" id="requestcallbackLabel" style="color: var(--white); font-size: 20px;">
+          <i class="fas fa-phone-volume me-2" style="color: var(--snd-color);"></i> Request A Callback
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4" id="modal-body2">
+        <p class="text-muted small mb-3">Leave your details and our healthcare coordinator will call you back within 15 minutes.</p>
+        <div id="mess_callback_pop"></div>
+        <form id="request-a-callback-pop">
+          <input type="hidden" name="recaptchaResponse" id="recaptchaResponse_callback" value="dummy_recaptcha_ok">
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: 400;">Your Name <span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="Enter Full Name" required style="border-radius: 8px; padding: 10px 14px;">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: 400;">Mobile Number <span class="text-danger">*</span></label>
+            <input type="tel" name="phone" id="phone" class="form-control" placeholder="10-digit Mobile Number" required pattern="[0-9]{10}" style="border-radius: 8px; padding: 10px 14px;">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: 400;">Department of Interest</label>
+            <select name="department" class="form-select" style="border-radius: 8px; padding: 10px 14px;">
+              <option value="General Paediatrics">General Paediatrics</option>
+              <% departments.forEach(dept => { %>
+                <option value="<%= dept.name %>"><%= dept.name %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: 400;">Message / Question</label>
+            <textarea name="message" class="form-control" rows="2" placeholder="Tell us how we can help" style="border-radius: 8px; padding: 10px 14px;"></textarea>
+          </div>
+          <div class="text-end mt-4">
+            <button type="submit" id="getancallback_pop" class="btn w-100" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); font-weight: 700; padding: 12px; border-radius: 25px; border: none; font-size: 16px;">
+              Request Call Back <i class="fas fa-phone ms-2"></i>
+            </button>
+            <div id="loading_callback_img_pop" style="display: none;" class="mt-2 text-center text-primary">
+              <i class="fas fa-spinner fa-spin"></i> Submitting request...
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

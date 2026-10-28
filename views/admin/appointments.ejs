@@ -1,0 +1,121 @@
+<!-- Appointments Management -->
+<div class="table-card p-4">
+    <div class="row g-3 align-items-center mb-4">
+        <div class="col-md-5">
+            <form method="GET" action="/admin/appointments" class="d-flex gap-2">
+                <input type="text" name="search" value="<%= query.search || '' %>" class="form-control form-control-sm" placeholder="Search by name, phone or doctor...">
+                <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                <% if (query.search || query.status) { %>
+                    <a href="/admin/appointments" class="btn btn-sm btn-outline-secondary">Reset</a>
+                <% } %>
+            </form>
+        </div>
+        <div class="col-md-7 d-flex justify-content-md-end gap-2">
+            <div class="btn-group btn-group-sm">
+                <a href="/admin/appointments" class="btn <%= !query.status || query.status === 'All' ? 'btn-dark' : 'btn-outline-dark' %>">All</a>
+                <a href="/admin/appointments?status=New" class="btn <%= query.status === 'New' ? 'btn-danger' : 'btn-outline-danger' %>">New</a>
+                <a href="/admin/appointments?status=Contacted" class="btn <%= query.status === 'Contacted' ? 'btn-warning' : 'btn-outline-warning' %>">Contacted</a>
+                <a href="/admin/appointments?status=Confirmed" class="btn <%= query.status === 'Confirmed' ? 'btn-success' : 'btn-outline-success' %>">Confirmed</a>
+                <a href="/admin/appointments?status=Completed" class="btn <%= query.status === 'Completed' ? 'btn-info' : 'btn-outline-info' %>">Completed</a>
+                <a href="/admin/appointments?status=Cancelled" class="btn <%= query.status === 'Cancelled' ? 'btn-secondary' : 'btn-outline-secondary' %>">Cancelled</a>
+            </div>
+        </div>
+    </div>
+
+    <% if (appointments.length === 0) { %>
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-calendar-times fa-3x mb-3 text-secondary"></i>
+            <h5>No appointment records found</h5>
+            <p class="small">Try adjusting search filters or check back later.</p>
+        </div>
+    <% } else { %>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small">
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient Details</th>
+                        <th>Requested Doctor &amp; Dept</th>
+                        <th>Date &amp; Slot</th>
+                        <th>Symptoms / Query</th>
+                        <th>Current Status</th>
+                        <th>Notes / Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="small">
+                    <% appointments.forEach(a => { %>
+                        <tr>
+                            <td>#<%= a.id %></td>
+                            <td>
+                                <strong><%= a.name %></strong>
+                                <div><a href="tel:<%= a.phone %>" class="text-primary text-decoration-none"><i class="fas fa-phone-alt"></i> <%= a.phone %></a></div>
+                                <% if (a.email) { %>
+                                    <div class="text-muted" style="font-size: 11px;"><%= a.email %></div>
+                                <% } %>
+                                <% if (a.address) { %>
+                                    <div class="text-muted" style="font-size: 11px;"><i class="fas fa-map-marker-alt"></i> <%= a.address %></div>
+                                <% } %>
+                            </td>
+                            <td>
+                                <strong class="text-dark"><%= a.doctor_name || 'Any Doctor' %></strong>
+                                <div class="text-muted small"><%= a.department_name %></div>
+                            </td>
+                            <td>
+                                <strong><%= a.appointment_date %></strong>
+                                <div class="text-muted" style="font-size: 11px;"><%= a.appointment_time %></div>
+                            </td>
+                            <td>
+                                <div style="max-width: 220px; line-height: 1.4; color: var(--grey-700);">
+                                    <%= a.query || 'Regular consultation' %>
+                                </div>
+                            </td>
+                            <td>
+                                <form action="/admin/appointments/<%= a.id %>/status" method="POST" class="d-inline">
+                                    <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" style="width: 120px; font-weight: 400;">
+                                        <option value="New" <%= a.status === 'New' ? 'selected' : '' %>>New</option>
+                                        <option value="Contacted" <%= a.status === 'Contacted' ? 'selected' : '' %>>Contacted</option>
+                                        <option value="Confirmed" <%= a.status === 'Confirmed' ? 'selected' : '' %>>Confirmed</option>
+                                        <option value="Completed" <%= a.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                        <option value="Cancelled" <%= a.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editModal-<%= a.id %>">
+                                    <i class="fas fa-edit"></i> Notes
+                                </button>
+                                <form action="/admin/appointments/<%= a.id %>/delete" method="POST" class="d-inline" onsubmit="return confirm('Delete appointment record?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+
+                                <!-- Notes Modal -->
+                                <div class="modal fade" id="editModal-<%= a.id %>" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <form action="/admin/appointments/<%= a.id %>/notes" method="POST">
+                                                <div class="modal-header">
+                                                    <h6 class="modal-title font-weight-bold">Internal Patient Notes (#<%= a.id %>)</h6>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="small text-muted mb-2">Patient: <strong><%= a.name %></strong> (<%= a.phone %>)</p>
+                                                    <textarea name="notes" class="form-control" rows="4" placeholder="Enter clinical notes, call summary, token number, or reception comments..."><%= a.notes || '' %></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-sm btn-primary">Save Notes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,177 @@
+<%- include('partials/header', { 
+    title: doctor.name + ' - ' + doctor.speciality + ' | Neotia Bhagirathi Raipur',
+    description: doctor.name + ', ' + doctor.speciality + ' at Neotia Bhagirathi Woman and Child Care Centre, Raipur.'
+}) %>
+
+<!-- Doctor Profile Hero Banner -->
+<section id="doctor-banner" class="banner-sec position-relative" style="background: linear-gradient(135deg, var(--brand-blue-2) 0%, var(--brand-blue-2-tint-1) 100%); padding: 120px 0 60px; color: var(--white);">
+    <div class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-7 col-lg-7">
+                    <div class="banner-text">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-2" style="background: transparent; padding: 0;">
+                                <li class="breadcrumb-item"><a href="/" style="color: var(--white); text-decoration: none;">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/find-a-doctor" style="color: var(--white); text-decoration: none;">Doctors</a></li>
+                                <li class="breadcrumb-item active text-white" aria-current="page"><%= doctor.name %></li>
+                            </ol>
+                        </nav>
+                        <h1 class="fadeInUp animatable" style="font-size: 38px; font-weight: 700; color: var(--white); margin-bottom: 8px;"><%= doctor.name %></h1>
+                        <p class="fadeInUp animatable" style="color: var(--white); font-size: 18px; font-weight: 400;"><%= doctor.speciality %></p>
+                        <div class="gapline my-3" style="width: 60px; height: 3px; background: var(--snd-color);"></div>
+                        
+                        <% if (doctor.designation) { %>
+                            <span class="d-block mb-1" style="color: var(--white); font-size: 14px;"><%= doctor.designation %></span>
+                        <% } %>
+
+                        <span class="dc-description fadeInUp animatable d-block mb-4" style="color: var(--white); font-size: 14px; line-height: 1.6;">
+                            <%= doctor.qualifications || 'Consultant Specialist' %>
+                        </span>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="/book-an-appointment?doctor=<%= encodeURIComponent(doctor.name) %>" class="btn" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); border-radius: 30px; font-weight: 700; padding: 12px 30px;">
+                                <i class="fas fa-calendar-check me-2"></i> Book Appointment
+                            </a>
+                            <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>" class="btn btn-outline-light" style="border-radius: 30px; font-weight: 700; padding: 12px 24px;">
+                                <i class="fas fa-phone-alt me-2"></i> Emergency Contact
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-5 text-center mt-4 mt-md-0">
+                    <div style="background: rgba(var(--white-rgb), 0.06); border-radius: 20px; padding: 20px; display: inline-block;">
+                        <img src="<%= doctor.image ? (doctor.image.startsWith('http') ? doctor.image : (doctor.image.startsWith('/') ? doctor.image : '/' + doctor.image)) : '/img/about-img.png' %>" alt="<%= doctor.name %>" class="img-fluid" style="max-height: 340px; object-fit: contain;" onerror="this.src='/img/about-img.png'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Doctor Detailed Information -->
+<section class="overview-sec section-padding" style="background: var(--white);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="workup-sec pe-lg-4">
+                    <div class="mb-4">
+                        <h3 style="color: var(--theme-color); font-weight: 700; font-size: 26px; border-left: 4px solid var(--snd-color); padding-left: 12px;">Doctor Overview</h3>
+                    </div>
+                    
+                    <div class="doctor-bio-content" style="color: var(--grey-700); font-size: 15px; line-height: 1.8;">
+                        <% if (doctor.overview && doctor.overview.length > 30) { %>
+                            <%- doctor.overview %>
+                        <% } else { %>
+                            <p><%= doctor.name %> is a dedicated and highly respected <%= doctor.speciality %> at Neotia Bhagirathi Woman and Child Care Centre, Raipur.</p>
+                            <p>With comprehensive clinical training and extensive experience handling complex paediatric and maternal cases, <%= doctor.name %> is committed to providing compassionate, evidence-based healthcare for every patient.</p>
+                            <h4 class="mt-4 mb-3" style="color: var(--brand-blue-2-tint-3); font-weight: 700; font-size: 20px;">Areas of Clinical Expertise</h4>
+                            <ul>
+                                <li>Specialised consultations in <%= doctor.speciality %></li>
+                                <li>Advanced paediatric diagnostic evaluation &amp; management</li>
+                                <li>Pre-operative and post-operative critical patient care</li>
+                                <li>Preventive health guidance and long-term care plans</li>
+                            </ul>
+                        <% } %>
+                    </div>
+
+                    <!-- OPD Schedule / Timings -->
+                    <div class="mt-5 p-4 rounded-4" style="background: var(--grey-bg); border: 1px solid var(--grey-100);">
+                        <h4 style="color: var(--theme-color); font-weight: 700; font-size: 20px; margin-bottom: 15px;">
+                            <i class="far fa-clock text-warning me-2"></i> OPD Consultation Schedule
+                        </h4>
+                        <div class="table-responsive">
+                            <table class="table table-bordered bg-white mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Days</th>
+                                        <th>Timings</th>
+                                        <th>OPD Type</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Monday - Saturday</td>
+                                        <td>10:00 AM - 2:00 PM (By Appointment)</td>
+                                        <td>Regular OPD</td>
+                                        <td>
+                                            <a href="/book-an-appointment?doctor=<%= encodeURIComponent(doctor.name) %>" class="btn btn-sm" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); font-weight: 700; border-radius: 15px;">Book</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monday, Wednesday, Friday</td>
+                                        <td>4:00 PM - 7:00 PM (By Appointment)</td>
+                                        <td>Evening Clinic</td>
+                                        <td>
+                                            <a href="/book-an-appointment?doctor=<%= encodeURIComponent(doctor.name) %>" class="btn btn-sm" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); font-weight: 700; border-radius: 15px;">Book</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Sidebar Card -->
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <div class="card border-0 shadow p-4 sticky-top" style="border-radius: 16px; top: 100px; z-index: 10;">
+                    <h4 style="color: var(--theme-color); font-weight: 700; font-size: 20px; margin-bottom: 15px;">
+                        Quick Appointment
+                    </h4>
+                    <p class="text-muted small mb-4">Book your consultation with <%= doctor.name %> online or call our OPD desk directly.</p>
+                    
+                    <div class="mb-3 p-3 rounded-3" style="background: var(--grey-bg);">
+                        <small class="text-muted d-block">OPD Direct Line</small>
+                        <a href="tel:<%= siteInfo.opdEnquiriesNumber %>" style="color: var(--theme-color); font-weight: 700; font-size: 17px; text-decoration: none;">
+                            <i class="fas fa-phone-alt me-1"></i> <%= siteInfo.opdEnquiriesNumber %>
+                        </a>
+                    </div>
+
+                    <a href="/book-an-appointment?doctor=<%= encodeURIComponent(doctor.name) %>" class="btn w-100 py-3 mb-2 font-weight-bold" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); border-radius: 30px; font-weight: 700; font-size: 15px;">
+                        Book Consultation Now
+                    </a>
+
+                    <button type="button" class="btn btn-outline-primary w-100 py-2" data-bs-toggle="modal" data-bs-target="#requestcallback" style="border-radius: 30px; font-weight: 700;">
+                        Request Call Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Specialists Section -->
+<% if (relatedDoctors && relatedDoctors.length > 0) { %>
+<section class="section-padding" style="background: var(--grey-bg);">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3 style="color: var(--theme-color); font-weight: 700; font-size: 26px;">Other Specialists in this Department</h3>
+            </div>
+        </div>
+        <div class="row g-4">
+            <% relatedDoctors.forEach(rd => { %>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card h-100 border-0 shadow-sm" style="border-radius: 14px; overflow: hidden; background: var(--white);">
+                        <div class="text-center pt-3" style="background: var(--grey-bg); height: 180px; display: flex; align-items: flex-end; justify-content: center;">
+                            <img src="<%= rd.image ? (rd.image.startsWith('http') ? rd.image : (rd.image.startsWith('/') ? rd.image : '/' + rd.image)) : '/img/about-img.png' %>" alt="<%= rd.name %>" style="max-height: 160px; object-fit: contain;" onerror="this.src='/img/about-img.png'">
+                        </div>
+                        <div class="card-body p-3 text-center">
+                            <h5 style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">
+                                <a href="/doctor/<%= rd.slug %>" style="color: inherit; text-decoration: none;"><%= rd.name %></a>
+                            </h5>
+                            <p class="text-muted small mb-3"><%= rd.speciality %></p>
+                            <a href="/doctor/<%= rd.slug %>" class="btn btn-sm btn-outline-primary w-100" style="border-radius: 20px;">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<%- include('partials/modals') %>
+<%- include('partials/footer') %>

@@ -1,0 +1,55 @@
+<!-- Blogs Management -->
+<div class="table-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h5 class="mb-0 fw-bold">Health Articles &amp; Blog Posts (<%= blogs.length %>)</h5>
+            <small class="text-muted">Manage health advisories, medical guides, and press releases</small>
+        </div>
+        <a href="/admin/blogs/new" class="btn btn-primary" style="border-radius: 8px;">
+            <i class="fas fa-plus me-1"></i> Write New Article
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small">
+                <tr>
+                    <th>Article</th>
+                    <th>Date</th>
+                    <th>Slug</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="small">
+                <% blogs.forEach(b => { %>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="<%= b.image ? (b.image.startsWith('http') ? b.image : (b.image.startsWith('/') ? b.image : '/' + b.image)) : '/img/about-img.png' %>" alt="<%= b.title %>" style="width: 50px; height: 38px; object-fit: cover; border-radius: 6px;" onerror="this.src='/img/about-img.png'">
+                                <div>
+                                    <strong class="d-block text-dark"><%= b.title %></strong>
+                                    <small class="text-muted"><%= b.excerpt ? b.excerpt.substring(0, 60) + '...' : '' %></small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light text-dark border"><%= b.date %></span></td>
+                        <td><code>/blog-details/<%= b.slug %></code></td>
+                        <td>
+                            <a href="/blog-details/<%= b.slug %>" target="_blank" class="btn btn-sm btn-outline-secondary me-1" title="View Article">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="/admin/blogs/<%= b.id %>/edit" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="/admin/blogs/<%= b.id %>/delete" method="POST" class="d-inline" onsubmit="return confirm('Delete this blog post?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>

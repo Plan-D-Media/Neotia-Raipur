@@ -1,0 +1,288 @@
+/**
+ * Multilingual Translation Styling & Regional Typography (i18n)
+ * Supports English and Hindi (हिन्दी)
+ */
+
+/* 1. Regional Typography Rules
+ * --font-brand already falls back to Noto Sans Devanagari for Hindi glyphs;
+ * that font is only requested when Hindi is active (see header.ejs and i18n.js). */
+html[lang="hi"] body {
+    font-family: var(--font-brand);
+}
+
+/* ======================================================== */
+/* 2. Language Selector Pill (Pixel-Matched to Attachment)  */
+/* ======================================================== */
+.neotia-lang-wrapper {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 0 !important;
+    top: auto !important;
+    left: auto !important;
+}
+
+/* In Top Utility Bar */
+#headerDesktopLang {
+    margin-right: 14px !important;
+}
+
+/* In Main Navigation Bar */
+.neotia-lang-nav-item {
+    margin-left: 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border-right: none !important;
+}
+
+/* The White Rounded Pill from the Attachment */
+.neotia-lang-pill {
+    background: var(--white) !important;
+    border: 1.5px solid var(--grey-200) !important;
+    border-radius: 9999px !important;
+    padding: 4px 13px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(var(--brand-blue-2-rgb), 0.16) !important;
+    transition: all 0.25s ease !important;
+    text-decoration: none !important;
+    outline: none !important;
+    height: 32px !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.neotia-lang-pill:hover,
+.neotia-lang-pill:focus,
+.neotia-lang-pill.show {
+    background: var(--white) !important;
+    border-color: var(--brand-blue-2) !important;
+    box-shadow: 0 4px 15px rgba(var(--brand-blue-2-rgb), 0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Crisp Blue Globe SVG */
+.neotia-globe-svg {
+    width: 17px !important;
+    height: 17px !important;
+    stroke: var(--brand-blue-2) !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}
+
+/* Language Code (e.g. EN, BN, HI, OR) */
+.neotia-lang-text {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: var(--brand-blue-2) !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1 !important;
+    font-family: var(--font-brand) !important;
+}
+
+/* Solid Downward Triangle Arrow */
+.neotia-caret-svg {
+    width: 9px !important;
+    height: 7px !important;
+    fill: var(--brand-blue-2) !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+    transition: transform 0.25s ease !important;
+}
+
+.neotia-lang-pill.show .neotia-caret-svg {
+    transform: rotate(180deg) !important;
+}
+
+/* Dropdown Menu Container */
+.neotia-lang-menu {
+    position: absolute !important;
+    top: calc(100% + 6px) !important;
+    right: 0 !important;
+    left: auto !important;
+    min-width: 210px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-2-rgb), 0.22) !important;
+    border: 1px solid var(--grey-100) !important;
+    padding: 8px !important;
+    margin-top: 0 !important;
+    z-index: 99999 !important;
+    background: var(--white) !important;
+    display: none !important;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.neotia-lang-menu.show {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Header Logo Double-Rendering Protection on all subpages */
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.neotia-lang-menu .dropdown-header {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    color: var(--grey-600) !important;
+    letter-spacing: 0.5px !important;
+    padding: 6px 12px !important;
+}
+
+.neotia-lang-menu .dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: var(--brand-blue-2-tint-3) !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.neotia-lang-menu .dropdown-item:hover {
+    background: var(--grey-bg) !important;
+    color: var(--brand-blue-2) !important;
+    transform: translateX(3px) !important;
+}
+
+.neotia-lang-menu .dropdown-item.active {
+    background: var(--brand-blue-2) !important;
+    color: var(--white) !important;
+}
+
+.neotia-lang-menu .dropdown-item.active .badge {
+    background: rgba(var(--white-rgb), 0.25) !important;
+    color: var(--white) !important;
+}
+
+.neotia-lang-menu .badge {
+    font-size: 11px !important;
+    padding: 3px 6px !important;
+    border-radius: 6px !important;
+    background: var(--grey-bg) !important;
+    color: var(--grey-700) !important;
+    font-weight: 700 !important;
+}
+
+/* 3. Mobile Navigation Drawer Language Selector */
+.mobile-lang-container {
+    padding: 14px 16px;
+    border-top: 1px solid var(--grey-100);
+    border-bottom: 1px solid var(--grey-100);
+    background: var(--grey-bg);
+    margin: 10px 0 16px;
+}
+
+.mobile-lang-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--grey-600);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mobile-lang-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.mobile-lang-btn {
+    border: 1px solid var(--grey-300);
+    background: var(--white);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brand-blue-2-tint-3);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.mobile-lang-btn:hover {
+    background: var(--grey-bg);
+    color: var(--brand-blue-2);
+    border-color: var(--brand-blue-1);
+}
+
+.mobile-lang-btn.active {
+    background: var(--brand-blue-2);
+    color: var(--white);
+    border-color: var(--brand-blue-2);
+}
+
+.mobile-lang-btn.active .badge {
+    background: rgba(var(--white-rgb), 0.2) !important;
+    color: var(--white) !important;
+}
+
+/* 4. Fluid Expansion for Longer Regional Phrases */
+.home_button a,
+.banner-sec .btn,
+.navbar-nav .nav-link,
+.appointment-form .btn,
+.about-tabs .tab-link {
+    white-space: normal;
+    text-align: center;
+}
+
+/* 5. Clean Suppression of Default Google Translate Top Banner */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+body {
+    top: 0px !important;
+    position: static !important;
+}
+
+.goog-te-gadget {
+    display: none !important;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 6. Proper Noun Marker Utility */
+.notranslate,
+[translate="no"] {
+    display: inline-block;
+}

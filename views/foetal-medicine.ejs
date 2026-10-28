@@ -1,0 +1,677 @@
+<%- include('partials/header', { 
+    title: 'Foetal Medicine in Raipur | Neotia Bhagirathi',
+    description: 'Neotia Bhagirathi provides fetal medicine and fetal echocardiography in Raipur with expert specialists ensuring safe maternal & child care.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--grey-400);
+}
+.step-item.active {
+    color: var(--grey-800);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--black);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .booking-steps {
+        width: 100%;
+    }
+}
+
+/* Banner image styling */
+.banner-sec {
+    background: var(--grey-bg);
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+    position: relative;
+}
+@media (max-width: 991px) {
+    .banner-sec {
+        padding-top: 105px !important;
+        padding-bottom: 40px !important;
+    }
+}
+.banner-area .banner-img img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-1-rgb), 0.12);
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+}
+
+/* Speciality banner in content */
+.speciality_banner_no {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 30px 0 !important;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+.speciality_banner_no img {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    max-width: 100%;
+}
+
+/* Diagnostic scans grid */
+.content-001area {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 30px;
+}
+@media (max-width: 991px) {
+    .content-001area {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 575px) {
+    .content-001area {
+        grid-template-columns: 1fr;
+    }
+}
+.oo1-item {
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--grey-100);
+    border-radius: 10px;
+    font-weight: 400;
+    color: var(--brand-blue-2-tint-3);
+    box-shadow: 0 2px 6px rgba(var(--black-rgb), 0.03);
+    transition: all 0.3s ease;
+}
+.oo1-item:hover {
+    border-color: var(--snd-color, var(--brand-orange));
+    box-shadow: 0 6px 16px rgba(var(--black-rgb), 0.08);
+    transform: translateY(-2px);
+}
+
+/* Case studies video items */
+.doctors-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    max-width: 480px;
+}
+.doctors-item img {
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+    width: 100%;
+}
+.doctors-item:hover img {
+    transform: scale(1.03);
+}
+.right-plus {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    background: rgba(var(--brand-orange-rgb), 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(var(--black-rgb), 0.25);
+    transition: transform 0.3s ease;
+}
+.doctors-item:hover .right-plus {
+    transform: scale(1.12);
+}
+.right-plus img {
+    width: 18px;
+    height: 18px;
+}
+</style>
+
+<!-- banner sec start -->
+<section class="banner-sec">
+    <div class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 col-lg-5">
+                    <h1 class="fadeInUp animatable">Foetal Medicine</h1>
+                    <p class="fadeInUp animatable">From the first heartbeat to the first cry, we walk beside every mother, keeping both hearts safe and sound.</p>
+                    <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                </div>
+                <div class="col-md-6 col-lg-7">
+                    <div class="banner-img">
+                        <img src="/upload/fileManager/banner/foetal_medicine_hero_banner.jpg" alt="Foetal Medicine and Maternal Care" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner sec end -->
+
+<!-- content tabs sec start -->
+<section class="content-tabs-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panels">
+                    <section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+                        <h3 class="fadeInUp animatable">Foetal Medicine &amp; Maternal Care</h3>
+                        <p class="fadeInUp animatable">Most pregnancies are uncomplicated and regular antenatal care usually ensures an uneventful pregnancy and childbirth. However, some women have problems anteceding pregnancy or have had problems in their previous pregnancies which puts them at risk of developing complications in pregnancy which can affect both the mother and her unborn child. Such conditions include an advanced maternal age &gt; 35 years, obesity, previous medical conditions like Diabetes, Hypertension, previous baby with a genetic disorder like Down’s or Thalassemia or a family history of the genetic disorder.</p>
+                        <p class="pt-2 fadeInUp animatable">Foetal Medicine is a sub-speciality branch of Obstetrics and is now an integral part of all pregnancy care, both low risk and high risk. It deals with the well-being of the unborn child to ensure the birth of a healthy and normal child.</p>
+
+                        <div class="workup-sec mt-4">
+                            <h4 class="py-3 fadeInUp animatable">What do you need to know about problems affecting the unborn foetus?</h4>
+                            <p class="pt-2 fadeInUp animatable">In case of a previous history/family history of a genetic disorder, Prenatal Genetic Counselling by a genetic counsellor can be offered to such parents to help them plan their future pregnancies. Screening for risk of such genetic disorders can be offered to all pregnant women in early and mid – pregnancy. Sometimes an unborn child may have a structural deformity which may be lethal or sometimes associated with a chromosomal or genetic abnormality and this can affect 5 – 6 in 100 babies.</p>
+                            <p class="pt-2 fadeInUp animatable">Foetal Medicine can help in detecting these abnormalities in pregnancy and early detection can help in planning the management. In conditions where the maternal disease as mentioned earlier can affect the growth and the well-being of the foetus later in pregnancy, dedicated foetal medicine unit can monitor these babies and advise timely delivery of such babies who may be born premature, small or big to ensure a good outcome.</p>
+
+                            <h4 class="py-3 fadeInUp animatable">Foetal Medicine Services</h4>
+                            <p class="pt-2 fadeInUp animatable">A multidisciplinary approach is adopted for a more comprehensive care for mothers and babies with complex conditions. Our team of experts include maternal foetal medicine specialists, obstetricians, neonatologists and paediatric surgeons who share a passion for providing exceptional care to these pregnancies.</p>
+                            <p class="pt-2 fadeInUp animatable mb-2"><strong>Foetal Medicine Services we offer</strong></p>
+                            <ul class="fotal_first">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Prenatal Screening</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Foetal Diagnosis</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Genetic Counselling</p></div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Prenatal Screening</h4>
+                            <p class="fadeInUp animatable mb-4">Prenatal screening is done to assess the chance of the foetus in utero having any genetic conditions or any structural abnormality. Screening test cannot tell for sure whether the baby has any genetic condition but only the chance of having it. To find out for sure, a diagnostic test must be done.</p>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Down’s Syndrome Screening test is the most common screening test done worldwide.</h5>
+                                    </div>
+                                    <div class="mb-2"><p><strong>This is done by the:</strong></p></div>
+                                    <div class="mb-2"><p>NT scan + Double Marker test - known together as the First Trimester Screening test which is done from 11 to 13 weeks 6 days. The ultrasound markers and blood tests are combined together to give a probability.</p></div>
+                                    <div class="mb-2"><p>For those who missed the FTS, a Genetic Sonogram and the Quadruple test can be done from 16-20 weeks.</p></div>
+                                </li>
+
+                                <!-- Speciality Banner -->
+                                <li class="fadeInUp animatable speciality_banner_no">
+                                    <img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/FoetalMedicine.png" alt="Foetal Medicine" />
+                                </li>
+
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>The other screening commonly done are:</h5>
+                                    </div>
+                                    <div class="mb-2"><p><strong>Pre-eclampsia Screening</strong></p></div>
+                                    <div class="mb-2"><p>It is done between 11 to 13 weeks.</p></div>
+                                    <div class="mb-2"><p>It involves ultrasound scan to assess the placental blood flow, in combination with the mean arterial blood pressure, Serum PAPP-A, maternal blood marker and Placental Growth Factor (PLGF).</p></div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Preterm Labour Screening</h4>
+                            <p class="fadeInUp animatable mb-4">Cervical Screening by transvaginal ultrasound is done at 11-13 weeks and 18-24 weeks. A short cervix may lead to preterm birth and appropriate management can be adopted when detected early.</p>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Foetal Diagnosis</h4>
+                            <p class="fadeInUp animatable mb-4">Foetal Birth Defects can be detected before birth because of world-class imaging and diagnostics. Foetal Medicine Specialists use high-tech tools and the best USG machines to assess and diagnose Foetal conditions.</p>
+                            <p class="fadeInUp animatable mb-3"><strong>Some of the common diagnostic USGs are:</strong></p>
+                            <div class="content-001area">
+                                <div class="oo1-item fadeInUp animated">Early Anomaly Scan: 12-17 weeks</div>
+                                <div class="oo1-item fadeInUp animated">Second Trimester Anomaly Scan: 18-23 weeks</div>
+                                <div class="oo1-item fadeInUp animated">Foetal Viability Scan: (Till 11 weeks)</div>
+                                <div class="oo1-item fadeInUp animated">Foetal Growth &amp; Doppler Scan: 24 weeks till birth</div>
+                                <div class="oo1-item fadeInUp animated">Foetal Echocardiography</div>
+                                <div class="oo1-item fadeInUp animated">3D &amp; 4D Ultrasound</div>
+                                <div class="oo1-item fadeInUp animated">Foetal MRI</div>
+                            </div>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Diagnostic Invasive Testing</h4>
+                            <p class="fadeInUp animatable mb-4">It is done to diagnose certain foetal conditions.</p>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><h5>It is usually done:</h5></div>
+                                    <div class="mb-2"><p>In cases of certain hereditary diseases which can be picked up from parents such as Thalassemia.</p></div>
+                                    <div class="mb-2"><p>In cases of a screen positive FTS or a Quadruple test.</p></div>
+                                    <div class="mb-2"><p>In cases of detection of structural abnormalities, picked up by the USG, which may be genetically associated.</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><h5>These are:</h5></div>
+                                    <div class="mb-2">
+                                        <p><strong>Chorionic Villus Sampling:</strong> 11-13 weeks 6 days</p>
+                                        <p><strong>Genetic Amniocentesis:</strong> 16 weeks onwards</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Foetal Therapy</h4>
+                            <p class="fadeInUp animatable mb-4">The aim is to diagnose and treat, if treatable, the abnormalities in the unborn for its well-being.</p>
+                            <p class="fadeInUp animatable mb-4">We offer comprehensive foetal care which includes:</p>
+                            <ul class="listing-apps foetal">
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Intrauterine Foetal blood transfusion</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Foetoscopic laser photocoagulation for twin-twin transfusion syndrome</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>MultiFoetal reduction</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Foetal shunt placement</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Amniotic band resection</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Ex utero intrapartum treatment (EXIT)</p></div></li>
+                                <li class="fadeInUp animatable"><div class="mb-2"><p>Amnioreduction in case of polyhydramnios</p></div></li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable mb-2">What Neotia Bhagirathi Woman and Child Care Centre, Raipur offers?</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>After the diagnosis, the parents are counselled by the Foetal Medicine Specialist along with a relevant consultant (e.g., paediatric surgeon, paediatric cardiologist) regarding further treatment if required.</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>At Neotia Bhagirathi Woman and Child Care Centre, Raipur we provide a holistic ambience for mother and child.</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Utmost care for women who are experiencing complications in pregnancies.</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Dedicated Obstetrics and Gynaecological department with fully equipped adult ICU.</p></div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2"><p>Level 3 NICUs and SCBU backed by an experienced neonatologist and paediatrician to take care of your newborn.</p></div>
+                                </li>
+                            </ul>
+                            <p class="fadeInUp animatable mb-2 mt-4">High-risk pregnancies and problems with the unborn child are not uncommon. Foetal Medicine thus focuses on the health of the foetus in the uterus, thereby detecting Foetal abnormalities, treating them if treatable, checking for Foetal growth and well-being, planning delivery at the optimum time to prevent intrauterine deaths along with prior planning of the management with the department of neonatology (neonatologists, paediatric surgeons &amp; cardiologists) to provide optimal treatment to the unborn child.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- content tabs sec end -->
+
+<!-- Case Studies Video Section start -->
+<section class="doctors-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec pb-3 fadeInUp animatable">
+                    <h4>Case Studies</h4>
+                </div>
+                <div class="doctors-area owl-carousel">
+                    <div class="doctors-item fadeInUp animatable">
+                        <a href="https://youtube.com/watch?v=S1iUQ7r_CXs" data-fancybox="doctor1">
+                            <img class="img-fluid" src="/upload/fileManager/thumbnail/sumona_thumb1.jpg" alt="Case study video thumbnail - Dr Sumona Haque" />
+                        </a>
+                        <div class="right-plus"><img src="/img/plus.png" alt="Play video" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Case Studies Video Section end -->
+
+<!-- form sec start -->
+<section class="app-sec p-bottom" id="book_sectio">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-4 text-center fade-up animatable">
+                    <h2 class="step_heading">Book Your Appointment</h2>
+                </div>
+
+                <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+
+                    <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <input type="hidden" name="hlink" value="/foetal-medicine" />
+                                    <input name="step" type="hidden" value="1">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <button type="submit" id="appointsubmitTriger" class="submit-btn">Next &rarr;</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics end -->
+
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required>
+                                    <select class="form-select" disabled>
+                                        <option value="8##Foetal Medicine" selected>Foetal Medicine</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="8##Foetal Medicine">
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <select class="form-select" name="consultant" id="consultant" required>
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option>
+                                        <option value="12##Dr. Sumona Haque">Dr. Sumona Haque</option>
+                                    </select>
+
+                                    <div class="date-wrapper position-relative mt-3">
+                                        <input type="date" class="form-control" placeholder="Date" min="<%= new Date().toISOString().split('T')[0] %>" name="preffered_date" id="preffered_date" required>
+                                        <span class="calendar-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                                    </div>
+
+                                    <input type="hidden" name="hospital_center" class="form-control readonly-field" value="<%= siteInfo.hospitalCentre %>" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-between appoint">
+                                    <button type="button" class="submit-btn submit-btn--outline" id="step2-back-btn">&larr; Back</button>
+                                    <input name="step" type="hidden" value="2">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details End -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- form sec end -->
+
+<!-- special doctors sec start -->
+<section class="special-doctor-sec p-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec fadeInUp animatable">
+                    <h4>Foetal Medicine and Maternal Care Doctors</h4>
+                </div>
+                <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/DrSumonaHaque-list.png" alt="Dr. Sumona Haque">
+                            <h4 class="doctor-name">Dr. Sumona Haque</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Maternal Foetal Medicine</h5>
+                            <span>9+ years experience</span>
+                            <p>MBBS, DNB (Obstetrics &amp; Gynaecology)</p>
+                            <p>Reg. No. WBMC 72710</p>
+                            <a href="/doctor/dr-sumona-haque">View Profile</a>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-sumona-haque">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- special doctors sec end -->
+
+<!-- Modals -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Book An Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Request A Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // 2-Step Appointment Booking Logic
+    var step1Form = document.getElementById("book-appointment-form-step-1");
+    var step2Form = document.getElementById("book-appointment-form-step-2");
+    var stepIndicator1 = document.getElementById("step-indicator-1");
+    var stepIndicator2 = document.getElementById("step-indicator-2");
+    var backBtn = document.getElementById("step2-back-btn");
+
+    if (step1Form) {
+        step1Form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var fname = document.getElementById("fname").value.trim();
+            var mobile = document.getElementById("mobile").value.trim();
+
+            if (!fname || !mobile) {
+                alert("Please fill in patient name and mobile number.");
+                return;
+            }
+
+            document.getElementById("booking-step-1").style.display = "none";
+            document.getElementById("booking-step-2").style.display = "block";
+
+            if (stepIndicator1 && stepIndicator2) {
+                stepIndicator1.classList.remove("active");
+                stepIndicator1.classList.add("done");
+                stepIndicator2.classList.add("active");
+            }
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener("click", function () {
+            document.getElementById("booking-step-2").style.display = "none";
+            document.getElementById("booking-step-1").style.display = "block";
+
+            if (stepIndicator1 && stepIndicator2) {
+                stepIndicator2.classList.remove("active");
+                stepIndicator1.classList.remove("done");
+                stepIndicator1.classList.add("active");
+            }
+        });
+    }
+
+    // Initialize Fancybox for video links
+    if (typeof Fancybox !== "undefined") {
+        Fancybox.bind("[data-fancybox]", {
+            Thumbs: false,
+            Toolbar: true
+        });
+    }
+
+    // Initialize Owl Carousels
+    if (typeof $.fn.owlCarousel !== "undefined") {
+        // Case Studies Videos
+        $(".doctors-area").owlCarousel({
+            dots: false,
+            nav: false,
+            margin: 20,
+            autoplay: false,
+            loop: false,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 1 },
+                992: { items: 2 }
+            }
+        });
+
+        // Doctor Profiles Slider
+        $("#doctorSliderWp").owlCarousel({
+            dots: false,
+            nav: false,
+            margin: 24,
+            autoplay: false,
+            loop: false,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 4 }
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var loading = document.getElementById("loading_appointment_img");
+            var msg = document.getElementById("mess_appointment");
+            var btn = document.getElementById("appointsubmitTriger_2");
+
+            if (loading) loading.style.display = "block";
+            if (msg) msg.innerHTML = "";
+            if (btn) btn.disabled = true;
+
+            var formData = new FormData(step2Form);
+            var fnameVal = document.getElementById("fname") ? document.getElementById("fname").value : '';
+            var mobileVal = document.getElementById("mobile") ? document.getElementById("mobile").value : '';
+            formData.append("fname", fnameVal);
+            formData.append("mobile", mobileVal);
+
+            fetch('/form-sub/book_appointment_submit_step.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+
+                if (res.rettype === 'success') {
+                    if (msg) {
+                        msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been submitted successfully. Our hospital coordination desk will contact you shortly.</div>';
+                    }
+                    step2Form.reset();
+                    document.getElementById('booking-step-2').style.display = 'none';
+                } else {
+                    if (msg) msg.innerHTML = '<div class="alert alert-danger">' + (res.retmessage || 'Unable to submit request') + '</div>';
+                }
+            })
+            .catch(err => {
+                if (loading) loading.style.display = "none";
+                if (btn) btn.disabled = false;
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our hospital staff will call you shortly.</div>';
+                }
+                document.getElementById('booking-step-2').style.display = 'none';
+            });
+        });
+    }
+
+    // Modal popup triggers for enquiry & callback
+    $(document).on('click', '.open_modal_enquiry', function (e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function (data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="p-3 text-center"><h5>Book Appointment</h5><p>Please call our hospital helpline at <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>"><%= siteInfo.emergencyNumbers[0] %></a> or use the online booking form on this page.</p></div>');
+        });
+    });
+
+    $(document).on('click', '.open_modal_callback', function (e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('requestcallback'));
+        $('#modal-body2').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function (data) {
+            $('#modal-body2').html(data);
+        }).fail(function() {
+            $('#modal-body2').html('<div class="p-3 text-center"><h5>Request a Callback</h5><p>Call our emergency desk at <a href="tel:<%= siteInfo.emergencyNumbers[1] %>"><%= siteInfo.emergencyNumbers[1] %></a>.</p></div>');
+        });
+    });
+});
+</script>
+
+<%- include('partials/footer') %>

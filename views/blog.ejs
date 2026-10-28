@@ -1,0 +1,60 @@
+<%- include('partials/header', { 
+    title: 'Hospital Blog & Health Insights | Neotia Bhagirathi Raipur',
+    description: 'Read the latest healthcare guides, paediatric articles, newborn care tips, and medical insights from our specialist doctors.'
+}) %>
+
+<!-- Banner -->
+<section class="banner-sec position-relative" style="background: linear-gradient(135deg, var(--brand-blue-2) 0%, var(--brand-blue-2-tint-1) 100%); padding: 120px 0 60px; color: var(--white);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background: transparent; padding: 0;">
+                        <li class="breadcrumb-item"><a href="/" style="color: var(--white); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Blog &amp; Health Insights</li>
+                    </ol>
+                </nav>
+                <h1 style="font-size: 38px; font-weight: 700; color: var(--white); margin-bottom: 12px;">Health Insights &amp; Clinical Updates</h1>
+                <p style="color: var(--white); font-size: 16px; max-width: 650px;">
+                    Educational articles and expert advice written by our senior paediatricians, surgeons, and neonatologists.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Listing Grid -->
+<section class="section-padding" style="background: var(--white);">
+    <div class="container">
+        <div class="row g-4">
+            <% blogs.forEach(b => { %>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 border-0 shadow-sm" style="border-radius: 16px; overflow: hidden; border: 1px solid var(--grey-100); transition: transform 0.2s ease;">
+                        <div style="height: 220px; overflow: hidden; background: var(--grey-bg);">
+                            <img src="<%= b.image ? (b.image.startsWith('http') ? b.image : (b.image.startsWith('/') ? b.image : '/' + b.image)) : '/img/about-img.png' %>" alt="<%= b.title %>" class="w-100 h-100" style="object-fit: cover;" onerror="this.src='/img/about-img.png'">
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <span class="badge bg-light text-primary mb-2"><i class="fas fa-calendar-alt me-1"></i> <%= b.date %></span>
+                                <h4 style="font-size: 19px; font-weight: 700; line-height: 1.4; color: var(--brand-blue-2-tint-3); margin-bottom: 10px;">
+                                    <a href="/blog-details/<%= b.slug %>" style="color: inherit; text-decoration: none;"><%= b.title %></a>
+                                </h4>
+                                <p class="text-muted small" style="line-height: 1.6;">
+                                    <%= b.excerpt ? b.excerpt.substring(0, 130) + '...' : 'Learn more about treatment, symptom recognition, and child healthcare advice.' %>
+                                </p>
+                            </div>
+                            <div class="pt-3 border-top mt-3">
+                                <a href="/blog-details/<%= b.slug %>" class="font-weight-bold" style="color: var(--theme-color); font-size: 14px; text-decoration: none;">
+                                    Read Full Article <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/modals') %>
+<%- include('partials/footer') %>

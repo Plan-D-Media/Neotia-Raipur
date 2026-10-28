@@ -1,0 +1,112 @@
+    <footer>
+        <div class="container">
+            <div class="row">
+                <!-- Logo + Contact -->
+                <div class="col-lg-5 col-md-6 mb-4">
+                    <div class="footer-logo">
+                        <a href="/"><img src="/img/neotia-raipur-logo.svg" alt="Neotia Bhagirathi Woman and Child Care Centre Raipur Logo" width="195" height="80" class="img-fluid"></a>
+                    </div>
+                    <p><%= siteInfo.hospitalName %> <br>(A Unit of <%= siteInfo.parentOrg %>)</p>
+                    <p><%= siteInfo.address %></p>
+                    <p><strong>Emergency:</strong> <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>"><%= siteInfo.emergencyNumbers[0] %></a> / <a href="tel:<%= siteInfo.emergencyNumbers[1] %>"><%= siteInfo.emergencyNumbers[1] %></a> <br>
+                        <strong>Email:</strong> <%= siteInfo.email %>
+                    </p>
+                    <div class="social-icons">
+                        <a href="<%= siteInfo.socialLinks.instagram %>" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="<%= siteInfo.socialLinks.facebook %>" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+                        <a href="<%= siteInfo.socialLinks.linkedin %>" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                        <a href="<%= siteInfo.socialLinks.youtube %>" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                        <a href="<%= siteInfo.socialLinks.twitter %>" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Excellence & Specialties -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Excellence &amp; Specialties</h5>
+                    <ul class="list-unstyled">
+                        <% departments.forEach(dept => { %>
+                            <li><a href="/<%= dept.slug %>"><%= dept.name %></a></li>
+                        <% }); %>
+                    </ul>
+                </div>
+
+                <!-- Doctors -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Doctors</h5>
+                    <ul class="list-unstyled">
+                        <% doctors.slice(0, 15).forEach(doc => { %>
+                            <li><a href="/doctor/<%= doc.slug %>"><%= doc.name %></a></li>
+                        <% }); %>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/book-an-appointment">Appointment</a></li>
+                        <li><a href="/specialised-services">Specialised Services</a></li>
+                        <li><a href="/find-a-doctor">Doctors</a></li>
+                        <li><a href="/experience">Experience</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/admin/login"><i class="fas fa-lock"></i> Staff / Admin Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="copyright">
+                        © Neotia Bhagirathi <%= new Date().getFullYear() %>. All Rights Reserved. 
+                        <a href="/disclaimer">Disclaimer</a> | 
+                        <a href="/privacy-and-policies">Privacy &amp; Policies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <%# Pages that do not embed the callback modal get it from here when the action bar asks for it %>
+    <template id="callbackModalTemplate"><%- include('callback-modal') %></template>
+
+    <!-- Back to top button -->
+    <a href="#" class="go-top" id="goTopBtn" aria-label="Back to top"><i class="fas fa-angle-up"></i></a>
+
+    <!-- WhatsApp Floating Action -->
+    <a href="https://api.whatsapp.com/send?phone=<%= siteInfo.whatsappNumber %>&text=Hello%20Neotia%20Bhagirathi%20Hospital,%20I%20would%20like%20to%20enquire%20about..." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Core Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/custom_form.js"></script>
+    <script src="/js/site_search.js?v=6.0"></script>
+    <script src="/js/action-bar.js?v=6.0"></script>
+
+    <!-- Multilingual Translation Engine & Google Translate Bridge -->
+    <div id="google_translate_element" style="display:none;" aria-hidden="true"></div>
+    <script src="/js/i18n.js?v=5.1"></script>
+
+    <script>
+      // Scroll to top button handling
+      window.addEventListener('scroll', function() {
+        var goTop = document.getElementById('goTopBtn');
+        if (goTop) {
+          if (window.scrollY > 300) {
+            goTop.style.display = 'block';
+          } else {
+            goTop.style.display = 'none';
+          }
+        }
+      });
+      document.getElementById('goTopBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+</body>
+</html>

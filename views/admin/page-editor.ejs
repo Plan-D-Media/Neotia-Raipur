@@ -1,0 +1,578 @@
+<!-- Page Editor & Content Optimization Workspace -->
+<div class="container-fluid p-0">
+
+    <!-- Top Action Breadcrumb & Buttons -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <a href="/admin/pages" class="text-muted text-decoration-none small">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Page Directory
+                </a>
+                <span class="text-muted small">/</span>
+                <span class="text-muted small"><%= isEdit ? 'Edit Page #' + page.id : 'Create New Page' %></span>
+            </div>
+            <h4 class="fw-bold mb-0" style="color: var(--brand-blue-2-tint-3);">
+                <%= isEdit ? page.title : 'Create New Website Page' %>
+            </h4>
+        </div>
+
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+            <% if (isEdit) { %>
+                <!-- Preview in New Tab -->
+                <a href="<%= page.url %><%= page.status !== 'published' ? '?preview=admin' : '' %>" target="_blank" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">
+                    <i class="fas fa-external-link-alt me-1"></i> Preview Page
+                </a>
+
+                <!-- Rewrite & Republish Workspace -->
+                <a href="/admin/pages/rewrite/<%= page.id %>" class="btn btn-outline-info text-dark btn-sm" style="border-radius: 8px;">
+                    <i class="fas fa-wand-magic-sparkles text-primary me-1"></i> Rewrite &amp; Optimize
+                </a>
+
+                <!-- Clone as Draft -->
+                <form method="POST" action="/admin/pages/clone/<%= page.id %>" class="d-inline" onsubmit="return confirm('Clone this page as a new draft?');">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">
+                        <i class="fas fa-copy me-1"></i> Clone
+                    </button>
+                </form>
+            <% } %>
+
+            <!-- Save as Draft -->
+            <button type="button" class="btn btn-outline-warning text-dark btn-sm" style="border-radius: 8px;" onclick="saveFormAsDraft()">
+                <i class="fas fa-pencil-alt me-1"></i> Save as Draft
+            </button>
+
+            <!-- Save & Publish Button -->
+            <button type="button" class="btn btn-primary btn-sm px-3" style="border-radius: 8px; background: var(--brand-blue-2); border-color: var(--brand-blue-2);" onclick="submitPageForm()">
+                <i class="fas fa-cloud-upload-alt me-1"></i> <%= isEdit ? 'Publish / Update Page' : 'Create & Publish' %>
+            </button>
+        </div>
+    </div>
+
+    <!-- Alert / Status notifications -->
+    <% if (typeof query !== 'undefined' && query.saved === '1') { %>
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center gap-2" role="alert" style="border-radius: 10px;">
+            <i class="fas fa-check-circle"></i>
+            <div>Page updated and published successfully! All changes are saved to the persistent database.</div>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <% if (typeof query !== 'undefined' && query.cloned === '1') { %>
+        <div class="alert alert-info alert-dismissible fade show d-flex align-items-center gap-2" role="alert" style="border-radius: 10px;">
+            <i class="fas fa-copy"></i>
+            <div>Page successfully cloned! You are now editing the duplicate draft. Adjust title, slug, and content before publishing.</div>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+
+    <!-- Main Editor Form -->
+    <form id="pageEditorForm" method="POST" action="/admin/pages/save" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= isEdit ? page.id : '' %>">
+        <input type="hidden" name="url" id="pageUrlInput" value="<%= isEdit ? (page.url || (page.slug === 'homepage' ? '/' : '/' + page.slug)) : '' %>">
+
+        <div class="row g-4">
+            <!-- Left 8 Columns: Main Editing Tabs -->
+            <div class="col-lg-8">
+                <!-- Navigation Tabs -->
+                <ul class="nav nav-tabs border-bottom-0 mb-3" id="editorTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold" id="content-tab" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" role="tab" style="border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-file-lines me-2 text-primary"></i> Page Content &amp; Copy
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold" id="media-tab" data-bs-toggle="tab" data-bs-target="#tab-media" type="button" role="tab" style="border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-image me-2 text-success"></i> Hero Banner &amp; Media
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold" id="seo-tab" data-bs-toggle="tab" data-bs-target="#tab-seo" type="button" role="tab" style="border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-chart-line me-2 text-warning"></i> SEO &amp; Meta Tags
+                        </button>
+                    </li>
+                    <% if (isEdit && page.revisions && page.revisions.length > 0) { %>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold text-secondary" id="history-tab" data-bs-toggle="tab" data-bs-target="#tab-history" type="button" role="tab" style="border-radius: 8px 8px 0 0;">
+                                <i class="fas fa-history me-1"></i> Revision History (<%= page.revisions.length %>)
+                            </button>
+                        </li>
+                    <% } %>
+                </ul>
+
+                <div class="tab-content" id="editorTabsContent">
+                    <!-- Tab 1: Content & Copy -->
+                    <div class="tab-pane fade show active" id="tab-content" role="tabpanel">
+                        <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px;">
+                            <!-- Page Title -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">Page Title <span class="text-danger">*</span></label>
+                                <input type="text" name="title" id="pageTitleInput" class="form-control form-control-lg" placeholder="e.g. Paediatric Cardiac Sciences &amp; Heart Care" value="<%= isEdit ? page.title : '' %>" required oninput="updateSeoPreview()">
+                                <small class="text-muted">Primary name displayed in menus, page head, and administrative inventory.</small>
+                            </div>
+
+                            <!-- Main H1 Heading -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">Main Section Heading (H1)</label>
+                                <input type="text" name="heading" id="pageHeadingInput" class="form-control" placeholder="e.g. Centre of Excellence in Paediatric Cardiac Sciences" value="<%= isEdit ? (page.heading || '') : '' %>">
+                                <small class="text-muted">The prominent headline displayed at the top of the main content area.</small>
+                            </div>
+
+                            <!-- Subheading / Tagline -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark">Subheading / Clinical Tagline</label>
+                                <input type="text" name="subheading" class="form-control" placeholder="e.g. 24/7 Advanced Paediatric Interventions &amp; Foetal Cardiology Care" value="<%= isEdit ? (page.subheading || '') : '' %>">
+                            </div>
+
+                            <!-- Main Body Content / Paragraphs -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-dark d-flex justify-content-between align-items-center">
+                                    <span>Primary Body Text &amp; Overview</span>
+                                    <span class="badge bg-light text-muted border">HTML &amp; Text Supported</span>
+                                </label>
+                                <textarea name="content" id="pageBodyContent" rows="10" class="form-control" placeholder="Write or edit the comprehensive section copy, clinical details, treatment descriptions, and facility highlights..."><%= isEdit ? (page.content || '') : '' %></textarea>
+                                <small class="text-muted">Supports formatted text, lists, and clinical descriptions for mothers and parents.</small>
+                            </div>
+
+                            <!-- Call to Action Section -->
+                            <div class="p-3 bg-light rounded-3 border">
+                                <h6 class="fw-bold mb-2 text-dark"><i class="fas fa-bullhorn text-primary me-2"></i> Call to Action (CTA) Controls</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">CTA Button Label</label>
+                                        <input type="text" name="ctaText" class="form-control form-control-sm" placeholder="e.g. Book An Appointment" value="<%= isEdit ? (page.ctaText || 'Book An Appointment') : 'Book An Appointment' %>">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small fw-bold">CTA Target URL</label>
+                                        <input type="text" name="ctaLink" class="form-control form-control-sm" placeholder="e.g. /book-an-appointment" value="<%= isEdit ? (page.ctaLink || '/book-an-appointment') : '/book-an-appointment' %>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Hero Banner & Images Optimization -->
+                    <div class="tab-pane fade" id="tab-media" role="tabpanel">
+                        <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px;">
+                            <h5 class="fw-bold mb-3 text-dark"><i class="fas fa-images text-success me-2"></i> Page Media &amp; Hero Banner Manager</h5>
+                            
+                            <!-- Hero Image Section -->
+                            <div class="row g-4 mb-4 align-items-center">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Current Hero Banner / Header Image</label>
+                                    <div class="position-relative rounded-3 border overflow-hidden bg-light" style="height: 200px;">
+                                        <img id="heroPreviewImg" 
+                                             src="<%= isEdit && (page.heroImage || page.thumbnail) ? (page.heroImage || page.thumbnail) : '/img/about-img.png' %>" 
+                                             alt="Hero Preview" 
+                                             class="w-100 h-100 object-fit-cover"
+                                             onerror="this.src='/img/about-img.png';">
+                                    </div>
+                                    <small class="text-muted d-block mt-1">Recommended aspect ratio: 16:9 or 21:9 banner format.</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Hero Image URL -->
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Image URL / Path</label>
+                                        <input type="text" name="heroImage" id="heroImageInput" class="form-control form-control-sm" value="<%= isEdit ? (page.heroImage || '') : '' %>" placeholder="/img/hero-cardiac.png" oninput="document.getElementById('heroPreviewImg').src = this.value;">
+                                    </div>
+
+                                    <!-- Upload Replacement Image File -->
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Upload New Image File</label>
+                                        <input type="file" name="heroUpload" class="form-control form-control-sm" accept="image/*" onchange="previewUploadedImage(this)">
+                                        <small class="text-muted">Uploads replace image safely without modifying other pages.</small>
+                                    </div>
+
+                                    <!-- Alt Text -->
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Image Alt Text (SEO &amp; Accessibility) <span class="text-danger">*</span></label>
+                                        <input type="text" name="altText" id="altTextInput" class="form-control form-control-sm" placeholder="e.g. Doctor consulting young child patient at Neotia Hospital" value="<%= isEdit ? (page.altText || '') : '' %>" oninput="updateSeoPreview()">
+                                        <small class="text-muted">Descriptive alt text improves image search indexability.</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Thumbnail Image for Page Listings -->
+                            <hr class="my-4">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-md-3">
+                                    <label class="form-label fw-bold">Page Thumbnail</label>
+                                    <div class="rounded-3 border overflow-hidden bg-light" style="height: 100px;">
+                                        <img id="thumbPreviewImg" 
+                                             src="<%= isEdit && page.thumbnail ? page.thumbnail : '/img/about-img.png' %>" 
+                                             alt="Thumbnail" 
+                                             class="w-100 h-100 object-fit-cover">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <label class="form-label small fw-bold">Thumbnail URL</label>
+                                    <input type="text" name="thumbnail" class="form-control form-control-sm mb-2" value="<%= isEdit ? (page.thumbnail || '') : '' %>" placeholder="/img/about-img.png" oninput="document.getElementById('thumbPreviewImg').src = this.value;">
+                                    <small class="text-muted">Used in table views, service cards, related pages, and preview snippets.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: SEO & Metadata Optimization -->
+                    <div class="tab-pane fade" id="tab-seo" role="tabpanel">
+                        <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px;">
+                            <h5 class="fw-bold mb-3 text-dark"><i class="fas fa-search text-primary me-2"></i> Search Engine Optimization (SEO)</h5>
+                            
+                            <!-- SEO Meta Title -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold mb-0">SEO Meta Title <span class="text-danger">*</span></label>
+                                    <small class="text-muted"><span id="titleCount">0</span> / 60 characters</small>
+                                </div>
+                                <input type="text" name="seoTitle" id="seoTitleInput" class="form-control" placeholder="e.g. Paediatrics in Raipur | Neotia Bhagirathi Hospital" value="<%= isEdit ? (page.seoTitle || '') : '' %>" oninput="updateSeoPreview()">
+                                <small class="text-muted">The title tag that appears in Google search engine result snippets.</small>
+                            </div>
+
+                            <!-- Meta Description -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold mb-0">Meta Description <span class="text-danger">*</span></label>
+                                    <small class="text-muted"><span id="descCount">0</span> / 160 characters</small>
+                                </div>
+                                <textarea name="metaDescription" id="seoDescInput" rows="3" class="form-control" placeholder="Brief summary of the page for search engines and social cards (120-160 characters)..." oninput="updateSeoPreview()"><%= isEdit ? (page.metaDescription || '') : '' %></textarea>
+                                <small class="text-muted">Compelling description to encourage clicks from search engine visitors.</small>
+                            </div>
+
+                            <!-- Canonical URL -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Canonical URL</label>
+                                <input type="url" name="canonicalUrl" id="canonicalInput" class="form-control" placeholder="/page-slug (the site domain is added from Settings)" value="<%= isEdit ? (page.canonicalUrl || '') : '' %>" oninput="updateSeoPreview()">
+                                <small class="text-muted">Canonical URL avoids duplicate content indexing penalties.</small>
+                            </div>
+
+                            <!-- Robots Indexing -->
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Robots Meta Tag</label>
+                                    <select name="indexing" id="indexingSelect" class="form-select" onchange="updateSeoPreview()">
+                                        <option value="index, follow" <%= isEdit && page.indexing === 'index, follow' ? 'selected' : '' %>>index, follow (Standard Public Page)</option>
+                                        <option value="noindex, follow" <%= isEdit && page.indexing === 'noindex, follow' ? 'selected' : '' %>>noindex, follow (Hidden from Search)</option>
+                                        <option value="noindex, nofollow" <%= isEdit && page.indexing === 'noindex, nofollow' ? 'selected' : '' %>>noindex, nofollow (Private / Confirmation)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Search Snippet Preview</label>
+                                    <div class="p-3 bg-light rounded-3 border">
+                                        <div id="snippetTitle" class="text-primary text-truncate fw-bold" style="font-size: 15px;">
+                                            <%= isEdit && page.seoTitle ? page.seoTitle : 'Page Title Preview' %>
+                                        </div>
+                                        <div id="snippetUrl" class="text-success small text-truncate" style="font-size: 11px;">
+                                            <%= siteInfo.siteUrl || '' %><%= isEdit ? page.url : '/page' %>
+                                        </div>
+                                        <div id="snippetDesc" class="text-muted small text-truncate" style="font-size: 12px;">
+                                            <%= isEdit && page.metaDescription ? page.metaDescription : 'Meta description preview will appear here...' %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Revision History -->
+                    <% if (isEdit && page.revisions && page.revisions.length > 0) { %>
+                        <div class="tab-pane fade" id="tab-history" role="tabpanel">
+                            <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px;">
+                                <h5 class="fw-bold mb-3 text-dark"><i class="fas fa-clock-rotate-left text-secondary me-2"></i> Revision History &amp; Rollback</h5>
+                                <div class="list-group">
+                                    <% page.revisions.forEach(function(rev, idx) { %>
+                                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
+                                            <div>
+                                                <div class="fw-bold text-dark"><%= rev.title || page.title %></div>
+                                                <small class="text-muted d-block">
+                                                    <i class="fas fa-calendar-alt me-1"></i> <%= new Date(rev.timestamp).toLocaleString() %> by <%= rev.author || 'Admin' %>
+                                                </small>
+                                                <% if (rev.note) { %>
+                                                    <span class="badge bg-light text-secondary border mt-1"><%= rev.note %></span>
+                                                <% } %>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="restoreRevision(<%= JSON.stringify(rev).replace(/"/g, '&quot;') %>)">
+                                                <i class="fas fa-undo me-1"></i> Load Version
+                                            </button>
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Right 4 Columns: Side Panel Attributes & SEO Checklist -->
+            <div class="col-lg-4">
+                <!-- Publication Status Card -->
+                <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px;">
+                    <h6 class="fw-bold mb-3 text-dark border-bottom pb-2">
+                        <i class="fas fa-cog text-secondary me-2"></i> Publication Settings
+                    </h6>
+
+                    <!-- Status Selector -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Page Status</label>
+                        <select name="status" id="statusSelect" class="form-select form-select-sm">
+                            <option value="published" <%= (isEdit && page.status === 'published') || !isEdit ? 'selected' : '' %>>Published (Live)</option>
+                            <option value="draft" <%= isEdit && page.status === 'draft' ? 'selected' : '' %>>Draft (Unpublished)</option>
+                            <option value="scheduled" <%= isEdit && page.status === 'scheduled' ? 'selected' : '' %>>Scheduled</option>
+                            <% if (isEdit && page.status === 'trashed') { %>
+                                <option value="trashed" selected>Trashed</option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <!-- Category Selector with Custom Category Support -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Category</label>
+                        <select name="category" id="categorySelect" class="form-select form-select-sm mb-2">
+                            <% categories.forEach(function(cat) { %>
+                                <option value="<%= cat %>" <%= (isEdit && page.category === cat) ? 'selected' : '' %>><%= cat %></option>
+                            <% }); %>
+                        </select>
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="newCategoryInput" class="form-control form-control-sm" placeholder="Add new category...">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="addNewCategory()">+ Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Page Type Selector -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Page Content Type</label>
+                        <select name="type" class="form-select form-select-sm">
+                            <option value="Core Page" <%= isEdit && page.type === 'Core Page' ? 'selected' : '' %>>Core Page</option>
+                            <option value="Clinical Department" <%= isEdit && page.type === 'Clinical Department' ? 'selected' : '' %>>Clinical Department</option>
+                            <option value="Specialist Profile" <%= isEdit && page.type === 'Specialist Profile' ? 'selected' : '' %>>Specialist Profile</option>
+                            <option value="Health Article" <%= isEdit && page.type === 'Health Article' ? 'selected' : '' %>>Health Article</option>
+                            <option value="Facilities" <%= isEdit && page.type === 'Facilities' ? 'selected' : '' %>>Facilities &amp; Tech</option>
+                            <option value="Legal Page" <%= isEdit && page.type === 'Legal Page' ? 'selected' : '' %>>Legal Page</option>
+                            <option value="Utility / Landing Page" <%= isEdit && page.type === 'Utility / Landing Page' ? 'selected' : '' %>>Utility / Landing Page</option>
+                        </select>
+                    </div>
+
+                    <!-- URL / Slug -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">URL / Slug</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-light text-muted">/</span>
+                            <input type="text" name="slug" id="slugInput" class="form-control" placeholder="my-page-slug" value="<%= isEdit ? page.slug : '' %>" <%= (isEdit && page.isSystem && page.slug === 'homepage') ? 'readonly' : '' %>>
+                        </div>
+                        <small class="text-muted">Public route address on the website.</small>
+                    </div>
+
+                    <% if (isEdit) { %>
+                        <div class="border-top pt-3 text-muted small" style="font-size: 11.5px;">
+                            <div><strong>Last Modified:</strong> <%= new Date(page.lastModified || Date.now()).toLocaleString() %></div>
+                            <div><strong>Author:</strong> <%= page.lastModifiedBy || 'Hospital Administrator' %></div>
+                            <div><strong>Revisions:</strong> <%= page.revisions ? page.revisions.length : 0 %> versions saved</div>
+                        </div>
+                    <% } %>
+                </div>
+
+                <!-- 7. SEO Completeness Checklist Widget -->
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 12px;">
+                    <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                        <h6 class="fw-bold mb-0 text-dark">
+                            <i class="fas fa-list-check text-success me-2"></i> SEO Optimization Checklist
+                        </h6>
+                        <span id="overallSeoBadge" class="badge badge-seo-complete">Checking...</span>
+                    </div>
+
+                    <ul class="list-unstyled mb-0" style="font-size: 13px;">
+                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                            <span><i id="chkIconTitle" class="fas fa-circle-check text-success me-2"></i> Page Title (10-70 chars)</span>
+                            <span id="chkStatusTitle" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                            <span><i id="chkIconDesc" class="fas fa-circle-check text-success me-2"></i> Meta Description (25-160 chars)</span>
+                            <span id="chkStatusDesc" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                            <span><i id="chkIconHeading" class="fas fa-circle-check text-success me-2"></i> Clear H1 Heading Structure</span>
+                            <span id="chkStatusHeading" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                            <span><i id="chkIconAlt" class="fas fa-circle-check text-success me-2"></i> Suitable Image Alt Text</span>
+                            <span id="chkStatusAlt" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                            <span><i id="chkIconCanonical" class="fas fa-circle-check text-success me-2"></i> Valid Canonical URL</span>
+                            <span id="chkStatusCanonical" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between py-2">
+                            <span><i id="chkIconIndexing" class="fas fa-circle-check text-success me-2"></i> Search Indexing Allowed</span>
+                            <span id="chkStatusIndexing" class="badge bg-success-subtle text-success">Complete</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Live Image File Preview
+    function previewUploadedImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('heroPreviewImg').src = e.target.result;
+                document.getElementById('thumbPreviewImg').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Save as Draft helper
+    function saveFormAsDraft() {
+        document.getElementById('statusSelect').value = 'draft';
+        document.getElementById('pageEditorForm').submit();
+    }
+
+    function submitPageForm() {
+        document.getElementById('pageEditorForm').submit();
+    }
+
+    // Add new Category dynamically
+    function addNewCategory() {
+        var input = document.getElementById('newCategoryInput');
+        var val = input.value.trim();
+        if (!val) return;
+
+        var sel = document.getElementById('categorySelect');
+        var opt = document.createElement('option');
+        opt.value = val;
+        opt.textContent = val;
+        opt.selected = true;
+        sel.appendChild(opt);
+
+        // Also notify backend via AJAX
+        fetch('/admin/pages/api/category', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: val })
+        }).catch(console.error);
+
+        input.value = '';
+        alert('Added category: ' + val);
+    }
+
+    // Live SEO preview & validation checklist
+    function updateSeoPreview() {
+        var title = document.getElementById('seoTitleInput').value.trim() || document.getElementById('pageTitleInput').value.trim();
+        var desc = document.getElementById('seoDescInput').value.trim();
+        var alt = document.getElementById('altTextInput').value.trim();
+        var canonical = document.getElementById('canonicalInput').value.trim();
+        var heading = document.getElementById('pageHeadingInput').value.trim();
+        var indexing = document.getElementById('indexingSelect').value;
+
+        // Counters
+        document.getElementById('titleCount').textContent = title.length;
+        document.getElementById('descCount').textContent = desc.length;
+
+        // Snippet preview
+        document.getElementById('snippetTitle').textContent = title || 'Page Title Preview';
+        document.getElementById('snippetDesc').textContent = desc || 'Meta description preview will appear here...';
+
+        var passCount = 0;
+
+        // 1. Title Check (10-70 chars)
+        if (title.length >= 10 && title.length <= 70) {
+            passCheck('Title', true);
+            passCount++;
+        } else {
+            passCheck('Title', false, title.length < 10 ? 'Too short' : 'Too long');
+        }
+
+        // 2. Meta Description Check (25-160 chars)
+        if (desc.length >= 25 && desc.length <= 165) {
+            passCheck('Desc', true);
+            passCount++;
+        } else {
+            passCheck('Desc', false, desc.length < 25 ? 'Needs text' : 'Too long');
+        }
+
+        // 3. Heading check
+        if (heading.length >= 5) {
+            passCheck('Heading', true);
+            passCount++;
+        } else {
+            passCheck('Heading', false, 'Missing H1');
+        }
+
+        // 4. Alt text check
+        if (alt.length >= 5) {
+            passCheck('Alt', true);
+            passCount++;
+        } else {
+            passCheck('Alt', false, 'Needs Alt Text');
+        }
+
+        // 5. Canonical check
+        if (canonical.startsWith('http')) {
+            passCheck('Canonical', true);
+            passCount++;
+        } else {
+            passCheck('Canonical', false, 'Needs valid URL');
+        }
+
+        // 6. Indexing check
+        if (indexing.includes('index')) {
+            passCheck('Indexing', true);
+            passCount++;
+        } else {
+            passCheck('Indexing', false, 'No-index set');
+        }
+
+        // Overall badge
+        var badge = document.getElementById('overallSeoBadge');
+        if (passCount >= 5) {
+            badge.className = 'badge badge-seo-complete';
+            badge.textContent = 'Complete (' + passCount + '/6)';
+        } else if (passCount >= 3) {
+            badge.className = 'badge badge-seo-attention';
+            badge.textContent = 'Needs Attention (' + passCount + '/6)';
+        } else {
+            badge.className = 'badge badge-seo-incomplete';
+            badge.textContent = 'Incomplete (' + passCount + '/6)';
+        }
+    }
+
+    function passCheck(item, isPass, note) {
+        var icon = document.getElementById('chkIcon' + item);
+        var status = document.getElementById('chkStatus' + item);
+        if (isPass) {
+            icon.className = 'fas fa-circle-check text-success me-2';
+            status.className = 'badge bg-success-subtle text-success';
+            status.textContent = 'Complete';
+        } else {
+            icon.className = 'fas fa-triangle-exclamation text-warning me-2';
+            status.className = 'badge bg-warning-subtle text-warning-emphasis';
+            status.textContent = note || 'Needs Attention';
+        }
+    }
+
+    function restoreRevision(rev) {
+        if (!confirm('Load this revision from ' + new Date(rev.timestamp).toLocaleString() + '? (You can inspect it before saving)')) return;
+        if (rev.title) document.getElementById('pageTitleInput').value = rev.title;
+        if (rev.heading) document.getElementById('pageHeadingInput').value = rev.heading;
+        if (rev.content) document.getElementById('pageBodyContent').value = rev.content;
+        if (rev.seoTitle) document.getElementById('seoTitleInput').value = rev.seoTitle;
+        if (rev.metaDescription) document.getElementById('seoDescInput').value = rev.metaDescription;
+        updateSeoPreview();
+        alert('Revision loaded into editor fields. Click "Publish / Update Page" to save.');
+    }
+
+    // Auto-generate slug from title for new pages
+    <% if (!isEdit) { %>
+        document.getElementById('pageTitleInput').addEventListener('input', function() {
+            var slug = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            document.getElementById('slugInput').value = slug;
+            document.getElementById('canonicalInput').value = '/' + slug;
+        });
+    <% } %>
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        updateSeoPreview();
+    });
+</script>

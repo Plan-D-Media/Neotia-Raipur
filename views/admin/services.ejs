@@ -1,0 +1,56 @@
+<!-- Clinical Services Management -->
+<div class="table-card p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h5 class="mb-0 fw-bold">Clinical Services &amp; Departments (<%= departments.length %>)</h5>
+            <small class="text-muted">Manage clinical disciplines, descriptions, and icons</small>
+        </div>
+        <a href="/admin/services/new" class="btn btn-primary" style="border-radius: 8px;">
+            <i class="fas fa-plus me-1"></i> Add New Department
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small">
+                <tr>
+                    <th>Department</th>
+                    <th>Slug</th>
+                    <th>Meta Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="small">
+                <% departments.forEach(dept => { %>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="<%= dept.icon.startsWith('http') ? dept.icon : (dept.icon.startsWith('/') ? dept.icon : '/' + dept.icon) %>" alt="<%= dept.name %>" style="width: 38px; height: 38px; object-fit: contain;" onerror="this.src='/img/cardio.png'">
+                                <strong class="text-dark"><%= dept.name %></strong>
+                            </div>
+                        </td>
+                        <td><code>/<%= dept.slug %></code></td>
+                        <td>
+                            <div class="text-muted" style="max-width: 380px; line-height: 1.4;">
+                                <%= dept.metaDescription || 'Specialised clinical department' %>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="/<%= dept.slug %>" target="_blank" class="btn btn-sm btn-outline-secondary me-1" title="View Page">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="/admin/services/<%= dept.id %>/edit" class="btn btn-sm btn-outline-primary me-1" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="/admin/services/<%= dept.id %>/delete" method="POST" class="d-inline" onsubmit="return confirm('Delete this department?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>

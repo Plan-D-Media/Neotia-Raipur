@@ -1,0 +1,93 @@
+<!-- Callbacks & Enquiries Management -->
+<div class="table-card p-4">
+    <div class="row g-3 align-items-center mb-4">
+        <div class="col-md-5">
+            <form method="GET" action="/admin/enquiries" class="d-flex gap-2">
+                <input type="text" name="search" value="<%= query.search || '' %>" class="form-control form-control-sm" placeholder="Search by name or phone...">
+                <button type="submit" class="btn btn-sm btn-primary">Search</button>
+                <% if (query.search || query.status) { %>
+                    <a href="/admin/enquiries" class="btn btn-sm btn-outline-secondary">Reset</a>
+                <% } %>
+            </form>
+        </div>
+        <div class="col-md-7 d-flex justify-content-md-end gap-2">
+            <div class="btn-group btn-group-sm">
+                <a href="/admin/enquiries" class="btn <%= !query.status || query.status === 'All' ? 'btn-dark' : 'btn-outline-dark' %>">All</a>
+                <a href="/admin/enquiries?status=New" class="btn <%= query.status === 'New' ? 'btn-warning' : 'btn-outline-warning' %>">New</a>
+                <a href="/admin/enquiries?status=Contacted" class="btn <%= query.status === 'Contacted' ? 'btn-primary' : 'btn-outline-primary' %>">Contacted</a>
+                <a href="/admin/enquiries?status=Resolved" class="btn <%= query.status === 'Resolved' ? 'btn-success' : 'btn-outline-success' %>">Resolved</a>
+            </div>
+        </div>
+    </div>
+
+    <% if (enquiries.length === 0) { %>
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-inbox fa-3x mb-3 text-secondary"></i>
+            <h5>No enquiry or callback requests</h5>
+        </div>
+    <% } else { %>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light small">
+                    <tr>
+                        <th>ID</th>
+                        <th>Lead Name</th>
+                        <th>Contact Number</th>
+                        <th>Message / Department</th>
+                        <th>Source</th>
+                        <th>Received At</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="small">
+                    <% enquiries.forEach(e => { %>
+                        <tr>
+                            <td>#<%= e.id %></td>
+                            <td><strong><%= e.name %></strong></td>
+                            <td>
+                                <a href="tel:<%= e.phone %>" class="text-primary text-decoration-none fw-bold">
+                                    <i class="fas fa-phone-alt me-1"></i> <%= e.phone %>
+                                </a>
+                                <% if (e.email) { %><div class="text-muted" style="font-size: 11px;"><%= e.email %></div><% } %>
+                            </td>
+                            <td>
+                                <% if (e.department) { %>
+                                    <div class="mb-1">
+                                        <span class="badge bg-primary-subtle text-primary border" style="font-size: 11px;">
+                                            <i class="fas fa-stethoscope me-1"></i><%= e.department %>
+                                        </span>
+                                    </div>
+                                <% } %>
+                                <div style="max-width: 260px; line-height: 1.4;"><%= e.message || 'Callback requested' %></div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border"><%= e.source || 'Website' %></span>
+                            </td>
+                            <td>
+                                <%= new Date(e.createdAt).toLocaleDateString() %><br>
+                                <small class="text-muted"><%= new Date(e.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></small>
+                            </td>
+                            <td>
+                                <form action="/admin/enquiries/<%= e.id %>/status" method="POST" class="d-inline">
+                                    <select name="status" class="form-select form-select-sm" onchange="this.form.submit()" style="width: 110px; font-weight: 400;">
+                                        <option value="New" <%= e.status === 'New' ? 'selected' : '' %>>New</option>
+                                        <option value="Contacted" <%= e.status === 'Contacted' ? 'selected' : '' %>>Contacted</option>
+                                        <option value="Resolved" <%= e.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/admin/enquiries/<%= e.id %>/delete" method="POST" class="d-inline" onsubmit="return confirm('Delete this callback lead?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+</div>

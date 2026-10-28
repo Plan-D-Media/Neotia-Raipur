@@ -1,0 +1,26 @@
+<%- include('partials/header', {
+    title: 'Something Went Wrong | Neotia Bhagirathi Hospital',
+    description: 'An unexpected error occurred.'
+}) %>
+
+<section class="section-padding text-center" style="padding-top: 150px; padding-bottom: 100px; background: var(--white);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h1 style="font-size: 80px; font-weight: 700; color: var(--brand-blue-2); margin-bottom: 10px;">500</h1>
+                <h3 style="font-weight: 700; color: var(--grey-900); margin-bottom: 15px;">Something Went Wrong</h3>
+                <p class="text-muted mb-4">We couldn't load this page right now. Please try again in a moment, or call us if you need help urgently.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/" class="btn btn-brand-secondary">
+                        <i class="fas fa-home me-2"></i> Go to Homepage
+                    </a>
+                    <a href="/find-a-doctor" class="btn btn-outline-primary">
+                        Find a Doctor
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

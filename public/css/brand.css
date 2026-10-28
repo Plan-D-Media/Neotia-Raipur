@@ -1,0 +1,821 @@
+/* ==========================================================================
+   Brand layer (NBWCCC Brand Manual). Loaded last on every public page.
+   Colours and fonts come from brand-tokens.css; nothing here is hard-coded.
+   1. Bootstrap bridge   2. Typography   3. Header   4. Action bar
+   5. Buttons            6. Floating buttons   7. Focus
+   ========================================================================== */
+
+/* 1. Bootstrap bridge: Bootstrap's own colours map onto brand tokens ---------- */
+:root {
+    --bs-body-font-family: var(--font-brand);
+    --bs-body-font-weight: 400;
+    --bs-body-color: var(--grey-800);
+    --bs-body-color-rgb: var(--grey-800-rgb);
+    --bs-emphasis-color: var(--black);
+    --bs-secondary-color: var(--grey-600);
+    --bs-tertiary-color: var(--grey-600);
+    --bs-secondary-bg: var(--grey-100);
+    --bs-tertiary-bg: var(--grey-bg);
+    --bs-heading-color: inherit;
+    --bs-primary: var(--brand-blue-1);
+    --bs-primary-rgb: var(--brand-blue-1-rgb);
+    --bs-secondary: var(--grey-600);
+    --bs-secondary-rgb: var(--grey-600-rgb);
+    --bs-success: var(--ui-success);
+    --bs-success-rgb: var(--ui-success-rgb);
+    --bs-danger: var(--ui-error);
+    --bs-danger-rgb: var(--ui-error-rgb);
+    --bs-warning: var(--brand-orange);
+    --bs-warning-rgb: var(--brand-orange-rgb);
+    --bs-info: var(--brand-blue-1);
+    --bs-info-rgb: var(--brand-blue-1-rgb);
+    --bs-light: var(--grey-bg);
+    --bs-light-rgb: var(--grey-bg-rgb);
+    --bs-dark: var(--grey-900);
+    --bs-dark-rgb: var(--grey-900-rgb);
+    --bs-link-color: var(--brand-blue-1);
+    --bs-link-color-rgb: var(--brand-blue-1-rgb);
+    --bs-link-hover-color: var(--brand-blue-2);
+    --bs-link-hover-color-rgb: var(--brand-blue-2-rgb);
+    --bs-border-color: var(--grey-200);
+    --bs-focus-ring-color: rgba(var(--brand-blue-1-rgb), 0.35);
+    --bs-form-valid-color: var(--ui-success);
+    --bs-form-valid-border-color: var(--ui-success);
+    --bs-form-invalid-color: var(--ui-error);
+    --bs-form-invalid-border-color: var(--ui-error);
+    --bs-code-color: var(--brand-blue-2);
+    --bs-highlight-bg: var(--brand-orange-tint-3);
+    /* "subtle" alert/badge colours: neutral backgrounds, dark readable text */
+    --bs-primary-text-emphasis: var(--brand-blue-2-tint-3);
+    --bs-success-text-emphasis: var(--ui-success);
+    --bs-danger-text-emphasis: var(--ui-error);
+    --bs-warning-text-emphasis: var(--brand-blue-2-tint-3);
+    --bs-info-text-emphasis: var(--brand-blue-2-tint-3);
+    --bs-primary-bg-subtle: var(--grey-bg);
+    --bs-success-bg-subtle: var(--grey-bg);
+    --bs-danger-bg-subtle: var(--grey-bg);
+    --bs-warning-bg-subtle: var(--grey-bg);
+    --bs-info-bg-subtle: var(--grey-bg);
+    --bs-primary-border-subtle: var(--grey-200);
+    --bs-success-border-subtle: var(--ui-success);
+    --bs-danger-border-subtle: var(--ui-error);
+    --bs-warning-border-subtle: var(--brand-orange);
+    --bs-info-border-subtle: var(--grey-200);
+}
+
+.btn {
+    --bs-btn-font-family: var(--font-brand);
+    --bs-btn-font-weight: 700;
+}
+
+.btn-primary,
+.btn-info {
+    --bs-btn-color: var(--white);
+    --bs-btn-bg: var(--brand-blue-1);
+    --bs-btn-border-color: var(--brand-blue-1);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--brand-blue-2);
+    --bs-btn-hover-border-color: var(--brand-blue-2);
+    --bs-btn-active-color: var(--white);
+    --bs-btn-active-bg: var(--brand-blue-2);
+    --bs-btn-active-border-color: var(--brand-blue-2);
+    --bs-btn-disabled-color: var(--white);
+    --bs-btn-disabled-bg: var(--brand-blue-1);
+    --bs-btn-disabled-border-color: var(--brand-blue-1);
+    --bs-btn-focus-shadow-rgb: var(--brand-blue-1-rgb);
+}
+
+.btn-outline-primary,
+.btn-outline-info {
+    --bs-btn-color: var(--brand-blue-1);
+    --bs-btn-border-color: var(--brand-blue-1);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--brand-blue-1);
+    --bs-btn-hover-border-color: var(--brand-blue-1);
+    --bs-btn-active-color: var(--white);
+    --bs-btn-active-bg: var(--brand-blue-2);
+    --bs-btn-active-border-color: var(--brand-blue-2);
+    --bs-btn-disabled-color: var(--brand-blue-1);
+    --bs-btn-disabled-border-color: var(--brand-blue-1);
+    --bs-btn-focus-shadow-rgb: var(--brand-blue-1-rgb);
+}
+
+.btn-secondary,
+.btn-dark {
+    --bs-btn-color: var(--white);
+    --bs-btn-bg: var(--grey-700);
+    --bs-btn-border-color: var(--grey-700);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--grey-800);
+    --bs-btn-hover-border-color: var(--grey-800);
+    --bs-btn-active-bg: var(--grey-900);
+    --bs-btn-active-border-color: var(--grey-900);
+    --bs-btn-focus-shadow-rgb: var(--grey-700-rgb);
+}
+
+.btn-outline-secondary,
+.btn-outline-dark {
+    --bs-btn-color: var(--grey-700);
+    --bs-btn-border-color: var(--grey-300);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--grey-700);
+    --bs-btn-hover-border-color: var(--grey-700);
+    --bs-btn-active-color: var(--white);
+    --bs-btn-active-bg: var(--grey-800);
+    --bs-btn-active-border-color: var(--grey-800);
+    --bs-btn-focus-shadow-rgb: var(--grey-700-rgb);
+}
+
+.btn-success {
+    --bs-btn-color: var(--white);
+    --bs-btn-bg: var(--ui-success);
+    --bs-btn-border-color: var(--ui-success);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--ui-success);
+    --bs-btn-hover-border-color: var(--ui-success);
+    --bs-btn-active-bg: var(--ui-success);
+    --bs-btn-focus-shadow-rgb: var(--ui-success-rgb);
+}
+
+.btn-outline-success {
+    --bs-btn-color: var(--ui-success);
+    --bs-btn-border-color: var(--ui-success);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--ui-success);
+    --bs-btn-hover-border-color: var(--ui-success);
+    --bs-btn-active-color: var(--white);
+    --bs-btn-active-bg: var(--ui-success);
+    --bs-btn-focus-shadow-rgb: var(--ui-success-rgb);
+}
+
+.btn-danger {
+    --bs-btn-color: var(--white);
+    --bs-btn-bg: var(--ui-error);
+    --bs-btn-border-color: var(--ui-error);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--ui-error);
+    --bs-btn-hover-border-color: var(--ui-error);
+    --bs-btn-active-bg: var(--ui-error);
+    --bs-btn-focus-shadow-rgb: var(--ui-error-rgb);
+}
+
+.btn-outline-danger {
+    --bs-btn-color: var(--ui-error);
+    --bs-btn-border-color: var(--ui-error);
+    --bs-btn-hover-color: var(--white);
+    --bs-btn-hover-bg: var(--ui-error);
+    --bs-btn-hover-border-color: var(--ui-error);
+    --bs-btn-active-color: var(--white);
+    --bs-btn-active-bg: var(--ui-error);
+    --bs-btn-focus-shadow-rgb: var(--ui-error-rgb);
+}
+
+/* Orange CTAs never carry white text: dark Blue 2 tint 3 on orange (5.8:1) */
+.btn-warning,
+.btn-outline-warning:hover,
+.btn-outline-warning:active {
+    --bs-btn-color: var(--brand-blue-2-tint-3);
+    --bs-btn-bg: var(--brand-orange);
+    --bs-btn-border-color: var(--brand-orange);
+    --bs-btn-hover-color: var(--brand-blue-2-tint-3);
+    --bs-btn-hover-bg: var(--brand-orange-tint-1);
+    --bs-btn-hover-border-color: var(--brand-orange-tint-1);
+    --bs-btn-active-color: var(--brand-blue-2-tint-3);
+    --bs-btn-active-bg: var(--brand-orange-tint-1);
+    --bs-btn-active-border-color: var(--brand-orange-tint-1);
+    --bs-btn-focus-shadow-rgb: var(--brand-orange-rgb);
+}
+
+.btn-outline-warning {
+    --bs-btn-color: var(--brand-blue-2-tint-3);
+    --bs-btn-border-color: var(--brand-orange);
+    --bs-btn-hover-color: var(--brand-blue-2-tint-3);
+    --bs-btn-hover-bg: var(--brand-orange);
+    --bs-btn-hover-border-color: var(--brand-orange);
+    --bs-btn-active-color: var(--brand-blue-2-tint-3);
+    --bs-btn-active-bg: var(--brand-orange-tint-1);
+}
+
+.btn-light,
+.btn-outline-light {
+    --bs-btn-hover-color: var(--brand-blue-2);
+    --bs-btn-hover-bg: var(--white);
+    --bs-btn-hover-border-color: var(--white);
+    --bs-btn-active-color: var(--brand-blue-2);
+    --bs-btn-active-bg: var(--white);
+}
+
+.btn-link {
+    --bs-btn-color: var(--brand-blue-1);
+    --bs-btn-hover-color: var(--brand-blue-2);
+    --bs-btn-active-color: var(--brand-blue-2);
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-active-color: var(--white);
+    --bs-dropdown-link-active-bg: var(--brand-blue-1);
+}
+
+.nav-pills {
+    --bs-nav-pills-link-active-bg: var(--brand-blue-1);
+}
+
+.pagination {
+    --bs-pagination-color: var(--brand-blue-1);
+    --bs-pagination-hover-color: var(--brand-blue-2);
+    --bs-pagination-focus-color: var(--brand-blue-2);
+    --bs-pagination-active-bg: var(--brand-blue-1);
+    --bs-pagination-active-border-color: var(--brand-blue-1);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(var(--brand-blue-1-rgb), 0.25);
+}
+
+.list-group {
+    --bs-list-group-active-bg: var(--brand-blue-1);
+    --bs-list-group-active-border-color: var(--brand-blue-1);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--brand-blue-1);
+    box-shadow: 0 0 0 0.25rem rgba(var(--brand-blue-1-rgb), 0.25);
+}
+
+.form-check-input:checked {
+    background-color: var(--brand-blue-1);
+    border-color: var(--brand-blue-1);
+}
+
+.form-check-input:focus {
+    border-color: var(--brand-blue-1);
+    box-shadow: 0 0 0 0.25rem rgba(var(--brand-blue-1-rgb), 0.25);
+}
+
+/* 50% white fails AA on Blue 2 (3.3:1); 85% passes (6.9:1) */
+.text-white-50 {
+    color: rgba(var(--white-rgb), 0.85) !important;
+}
+
+/* Star ratings etc. use Bootstrap's warning colour: keep them as orange accents */
+.text-warning {
+    color: var(--brand-orange) !important;
+}
+
+/* 2. Typography: Zen Maru Gothic, Regular 400 + Bold 700 only ---------------- */
+body {
+    font-family: var(--font-brand);
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-brand);
+    font-weight: 700;
+}
+
+input, select, textarea, label, .form-label, .form-control, .form-select,
+input::placeholder, textarea::placeholder {
+    font-family: var(--font-brand);
+    font-weight: 400;
+}
+
+button, .btn {
+    font-family: var(--font-brand);
+}
+
+/* Buttons and tabs are Bold, active or not */
+button, .btn, .neotia-lang-pill, .tab, .tab-link {
+    font-weight: 700;
+}
+
+.fw-light, .fw-lighter, .fw-normal, .fw-medium {
+    font-weight: 400 !important;
+}
+
+.fw-semibold, .fw-bold, .fw-bolder {
+    font-weight: 700 !important;
+}
+
+/* 3. Header: solid white bar, 4-colour logo only, clear space x on every side --
+   x = one arm of the plus = 10.78% of the logo width (647 / 6000 in the SVG).   */
+:root {
+    --logo-height: 80px;
+    --logo-width: calc(var(--logo-height) * 2.4396);
+    --logo-clear: calc(var(--logo-width) * 0.1078);
+}
+
+#mainHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1030;
+    padding: 0;
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(var(--black-rgb), 0.06);
+    transform: none;
+    animation: none;
+}
+
+#mainHeader .menu-navbar > .row {
+    align-items: center;
+}
+
+/* +2px so neighbouring pixels never land on the clear-space boundary; on narrow screens the
+   container gutter is smaller than x, so the logo is inset by the difference */
+#mainHeader .logo-part {
+    padding: calc(var(--logo-clear) + 2px) var(--logo-clear) calc(var(--logo-clear) + 2px) max(0px, calc(var(--logo-clear) + 2px - var(--bs-gutter-x, 1.5rem) * 0.5));
+    margin-left: 0;
+}
+
+#mainHeader .navbar-brand {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: var(--white);
+}
+
+#mainHeader .navbar-brand .site-logo {
+    display: block;
+    height: var(--logo-height);
+    width: var(--logo-width);
+    max-width: none;
+    filter: none;
+}
+
+#mainHeader .call-box-area {
+    margin-bottom: 12px;
+    gap: 24px;
+}
+
+#mainHeader .call-box-area p {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    color: var(--brand-blue-2);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#mainHeader .call-box-area p a {
+    display: inline-block;
+    padding: 3px 9px;
+    border: 1px solid var(--brand-blue-2);
+    border-radius: 4px;
+    color: var(--brand-blue-2);
+    font-weight: 700;
+    font-size: 13.5px;
+    background: var(--white);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#mainHeader .call-box-area p a:hover,
+#mainHeader .call-box-area p a:focus-visible {
+    background: var(--brand-blue-2);
+    border-color: var(--brand-blue-2);
+    color: var(--white);
+}
+
+/* AmbujaNeotia parent logo: its own colours, on white, never filtered */
+#mainHeader .call-box-area img {
+    filter: none;
+    max-width: 170px;
+    height: auto;
+}
+
+#mainHeader .navbar-nav {
+    gap: 0;
+}
+
+#mainHeader .navbar-nav .nav-link {
+    color: var(--brand-blue-2);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.1;
+    padding: 0 16px;
+    border-right: 1px solid rgba(var(--brand-blue-2-rgb), 0.35);
+    transition: color 0.2s ease;
+}
+
+#mainHeader .navbar-nav li:last-child .nav-link {
+    border-right: 0;
+    padding-right: 0;
+}
+
+#mainHeader .navbar-nav .nav-link:hover,
+#mainHeader .navbar-nav .nav-link:focus-visible,
+#mainHeader .navbar-nav .nav-link.active {
+    color: var(--brand-blue-1);
+}
+
+#mainHeader .menu-bar,
+#mainHeader .header-search-toggle {
+    color: var(--brand-blue-2);
+}
+
+#mainHeader .menu-bar svg {
+    filter: none;
+}
+
+.mega-panel {
+    top: var(--header-height);
+}
+
+/* Footer logo (180px wide, x = 19.4px): inset it where the container gutter is narrower than x */
+footer .footer-logo img {
+    margin-left: max(0px, calc(20px - var(--bs-gutter-x, 1.5rem) * 0.5));
+}
+
+/* Mobile drawer: Blue 2 panel, white text (8.3:1) */
+.navbar-nav-mobile .nav-link,
+.navbar-nav-mobile .dropdown-toggle {
+    font-weight: 700;
+}
+
+.close-menu {
+    color: var(--white);
+}
+
+/* The page starts below the fixed header (and the action bar on inner pages).
+   Banners used to sit underneath a transparent header, so their own top padding
+   already clears the header; only the extra height is added here. */
+body {
+    padding-top: var(--page-offset, 0px);
+}
+
+.header-search-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 20px;
+    line-height: 44px;
+    text-align: center;
+    padding: 0;
+}
+
+/* 4. Action bar ------------------------------------------------------------- */
+.action-bar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    z-index: 1029;
+    background: var(--white);
+    border-top: 1px solid var(--grey-100);
+    box-shadow: 0 6px 16px rgba(var(--black-rgb), 0.08);
+    padding: 10px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+}
+
+.action-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.action-search {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.action-search input {
+    width: 100%;
+    height: 46px;
+    padding: 0 18px 0 46px;
+    border: 1px solid var(--grey-300);
+    border-radius: 23px;
+    background: var(--white);
+    color: var(--grey-900);
+    font-size: 15px;
+}
+
+.action-search input::placeholder {
+    color: var(--grey-600);
+}
+
+.action-search input:focus {
+    outline: none;
+    border-color: var(--brand-blue-1);
+    box-shadow: 0 0 0 3px rgba(var(--brand-blue-1-rgb), 0.3);
+}
+
+.action-search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--brand-blue-2);
+    pointer-events: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex: 0 0 auto;
+}
+
+/* Suggestions dropdown shared with the hero search */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1031;
+    display: none;
+    max-height: 380px;
+    overflow-y: auto;
+    margin-top: 8px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: var(--white);
+    box-shadow: 0 8px 24px rgba(var(--black-rgb), 0.18);
+    text-align: left;
+}
+
+.search-suggestions h4 {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--grey-100);
+    color: var(--brand-blue-2);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-suggestions ul {
+    list-style: none;
+    margin: 0 0 15px;
+    padding: 0;
+}
+
+.search-suggestions ul li a,
+.search-suggestions .tag-details span a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--grey-800);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.search-suggestions ul li a:hover,
+.search-suggestions ul li a:focus-visible,
+.search-suggestions .tag-details span a:hover,
+.search-suggestions .tag-details span a:focus-visible {
+    background: var(--grey-bg);
+    color: var(--brand-blue-2);
+}
+
+/* Homepage: hidden until the hero's own search/buttons leave the viewport */
+.action-bar--after-hero {
+    transform: translateY(-110%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.action-bar--after-hero.is-visible {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* The bar slides out from behind the header, so keep it under it in the stack */
+.mobile-action-bar {
+    display: none;
+}
+
+/* 5. Buttons: primary = orange with dark text, secondary = Blue 1 with white -- */
+.btn-brand-primary,
+.btn-brand-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 10px 22px;
+    border: 0;
+    border-radius: 23px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-brand-primary {
+    background: var(--brand-orange);
+    color: var(--brand-blue-2-tint-3);
+}
+
+.btn-brand-primary:hover,
+.btn-brand-primary:focus-visible,
+.btn-brand-primary:active {
+    background: var(--brand-orange-tint-1);
+    color: var(--brand-blue-2-tint-3);
+}
+
+.btn-brand-secondary {
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+
+.btn-brand-secondary:hover,
+.btn-brand-secondary:focus-visible,
+.btn-brand-secondary:active {
+    background: var(--brand-blue-2);
+    color: var(--white);
+}
+
+/* Hero buttons on the homepage follow the same two styles */
+.home_button a:not(.home_call) {
+    background: var(--brand-orange) !important;
+    color: var(--brand-blue-2-tint-3) !important;
+}
+
+.home_button a:not(.home_call):hover,
+.home_button a:not(.home_call):focus-visible {
+    background: var(--brand-orange-tint-1) !important;
+    color: var(--brand-blue-2-tint-3) !important;
+}
+
+.home_button a.home_call {
+    background: var(--brand-blue-1) !important;
+    color: var(--white) !important;
+}
+
+.home_button a.home_call:hover,
+.home_button a.home_call:focus-visible {
+    background: var(--brand-blue-2) !important;
+    color: var(--white) !important;
+}
+
+/* 6. Floating buttons ---------------------------------------------------------- */
+.whatsapp-float,
+.go-top {
+    z-index: 1020;
+}
+
+/* 7. Focus: visible on every interactive element ------------------------------ */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--brand-blue-1);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.btn-brand-secondary:focus-visible,
+#mainHeader .call-box-area p a:focus-visible {
+    outline-color: var(--brand-orange);
+}
+
+/* Responsive ------------------------------------------------------------------ */
+@media (max-width: 1199px) {
+    #mainHeader .navbar-nav .nav-link {
+        padding: 0 11px;
+        font-size: 14px;
+    }
+
+    .btn-brand-primary,
+    .btn-brand-secondary {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Tablet: hamburger menu, action bar still under the header */
+@media (max-width: 991px) {
+    :root {
+        --logo-height: 60px;
+    }
+
+    #mainHeader .call-box-area {
+        margin-bottom: 0;
+        gap: 8px;
+    }
+
+    #mainHeader .call-box-area p,
+    #mainHeader .call-box-area img {
+        display: none !important;
+    }
+
+    #mainHeader .menu-bar {
+        display: block;
+        cursor: pointer;
+    }
+
+    /* Desktop nav (incl. its language pill) gives way to the drawer, which has its own switcher */
+    #mainHeader .navbar-nav,
+    #mainHeader .neotia-lang-nav-item {
+        display: none !important;
+    }
+
+    #mainHeader .call-box-area {
+        gap: 4px;
+    }
+}
+
+/* Mobile (<= 768px): search behind the header icon, buttons in a bottom bar */
+@media (max-width: 768px) {
+    :root {
+        --logo-height: 57px;
+    }
+
+    #mainHeader .header-search-toggle {
+        display: inline-block;
+    }
+
+    .action-bar {
+        display: none;
+        padding: 10px 0 12px;
+    }
+
+    .action-bar.is-search-open {
+        display: block;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .action-bar .action-buttons {
+        display: none;
+    }
+
+    .mobile-action-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1029;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+        background: var(--white);
+        box-shadow: 0 -4px 14px rgba(var(--black-rgb), 0.1);
+    }
+
+    .mobile-action-bar {
+        transition: transform 0.3s ease, visibility 0.3s;
+    }
+
+    /* Homepage: hidden while the hero's own buttons are on screen */
+    .mobile-action-bar.is-hidden {
+        transform: translateY(110%);
+        visibility: hidden;
+    }
+
+    .mobile-action-bar .btn {
+        min-height: 48px;
+        width: 100%;
+        padding: 8px 6px;
+        font-size: 14px;
+        white-space: normal;
+        border-radius: 24px;
+    }
+
+    body {
+        padding-bottom: var(--mobile-bar-height);
+    }
+
+    /* Floating buttons sit above the bottom bar */
+    .whatsapp-float {
+        bottom: calc(var(--mobile-bar-height) + 72px) !important;
+        right: 15px !important;
+    }
+
+    .go-top {
+        bottom: calc(var(--mobile-bar-height) + 16px) !important;
+        right: 15px !important;
+    }
+
+    /* The vertical "Request a CallBack" tab duplicates the bottom bar */
+    .callback-btn {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .action-bar,
+    #mainHeader,
+    .btn-brand-primary,
+    .btn-brand-secondary {
+        transition: none !important;
+        animation: none !important;
+    }
+}

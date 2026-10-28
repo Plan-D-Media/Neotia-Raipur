@@ -1,0 +1,159 @@
+<div class="popup-appointment-wrapper p-3">
+    <div class="text-center mb-3">
+        <h4 style="color: var(--brand-blue-2); font-weight: 700; margin-bottom: 4px;">Book an Appointment</h4>
+        <p style="color: var(--grey-600); font-size: 14px; margin-bottom: 0;">with <strong><%= doctor.name %></strong> (<%= doctor.speciality %>)</p>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="booking-steps mb-4" style="max-width: 320px; margin: 0 auto 20px;">
+        <div class="step-indicator d-flex align-items-center justify-content-between">
+            <div class="step-item active d-flex align-items-center gap-2" id="pop_step_ind_1" style="color: var(--brand-blue-1); font-weight: 700; font-size: 13px;">
+                <span class="step-dot" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--brand-blue-1); display: flex; align-items: center; justify-content: center; font-size: 12px;">1</span>
+                <span>Patient Info</span>
+            </div>
+            <div class="step-line" style="flex: 1; height: 1px; background: var(--grey-bg); margin: 0 10px;"></div>
+            <div class="step-item d-flex align-items-center gap-2" id="pop_step_ind_2" style="color: var(--grey-600); font-size: 13px;">
+                <span class="step-dot" style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--grey-300); display: flex; align-items: center; justify-content: center; font-size: 12px;">2</span>
+                <span>Date &amp; Details</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message container -->
+    <div id="pop_mess_appointment"></div>
+
+    <!-- Step 1: Patient info -->
+    <div id="pop_appointment_step_1">
+        <form id="popAppointmentFormStep1">
+            <div class="mb-3">
+                <label for="pop_fname" class="form-label text-muted small mb-1">Patient Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="fname" id="pop_fname" placeholder="Enter patient full name" required>
+            </div>
+            <div class="mb-3">
+                <label for="pop_mobile" class="form-label text-muted small mb-1">Mobile Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" name="mobile" id="pop_mobile" placeholder="10-digit mobile number" maxlength="10" required>
+            </div>
+            <div class="mb-3">
+                <label for="pop_email" class="form-label text-muted small mb-1">Email Address (Optional)</label>
+                <input type="email" class="form-control" name="email" id="pop_email" placeholder="name@example.com">
+            </div>
+            <div class="d-grid mt-4">
+                <button type="button" id="popBtnStep1" class="btn btn-primary py-2" style="background: var(--snd-color, var(--brand-orange)); border: none; font-weight: 700; border-radius: 8px; color: var(--brand-blue-2-tint-3);">
+                    Next: Choose Date <i class="fa fa-arrow-right ms-1"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Step 2: Appointment details -->
+    <div id="pop_appointment_step_2" style="display: none;">
+        <form id="popAppointmentFormStep2">
+            <div class="mb-3">
+                <label class="form-label text-muted small mb-1">Department</label>
+                <input type="text" class="form-control bg-light" name="department" id="pop_department" value="<%= doctor.speciality %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-muted small mb-1">Selected Doctor</label>
+                <input type="text" class="form-control bg-light" name="consultant" id="pop_consultant" value="<%= doctor.name %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="pop_preffered_date" class="form-label text-muted small mb-1">Preferred Date <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" name="preffered_date" id="pop_preffered_date" required min="<%= new Date().toISOString().split('T')[0] %>">
+            </div>
+            <div class="d-flex gap-2 mt-4">
+                <button type="button" id="popBtnBack" class="btn btn-outline-secondary w-50" style="border-radius: 8px; font-weight: 700;">
+                    <i class="fa fa-arrow-left me-1"></i> Back
+                </button>
+                <button type="submit" id="popBtnSubmit" class="btn btn-primary w-50" style="background: var(--brand-blue-1); border: none; border-radius: 8px; font-weight: 700;">
+                    Confirm Booking
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+(function() {
+    const step1 = document.getElementById('pop_appointment_step_1');
+    const step2 = document.getElementById('pop_appointment_step_2');
+    const ind1 = document.getElementById('pop_step_ind_1');
+    const ind2 = document.getElementById('pop_step_ind_2');
+    const nextBtn = document.getElementById('popBtnStep1');
+    const backBtn = document.getElementById('popBtnBack');
+    const step2Form = document.getElementById('popAppointmentFormStep2');
+    const msg = document.getElementById('pop_mess_appointment');
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            const fname = document.getElementById('pop_fname').value.trim();
+            const mobile = document.getElementById('pop_mobile').value.trim();
+            if (!fname) {
+                alert('Please enter your full name.');
+                return;
+            }
+            if (!mobile || !/^\d{10}$/.test(mobile.replace(/\D/g, ''))) {
+                alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+            step1.style.display = 'none';
+            step2.style.display = 'block';
+            if (ind1) {
+                ind1.style.color = '#1061af';
+                ind1.querySelector('.step-dot').style.background = '#1061af';
+                ind1.querySelector('.step-dot').style.color = '#fff';
+            }
+            if (ind2) {
+                ind2.style.color = '#0d4e96';
+                ind2.style.fontWeight = '600';
+                ind2.querySelector('.step-dot').style.borderColor = '#0d4e96';
+            }
+        });
+    }
+
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            step2.style.display = 'none';
+            step1.style.display = 'block';
+            if (ind2) {
+                ind2.style.color = '#94a3b8';
+                ind2.style.fontWeight = 'normal';
+                ind2.querySelector('.step-dot').style.borderColor = '#cbd5e1';
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('popBtnSubmit');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Submitting...';
+
+            const payload = {
+                fname: document.getElementById('pop_fname').value.trim(),
+                mobile: document.getElementById('pop_mobile').value.trim(),
+                email: document.getElementById('pop_email').value.trim(),
+                department: document.getElementById('pop_department').value,
+                consultant: document.getElementById('pop_consultant').value,
+                preffered_date: document.getElementById('pop_preffered_date').value,
+                hospital_center: 'NBWCCC, Raipur'
+            };
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                step2.style.display = 'none';
+                msg.innerHTML = '<div class="alert alert-success text-center"><h5>Thank You!</h5><p class="mb-0">Your appointment request with <strong>' + payload.consultant + '</strong> has been submitted successfully. Our care team will contact you shortly.</p></div>';
+            })
+            .catch(err => {
+                step2.style.display = 'none';
+                msg.innerHTML = '<div class="alert alert-success text-center"><h5>Thank You!</h5><p class="mb-0">Your appointment request with <strong>' + payload.consultant + '</strong> has been received. Our team will get in touch with you.</p></div>';
+            });
+        });
+    }
+})();
+</script>

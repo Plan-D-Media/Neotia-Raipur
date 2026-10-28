@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="table-card p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <div>
+                    <h5 class="mb-0 fw-bold">Hospital Global Settings</h5>
+                    <small class="text-muted">Update emergency helplines, addresses, and contact channels</small>
+                </div>
+            </div>
+
+            <% if (typeof success !== 'undefined' && success) { %>
+                <div class="alert alert-success py-2 small mb-4">
+                    <i class="fas fa-check-circle me-1"></i> Hospital settings updated successfully!
+                </div>
+            <% } %>
+
+            <form action="/admin/settings" method="POST">
+                <h6 class="text-uppercase fw-bold text-primary small mb-3">Emergency Lines &amp; Helplines</h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Emergency Hotline #1 <span class="text-danger">*</span></label>
+                        <input type="text" name="emergency1" class="form-control" value="<%= siteInfo.emergencyNumbers[0] %>" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Emergency Hotline #2 <span class="text-danger">*</span></label>
+                        <input type="text" name="emergency2" class="form-control" value="<%= siteInfo.emergencyNumbers[1] %>" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label font-weight-bold small">OPD Appointment Line</label>
+                        <input type="text" name="appointmentNumber" class="form-control" value="<%= siteInfo.appointmentNumber %>">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label font-weight-bold small">OPD Enquiries Phone</label>
+                        <input type="text" name="opdEnquiriesNumber" class="form-control" value="<%= siteInfo.opdEnquiriesNumber %>">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label font-weight-bold small">WhatsApp Number</label>
+                        <input type="text" name="whatsappNumber" class="form-control" value="<%= siteInfo.whatsappNumber %>">
+                    </div>
+                </div>
+
+                <h6 class="text-uppercase fw-bold text-primary small mb-3">Hospital Details &amp; Address</h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Hospital Name</label>
+                        <input type="text" name="hospitalName" class="form-control" value="<%= siteInfo.hospitalName %>" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Contact Email</label>
+                        <input type="email" name="email" class="form-control" value="<%= siteInfo.email %>" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Centre name on appointment forms</label>
+                        <input type="text" name="hospitalCentre" class="form-control" value="<%= siteInfo.hospitalCentre || '' %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Appointment number (as displayed)</label>
+                        <input type="text" name="appointmentNumberDisplay" class="form-control" value="<%= siteInfo.appointmentNumberDisplay || '' %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Site URL (e.g. https://raipur.example.com; blank = relative links)</label>
+                        <input type="url" name="siteUrl" class="form-control" value="<%= siteInfo.siteUrl || '' %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Google Maps embed URL (blank = no map)</label>
+                        <input type="url" name="mapEmbedUrl" class="form-control" value="<%= siteInfo.mapEmbedUrl || '' %>">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label font-weight-bold small">Full Physical Address</label>
+                        <textarea name="address" class="form-control" rows="2"><%= siteInfo.address %></textarea>
+                    </div>
+                </div>
+
+                <h6 class="text-uppercase fw-bold text-primary small mb-3">Social Media Links</h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Instagram</label>
+                        <input type="text" name="instagram" class="form-control" value="<%= siteInfo.socialLinks.instagram %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Facebook</label>
+                        <input type="text" name="facebook" class="form-control" value="<%= siteInfo.socialLinks.facebook %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">LinkedIn</label>
+                        <input type="text" name="linkedin" class="form-control" value="<%= siteInfo.socialLinks.linkedin %>">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">YouTube</label>
+                        <input type="text" name="youtube" class="form-control" value="<%= siteInfo.socialLinks.youtube %>">
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary font-weight-bold px-4 py-2">
+                        Save Global Settings <i class="fas fa-save ms-1"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

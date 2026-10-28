@@ -1,0 +1,855 @@
+<%- include('partials/header', { 
+    title: 'Obstetrics & Gynaecology in Raipur | Neotia Bhagirathi',
+    description: 'Neotia Bhagirathi offers expert obstetrics and gynaecology care in Raipur. From maternity care to advanced gynaecological surgeries and PCOS clinic.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Crucial Header Offset Fix so top menu is never disturbed */
+.banner-sec {
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+}
+
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey-400);
+    font-size: 14px;
+    font-weight: 400;
+}
+.step-item.active {
+    color: var(--grey-900);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--brand-blue-1);
+}
+.speciality_banner {
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.06);
+}
+.doctors-sec .right-plus {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(var(--white-rgb), 0.9);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.15);
+}
+.doctors-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.doctors-item img.img-fluid {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+}
+</style>
+
+<!-- Banner Section -->
+<section class="banner-sec">
+        <div class="banner-area">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-5 col-lg-5">
+                        <h1 class="fadeInUp animatable">Obstetrics &amp; Gynaecology</h1>
+                        <p class="fadeInUp animatable">From young adulthood to motherhood and beyond, we offer the care, comfort and trust every woman deserves.</p>
+                        <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="banner-img">
+                            <img src="/upload/fileManager/test2/Splbanner9-img.png" alt="Obstetrics and Gynaecology" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Clinical Content Section -->
+<section class="content-tabs-sec section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-12"><!--    <div class="tablist fadeInUp animatable" role="tablist" aria-label="Paediatric Cardiac Sciences">
+                        <button class="tab" role="tab" aria-selected="true" aria-controls="tab1" id="t1">Immunisation and
+                            <br>
+                            Infectious Disease Prevention</button>
+                        <button class="tab" role="tab" aria-selected="false" aria-controls="tab2" id="t2">Developmental Screening  
+                            <br>
+                            and Health Education</button>
+                        <button class="tab" role="tab" aria-selected="false" aria-controls="tab3" id="t3">Accident and <br> Injury Prevention</button>
+                    </div> -->
+<div class="panels">
+<section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+<h3 class="fadeInUp animatable">Obstetrics and Gynaecology</h3>
+<p class="fadeInUp animatable">The department of Obstetrics and Gynaecology here provides complete treatment for any kind of obstetric and gynaecological requirements. The department offers comprehensive women care including high-end obstetrics and gynaecological services for women of all ages. With state-of-the-art healthcare facilities and a dedicated team including some of the best obstetricians and gynaecologists specialist in Kolkata, you can be rest assured that you are in safe and knowledgeable hands. Generally, women of different age groups have different types of concerns related to health and every gynae doctor provides utmost care to all the patients. At our hospital we provide superior quality of diagnostic, therapeutic, surgical as well as counselling facilities to women. Starting from puberty to childbirth to menopause, women go through multiple health issues which needs to be addressed at the earliest. The specialised and expert medical team also offer services related to high-risk pregnancy, infertility treatments, conventional gynaecological surgeries. The team also has diverse knowledge and years of experience in women’s surgical healthcare.</p>
+<div class="workup-sec mt-4">
+<h4 class="py-3 fadeInUp animatable">A broad spectrum of maternity services</h4>
+<p class="pt-2 fadeInUp animatable">From treating high-risk pregnancy cases and successful painless deliveries at par with International Clinical norms to post-natal care – we offer comprehensive maternity care that provides much-needed support to an expecting mother. We run expert childbirth classes or LAMAZE classes, physiotherapy, nutrition and endocrine programs which have been proven internationally to increase a mother’s confidence in her ability to give birth.</p>
+<p class="pt-2 fadeInUp animatable">We fully understand that post-delivery stage is a crucial one. Although many women and infants transition through this time without any problems; however, in some cases women or infants develop significant health issues. We have a fully equipped 4-bedded Adult ICU which is dedicated to women who need intensive monitoring and care. The unit is manned around the clock by the best obstetrician gynaecologists Kolkata backed by a skilled ICU team who are adept at responding to critical situations efficiently. Post-delivery, your baby is transferred immediately to the well-baby nursery or the Neonatal Intensive Care Unit for highly specialised hospital care. We have a full-time of neonatologists, intensive sisters, the best pediatricians in Kolkata to handle neonatal complications.</p>
+<p class="pt-2 fadeInUp animatable">We take great pride in delivering a welcoming and healing environment that physically and emotionally uplifts our patients and their families. And our hospital décor plays a key role – the décor themed on various climatic zones including the therapeutic properties of Mother Nature exudes positivity and freshness. It creates a healing environment where women can enjoy a positive experience for the most exciting time of their lives.</p>
+<p class="pt-2 fadeInUp animatable">Our gynaecological department cares for women of all ages</p>
+<p class="pt-2 fadeInUp animatable">We understand that gynaecological health is often a sensitive issue, whether related to irregular periods, sexual health or pregnancy-hence our team which includes some of the best obstetricians, trained nurses and gynae doctor Kolkata walk that extra mile to provide you with extremely personalised service.</p>
+<p class="pt-2 fadeInUp animatable"><strong>Our gynaecological services include -</strong></p>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<p>specialised clinic for PCOD-We offer a comprehensive approach to treat PCOD backed by a team of gynaecologists, endocrinologist, nutritionist, psychologist and genetics as well. We collaborate with every patient to build an individualised treatment plan that will help her.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<p>Gyane Laparoscopy Surgeries-We provide comprehensive facilities for all kind of Gynaecological Surgery in Kolkata equipped with advanced laparoscopic instruments supported by a skilled team.</p>
+</div>
+</li>
+<li class="fadeInUp animatable speciality_banner_no"><img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/ObstetricsGynaecology.png"></li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<p>Treating gestational diabetes for women-We aim to provide all kinds of treatment and management for women with any type of diabetes during pregnancy. The team includes endocrinologists, skilled nurses, dieticians, physiotherapists and gynaecologists for every woman who steps in our hospital with this disorder.</p>
+</div>
+</li>
+</ul>
+<p class="fadeInUp animatable mt-4 mb-4">We have specialised health checkup packages for women. To know more about these packages, get in touch with us. Check our contact details here The unit also comprises of Labour Delivery Room. The rooms are designed in soft and soothing colors to fill a sense of peace. The unit also includes fully designed and equipped three modular OTs where all types of gynae and obs surgeries can be performed. A hospital can also be considered as good as its doctors and we have the finest gynaecologists in Kolkata on board.</p>
+<p class="fadeInUp animatable mb-4">Every mother to be, needs the best motherly care. We at Neotia Bhagirathi Woman and Child Care Centre, Raipur aim at providing holistic care towards every woman in a stimulating environment for their emotional, psychological and physical-well-being. It creates a healing environment where women can experience a stress-free existence in a place away from their home. You'll be looked after by an experienced consultant gynaecologist who is dedicated to your health and wellbeing.</p>
+<h4 class="py-3 mt-4 fadeInUp animatable">Polycystic Ovary Syndrome (PCOS)</h4>
+<p class="fadeInUp animatable mb-4">PCOS is one of the most common causes of infertility in clinical practice, characterised by abnormal hormone production in the woman’s body. Most often a timely medical intervention (early detection, treatment and counseling) can effectively control PCOS enabling the person to conceive and enjoy parenthood &amp; lead a happy and healthy life. Treatment of PCOS varies from woman to woman. A healthier lifestyle is considered the most important step to manage PCOS. In Neotia Bhagirathi Woman and Child Care Centre, Raipur the experts here recognise the unique challenges associated with the syndrome and help women to develop the best possible plan for their wellbeing.</p>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Advice / Case Studies Section -->
+<section class="doctors-sec section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="workup-sec pb-3 fadeInUp animatable">
+<h4>Advice / Case Studies</h4>
+</div>
+<div class="doctors-area owl-carousel">
+<div class="doctors-item fadeInUp animated"><a href="https://youtube.com/watch?v=dFZuTpWNjPE" data-fancybox="doctor1"> <img class="img-fluid" src="/upload/fileManager/thumbnail/chandrani_thumb1.jpg" alt=""></a>
+<div class="right-plus"><img src="/img/plus.png" alt=""></div>
+</div>
+<div class="doctors-item fadeInUp animated"><a href="https://youtube.com/watch?v=U4hqdJ7hOmQ" data-fancybox="doctor1"> <img class="img-fluid" src="/upload/fileManager/thumbnail/chandrani_thumb2.jpg" alt=""></a>
+<div class="right-plus"><img src="/img/plus.png" alt=""></div>
+</div>
+<div class="doctors-item fadeInUp animatable"><a href="https://youtube.com/watch?v=S1iUQ7r_CXs" data-fancybox="doctor1"> <img class="img-fluid" src="/upload/fileManager/thumbnail/sumona_thumb1.jpg" alt=""></a>
+<div class="right-plus"><img src="/img/plus.png" alt=""></div>
+</div>
+<div class="doctors-item fadeInUp animated"><a href="https://youtu.be/L8BXdw9pOjM?si=xeFKgUdIlBV2OxJp" data-fancybox="doctor1"> <img class="img-fluid" src="/upload/fileManager/thumbnail/prasun-thumb1.png" alt=""></a>
+<div class="right-plus"><img src="/img/plus.png" alt=""></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 2-Step Appointment Booking Section -->
+<section class="app-sec p-bottom" id="book_sectio">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class=" mb-4 text-center fade-up animatable">
+                        <h2 class="step_heading">Book Your Appointment</h2>
+                    </div>
+                    <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+                <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required="">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+
+                                <input type="hidden" name="hlink" value="/obstetrics-gynaecology">
+                                <input type="hidden" name="ip" value="116.193.136.40">
+                                <input name="step" type="hidden" value="1">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
+                                <button type="submit" id="appointsubmitTriger" class="submit-btn">Next →</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics start -->
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required="">
+
+                                                                    <select class="form-select " disabled="">
+                                    <option value="9##Obstetrics & Gynaecology" selected="">Obstetrics &amp; Gynaecology</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="9##Obstetrics & Gynaecology">
+                                 
+                            </div>
+
+                            <div class="col-lg-6">
+                                                                    <select class="form-select " name="consultant" id="consultant" required="">
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option><option value="22##Dr. Abha Saraf">Dr. Abha Saraf</option><option value="23##Dr. Abhijit Ghosh">Dr. Abhijit Ghosh</option><option value="78##Dr. Ajanta Samanta">Dr. Ajanta Samanta</option><option value="46##Dr. Alok Basu">Dr. Alok Basu</option><option value="47##Dr. Amitoj Athwal">Dr. Amitoj Athwal</option><option value="48##Dr. Ankita Mandal">Dr. Ankita Mandal</option><option value="49##Dr. Avishek Bhadra">Dr. Avishek Bhadra</option><option value="50##Dr. Barun Chakraborty">Dr. Barun Chakraborty</option><option value="51##Dr. Bimla Goenka">Dr. Bimla Goenka</option><option value="52##Dr. Biswajyoti Guha">Dr. Biswajyoti Guha</option><option value="53##Dr. Bratati Bhattacharyya">Dr. Bratati Bhattacharyya</option><option value="9##Dr. Chandrani Pal">Dr. Chandrani Pal</option><option value="54##Dr. Debalina Brahma">Dr. Debalina Brahma</option><option value="55##Dr. Dibyendu Banerjee">Dr. Dibyendu Banerjee</option><option value="56##Dr. Indranil Saha">Dr. Indranil Saha</option><option value="57##Dr. Jayeeta Roy (Mitra)">Dr. Jayeeta Roy (Mitra)</option><option value="58##Dr. Kasturi Bhaumik">Dr. Kasturi Bhaumik</option><option value="59##Dr. Kavita Mandal">Dr. Kavita Mandal</option><option value="60##Dr. Nandini Chakrabarti Bhattacharyya">Dr. Nandini Chakrabarti Bhattacharyya</option><option value="61##Dr. Nilabha Bhaduri">Dr. Nilabha Bhaduri</option><option value="62##Dr. Prajnanika Gurung">Dr. Prajnanika Gurung</option><option value="7##Dr. Prosun Bera">Dr. Prosun Bera</option><option value="63##Dr. Ratnabali Chakravorty">Dr. Ratnabali Chakravorty</option><option value="64##Dr. Rupa Sharan Ganguli">Dr. Rupa Sharan Ganguli</option><option value="65##Dr. Sankar Das Mahapatra">Dr. Sankar Das Mahapatra</option><option value="66##Dr. Shivanjali Nayak">Dr. Shivanjali Nayak</option><option value="67##Dr. Shubhra Ghosh Paul">Dr. Shubhra Ghosh Paul</option><option value="68##Dr. Subhas Chandra Biswas">Dr. Subhas Chandra Biswas</option><option value="69##Dr. Suchandra Mukhopadhyay">Dr. Suchandra Mukhopadhyay</option><option value="12##Dr. Sumona Haque">Dr. Sumona Haque</option><option value="70##Dr. Susmita Deb Majumder">Dr. Susmita Deb Majumder</option><option value="71##Dr. Trina Sengupta">Dr. Trina Sengupta</option><option value="72##Dr. Vineeta Kaul nee Verma">Dr. Vineeta Kaul nee Verma</option><option value="73##Dr. Vinita Khemani">Dr. Vinita Khemani</option>    
+                                    </select>
+
+                                  
+
+                                <div class="date-wrapper position-relative">
+                                    <input type="date" class="form-control" placeholder="Date" min="2026-10-19" name="preffered_date" id="preffered_date" required="">
+                                    <span class="calendar-icon"><i class="fa-solid fa-calendar-days calendar-icon"></i></span>
+                                </div>
+
+                                <input type="hidden" name="hospital_center" class="form-control readonly-field" value="<%= siteInfo.hospitalCentre %>" readonly="">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-between appoint">
+                                <input name="step" type="hidden" value="2">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details End -->
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+<!-- Obstetrics and Gynaecology Doctors Carousel -->
+<section class="special-doctor-sec p-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="workup-sec fadeInUp animatable">
+                        <h4 class="">Obstetrics and Gynaecology Doctors</h4>
+                    </div>
+                    <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/DProsun-list.png" alt="Dr. Prosun Bera">
+                            <h4 class="doctor-name">Dr. Prosun Bera </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>IVF Specialist &amp; Laparoscopic Surgeon</h5>
+                            <span>9+ years experience</span>
+                            <p>MBBS, MS (O&amp;G), FMAS, DIPMAS, FRM</p>
+                            <p>Reg. No. WBMC 65799</p><a href="/doctor/dr-prosun-bera">View Profile</a></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-prosun-bera">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/DrChandrani-list.png" alt="Dr. Chandrani Pal">
+                            <h4 class="doctor-name">Dr. Chandrani Pal </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span>15+ years experience</span>
+                            <p>DNB (Obstetrics &amp; Gynaecology), MRCOG(UK), D.G.O. , M.B.B.S.</p>
+                            <p>Reg. No. WBMC 66796</p><a href="/doctor/dr-chandrani-pal">View Profile</a></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-chandrani-pal">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/DrSumonaHaque-list.png" alt="Dr. Sumona Haque">
+                            <h4 class="doctor-name">Dr. Sumona Haque </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Maternal Foetal Medicine</h5>
+                            <span>9+ years experience</span>
+                            <p>MBBS, DNB (Obstetrics &amp; Gynaecology)</p>
+                            <p>Reg. No. WBMC 72710</p><a href="/doctor/dr-sumona-haque">View Profile</a></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-sumona-haque">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/dr_abha.jpg" alt="Dr. Abha Saraf">
+                            <h4 class="doctor-name">Dr. Abha Saraf </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-abha-saraf">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/dr_abhijit.jpg" alt="Dr. Abhijit Ghosh">
+                            <h4 class="doctor-name">Dr. Abhijit Ghosh </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MRCOG (London)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-abhijit-ghosh">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_alok.jpg" alt="Dr. Alok Basu">
+                            <h4 class="doctor-name">Dr. Alok Basu </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, FRCOG (London)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-alok-basu">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_amitoj.jpg" alt="Dr. Amitoj Athwal">
+                            <h4 class="doctor-name">Dr. Amitoj Athwal </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DNB (G&amp;O)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-amitoj-athwal">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_ankita.jpg" alt="Dr. Ankita Mandal">
+                            <h4 class="doctor-name">Dr. Ankita Mandal </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-ankita-mandal">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_avishek_b.jpg" alt="Dr. Avishek Bhadra">
+                            <h4 class="doctor-name">Dr. Avishek Bhadra </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS (Gold MEdalist), MS (Gold Medalist), DNB, MNAMS, MICOG, FIAOG, MRCOG</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-avishek-bhadra">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_barun_c.jpg" alt="Dr. Barun Chakraborty">
+                            <h4 class="doctor-name">Dr. Barun Chakraborty </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD ( G &amp; O), FICOG</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-barun-chakraborty">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_bimla_g.jpg" alt="Dr. Bimla Goenka">
+                            <h4 class="doctor-name">Dr. Bimla Goenka </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DA, DNB (G&amp;O), MNAMS</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-bimla-goenka">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_biswajyoti_g.jpg" alt="Dr. Biswajyoti Guha">
+                            <h4 class="doctor-name">Dr. Biswajyoti Guha </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (O&amp;G),MRCOG (London), FICOG</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-biswajyoti-guha">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_bratati_g.jpg" alt="Dr. Bratati Bhattacharyya">
+                            <h4 class="doctor-name">Dr. Bratati Bhattacharyya </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MD (G&amp;O), FICOG</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-bratati-bhattacharyya">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_devlina_b.jpg" alt="Dr. Debalina Brahma">
+                            <h4 class="doctor-name">Dr. Debalina Brahma </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS,DGO</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-debalina-brahma">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_dibyendu_b.jpg" alt="Dr. Dibyendu Banerjee">
+                            <h4 class="doctor-name">Dr. Dibyendu Banerjee </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MD, DNB, FICOG, Laproscopic Surgeon &amp; Infertility Specialist</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-dibyendu-banerjee">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_indranil_s.jpg" alt="Dr. Indranil Saha">
+                            <h4 class="doctor-name">Dr. Indranil Saha </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MD, MRCOG (LONDON)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-indranil-saha">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_joyeta.jpg" alt="Dr. Jayeeta Roy (Mitra)">
+                            <h4 class="doctor-name">Dr. Jayeeta Roy (Mitra) </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>DGO, MS (G&amp;O), FICOG, FMAS</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-jayeeta-roy-mitra">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_kasturi.jpg" alt="Dr. Kasturi Bhaumik">
+                            <h4 class="doctor-name">Dr. Kasturi Bhaumik </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p></p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-kasturi-bhaumik">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_kabita_m.jpg" alt="Dr. Kavita Mandal">
+                            <h4 class="doctor-name">Dr. Kavita Mandal </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (O&amp;G - AIIMS, New Delhi)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-kavita-mandal">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_nandini_c_b.jpg" alt="Dr. Nandini Chakrabarti Bhattacharyya">
+                            <h4 class="doctor-name">Dr. Nandini Chakrabarti Bhattacharyya </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, DNB (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-nandini-chakrabarti-bhattacharyya">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_nilabha.jpg" alt="Dr. Nilabha Bhaduri">
+                            <h4 class="doctor-name">Dr. Nilabha Bhaduri </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-nilabha-bhaduri">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_prajnanika.jpg" alt="Dr. Prajnanika Gurung">
+                            <h4 class="doctor-name">Dr. Prajnanika Gurung </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS (Cal), MD (Obs &amp; Gyn) (AIIMS Delhi), Diploma in Gynaecological Endoscopic Surgery (Germany)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-prajnanika-gurung">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_ratnabali.jpg" alt="Dr. Ratnabali Chakravorty">
+                            <h4 class="doctor-name">Dr. Ratnabali Chakravorty </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MD (G&amp;O), FICMCH</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-ratnabali-chakravorty">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_rupasharan.jpg" alt="Dr. Rupa Sharan Ganguli">
+                            <h4 class="doctor-name">Dr. Rupa Sharan Ganguli </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (PGI-Chandigarh)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-rupa-sharan-ganguli">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_shankardas.jpg" alt="Dr. Sankar Das Mahapatra">
+                            <h4 class="doctor-name">Dr. Sankar Das Mahapatra </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MS (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-sankar-das-mahapatra">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_shivanjali.jpg" alt="Dr. Shivanjali Nayak">
+                            <h4 class="doctor-name">Dr. Shivanjali Nayak </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DNB (OBS &amp; GYNAE), FMAS, FICRS</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-shivanjali-nayak">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_subhraq_g.jpg" alt="Dr. Shubhra Ghosh Paul">
+                            <h4 class="doctor-name">Dr. Shubhra Ghosh Paul </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p></p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-shubhra-ghosh-paul">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_subhaschandra.jpg" alt="Dr. Subhas Chandra Biswas">
+                            <h4 class="doctor-name">Dr. Subhas Chandra Biswas </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (O&amp;G), FICOG, FIMSA, FMAS</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-subhas-chandra-biswas">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_suchandra.jpg" alt="Dr. Suchandra Mukhopadhyay">
+                            <h4 class="doctor-name">Dr. Suchandra Mukhopadhyay </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DNB (G&amp;O)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-suchandra-mukhopadhyay">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_susmitadeb.jpg" alt="Dr. Susmita Deb Majumder">
+                            <h4 class="doctor-name">Dr. Susmita Deb Majumder </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MD (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-susmita-deb-majumder">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_trina_s.jpg" alt="Dr. Trina Sengupta">
+                            <h4 class="doctor-name">Dr. Trina Sengupta </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, DNB</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-trina-sengupta">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_vineeta_k.jpg" alt="Dr. Vineeta Kaul nee Verma">
+                            <h4 class="doctor-name">Dr. Vineeta Kaul nee Verma </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, MD (AIIMS), (O&amp;G)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-vineeta-kaul-nee-verma">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/obsteric/dr_vinita_k.jpg" alt="Dr. Vinita Khemani">
+                            <h4 class="doctor-name">Dr. Vinita Khemani </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics &amp; Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS, DGO, MRCOG (1)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-vinita-khemani">Book Appointment</a>
+                    </div><div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/dr-Ajanta-Samanta.png" alt="Dr. Ajanta Samanta">
+                            <h4 class="doctor-name">Dr. Ajanta Samanta </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Obstetrics and Gynaecology</h5>
+                            <span></span>
+                            <p>MBBS (Hons in Gynaecology and Obstetrics) MS ( Gynaecology and Obstetrics) DNB (Gynaecology and Obstetrics) MRCOG ( UK, London)</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-ajanta-samanta">Book Appointment</a>
+                    </div>                        
+                    
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Enquiry Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel">Book Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Callback Modal -->
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-labelledby="requestcallbackLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestcallbackLabel">Request a Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+$(document).ready(function() {
+    // Initialize Fancybox for video advice
+    if (typeof Fancybox !== "undefined") {
+        Fancybox.bind("[data-fancybox]", {
+            Toolbar: true
+        });
+    }
+
+    // Initialize Video Carousel
+    if ($(".doctors-area").length) {
+        $(".doctors-area").owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 4 }
+            }
+        });
+    }
+
+    // Initialize Doctor Slider
+    if ($('#doctorSliderWp').length) {
+        $('#doctorSliderWp').owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                576: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 4 }
+            }
+        });
+    }
+
+    // Two-step appointment form handling
+    const step1Form = document.getElementById('book-appointment-form-step-1');
+    const step2Form = document.getElementById('book-appointment-form-step-2');
+    const step1Div = document.getElementById('booking-step-1');
+    const step2Div = document.getElementById('booking-step-2');
+    const ind1 = document.getElementById('step-indicator-1');
+    const ind2 = document.getElementById('step-indicator-2');
+    const prevBtn = document.getElementById('step2-prev-btn');
+
+    if (step1Form) {
+        step1Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fname').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            if (!name || !mobile) {
+                alert('Please enter patient name and mobile number.');
+                return;
+            }
+
+            step1Div.style.display = 'none';
+            step2Div.style.display = 'block';
+            if (ind1) {
+                ind1.classList.remove('active');
+                ind1.classList.add('done');
+            }
+            if (ind2) {
+                ind2.classList.add('active');
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            step2Div.style.display = 'none';
+            step1Div.style.display = 'block';
+            if (ind2) ind2.classList.remove('active');
+            if (ind1) {
+                ind1.classList.remove('done');
+                ind1.classList.add('active');
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loading = document.getElementById('loading_appointment_img');
+            const msg = document.getElementById('mess_appointment');
+            
+            const formData = {
+                fname: document.getElementById('fname') ? document.getElementById('fname').value : '',
+                mobile: document.getElementById('mobile') ? document.getElementById('mobile').value : '',
+                email: document.getElementById('email') ? document.getElementById('email').value : '',
+                department: document.getElementById('department') ? document.getElementById('department').value : '9##Obstetrics and Gynaecology',
+                consultant: document.getElementById('consultant') ? document.getElementById('consultant').value : '',
+                preffered_date: document.getElementById('preffered_date') ? document.getElementById('preffered_date').value : '',
+                hospital_center: '<%= siteInfo.hospitalCentre %>'
+            };
+
+            if (loading) loading.style.display = 'block';
+            if (msg) msg.innerHTML = '';
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted successfully.</div>';
+                }
+                step2Form.reset();
+                if (step1Form) step1Form.reset();
+                setTimeout(() => {
+                    step2Div.style.display = 'none';
+                    step1Div.style.display = 'block';
+                    if (ind2) ind2.classList.remove('active');
+                    if (ind1) {
+                        ind1.classList.remove('done');
+                        ind1.classList.add('active');
+                    }
+                }, 4000);
+            })
+            .catch(err => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted.</div>';
+                }
+            });
+        });
+    }
+
+    // Modal remote loading
+    $(document).on('click', '.open_modal_enquiry', function() {
+        var url = $(this).data('remote');
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        $('#enquiryModal').modal('show');
+        $.get(url, function(data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="alert alert-danger">Unable to load appointment form. Please try calling us directly.</div>');
+        });
+    });
+});
+</script>

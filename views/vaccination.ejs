@@ -1,0 +1,688 @@
+<%- include('partials/header', { 
+    title: 'Vaccination & Immunisation in Raipur | Neotia Bhagirathi',
+    description: 'Neotia Bhagirathi provides child vaccination and preventive care in Raipur, including flu, measles, HPV vaccines and immunisation packages.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--grey-400);
+}
+.step-item.active {
+    color: var(--grey-800);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--black);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .booking-steps {
+        width: 100%;
+    }
+}
+
+/* Banner image styling */
+.banner-sec {
+    background: var(--grey-bg);
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+    position: relative;
+}
+@media (max-width: 991px) {
+    .banner-sec {
+        padding-top: 105px !important;
+        padding-bottom: 40px !important;
+    }
+}
+.banner-area .banner-img img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-1-rgb), 0.12);
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+}
+
+/* Speciality banner in content */
+.speciality_banner_no {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 30px 0 !important;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+.speciality_banner_no img {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    max-width: 100%;
+}
+
+/* Doctor card modern touch */
+.sec00-doctorwp .item {
+    margin: 10px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--grey-100);
+    transition: all 0.3s ease;
+}
+.sec00-doctorwp .item:hover {
+    box-shadow: 0 8px 24px rgba(var(--brand-blue-1-rgb), 0.12);
+    transform: translateY(-4px);
+}
+.sec00-doctorwp .img-doctor img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 3px solid var(--grey-100);
+}
+.sec00-doctorwp .doctor-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand-blue-1);
+    margin-bottom: 6px;
+}
+.sec00-doctorwp .doctor-content h5 {
+    font-size: 14px;
+    color: var(--brand-blue-1);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.sec00-doctorwp .doctor-content p {
+    font-size: 13px;
+    color: var(--grey-600);
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.sec00-doctorwp .book-app {
+    display: inline-block;
+    padding: 9px 24px;
+    background: var(--brand-blue-1);
+    color: var(--white);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+.sec00-doctorwp .book-app:hover {
+    background: var(--brand-orange);
+    color: var(--brand-blue-2-tint-3);
+}
+</style>
+
+<!-- Request a Call Back Button -->
+<a href="javascript:void(0)" class="callback-btn open_modal_callback" data-remote="/request-a-callback">
+    Request a CallBack
+</a>
+
+<!-- banner sec start -->
+<section class="banner-sec">
+    <div class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-5 col-lg-5">
+                    <h1 class="fadeInUp animatable">Vaccination &amp; Immunisation</h1>
+                    <p class="fadeInUp animatable">With every shot and every check-up, we protect your child’s health today, so they can smile brighter.</p>
+                    <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="banner-img">
+                        <img src="/upload/fileManager/banner/vaccination_preventive_hero_banner.jpg" alt="Child Vaccination & Preventive Care" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner sec end -->
+
+<!-- content tabs sec start -->
+<section class="content-tabs-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panels">
+                    <section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+                        <h3 class="fadeInUp animatable">Paediatric Vaccination and Preventive Care</h3>
+                        <p class="fadeInUp animatable">At our Paediatric Preventive Care Department, we focus on keeping children healthy and well from birth through adolescence. Our comprehensive approach integrates the latest immunisation guidelines, regular health screenings and personalised advice to manage risks and promote optimal physical and developmental growth.</p>
+                        <p class="pt-4 fadeInUp animatable">Our Specialised Services include:</p>
+                        
+                        <div class="workup-sec mt-5">
+                            <h4 class="py-3 fadeInUp animatable">Immunisation and Infectious Disease Prevention</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Standard Immunisation Schedule</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Routine Vaccinations: </strong>Administration of all core vaccines according to national guidelines (e.g., MMR, DTaP, Polio, Hib, Pneumococcal, Rotavirus, Meningococcal and Hepatitis).</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Catch-Up Schedules: </strong>Developing and implementing personalised plans for children who have missed or delayed vaccinations.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div>
+                                        <h5>Seasonal and Travel Vaccinations</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Influenza (Flu) Vaccine: </strong>Annual administration for all eligible children to prevent seasonal illness.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Travel Consultations: </strong>Providing necessary vaccines (e.g., Yellow Fever, Typhoid) and prophylactic medications for families travelling internationally.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Infectious Disease Risk Management</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Exposure Counselling: </strong>Guidance and testing following exposure to common childhood diseases (e.g., chickenpox, pertussis).</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Antibiotic Stewardship: </strong>Promoting responsible use of antibiotics to combat drug resistance.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Health Surveillance and Screening</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Physical Growth and Vitals Monitoring</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Physical Examination: </strong>Comprehensive assessment of growth (height, weight, head circumference) and physical health at routine intervals.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Vision and Hearing Screening: </strong>Early detection of sensory impairments that can affect learning and development.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Blood Pressure and Anaemia Screening: </strong>Monitoring for hypertension and nutritional deficiencies at appropriate ages.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable speciality_banner_no">
+                                    <img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/PaediatricVaccination.png" alt="Paediatric Vaccination Speciality Banner" />
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div>
+                                        <h5>Developmental and Behavioural Screening</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Standardised Screening Tools: </strong>Routine use of validated questionnaires (e.g., ASQ, M-CHAT) to identify potential delays in motor, speech, cognitive and social development.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Early Intervention Referrals: </strong>Prompt referral to specialists (e.g., Speech Therapy, Occupational Therapy, Child Psychology) when concerns are identified.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Adolescent Health Screening</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Mental Health Assessment: </strong>Screening for depression, anxiety, substance use and eating disorders.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Sexual Health Counselling: </strong>Confidential, age-appropriate advice and testing services.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Health Education and Risk Reduction</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Nutrition and Healthy Lifestyle Guidance</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Dietary Counselling: </strong>Personalised advice to prevent obesity, manage nutritional deficiencies and establish healthy eating habits.</p>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Physical Activity Promotion: </strong>Encouraging age-appropriate exercise to support bone health and cardiovascular fitness.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Injury and Accident Prevention</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Safety Counselling: </strong>Detailed advice on home safety, car seat use, water safety, helmet use and playground safety at every health visit.</p>
+                                        <p><strong>Poison Prevention: </strong>Education on safe storage of medications and household toxins.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Oral Health and Dental Care</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p><strong>Dental Varnish Application: </strong>Applying topical fluoride for decay prevention in high-risk groups.</p>
+                                        <p><strong>Referral Guidance: </strong>Recommendations for establishing a "dental home" and routine check-ups.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Sleep Hygiene Education</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Advice on establishing healthy sleep routines for infants (SIDS prevention) and managing sleep disorders in older children and teens.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>School Readiness and Adjustment</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Counselling and support for parents and children transitioning to nursery, primary school and secondary school environments.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section id="tab2" class="panel" role="tabpanel" aria-labelledby="t2">
+                        <h3>Developmental Screening and Health Education</h3>
+                    </section>
+                    <section id="tab3" class="panel" role="tabpanel" aria-labelledby="t3">
+                        <h3>Accident and Injury Prevention</h3>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- content tabs sec end -->
+
+<!-- form sec start -->
+<section class="app-sec p-bottom" id="book_sectio">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-4 text-center fade-up animatable">
+                    <h2 class="step_heading">Book Your Appointment</h2>
+                </div>
+                
+                <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+                    
+                    <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <input type="hidden" name="hlink" value="/vaccination" />
+                                    <input type="hidden" name="ip" value="127.0.0.1" />
+                                    <input name="step" type="hidden" value="1">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                                    <button type="submit" id="appointsubmitTriger" class="submit-btn">Next &rarr;</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics end -->
+
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required>
+                                    <select class="form-select" disabled>
+                                        <option value="7##Vaccination & Immunisation" selected>Vaccination &amp; Immunisation</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="7##Vaccination & Immunisation">
+                                </div>
+                                <div class="col-lg-6">
+                                    <select class="form-select" name="consultant" id="consultant" required>
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor" selected>Any Doctor</option>
+                                        <option value="13##Dr. Niladri Bose">Dr. Niladri Bose (Newborn & Child Specialist)</option>
+                                        <option value="12##Dr. Afzal Hussain">Dr. Afzal Hussain (Paediatrician & Neonatologist)</option>
+                                        <option value="14##Dr. Sulagna Dutta">Dr. Sulagna Dutta (Paediatrics & Neonatology)</option>
+                                        <option value="9##Dr. Somenath Gorain">Dr. Somenath Gorain (Paediatric Specialist)</option>
+                                    </select>
+                                    <div class="date-wrapper position-relative">
+                                        <input type="date" class="form-control" placeholder="Date" min="<%= new Date().toISOString().split('T')[0] %>" name="preffered_date" id="preffered_date" required>
+                                        <span class="calendar-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                                    </div>
+                                    <input type="hidden" name="hospital_center" class="form-control readonly-field" value="<%= siteInfo.hospitalCentre %>" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-between appoint">
+                                    <button type="button" class="submit-btn submit-btn--outline" id="step2-prev-btn">&larr; Back</button>
+                                    <input name="step" type="hidden" value="2">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- form sec end -->
+
+<!-- special doctors sec start -->
+<section class="special-doctor-sec p-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec fadeInUp animatable">
+                    <h4>Vaccination and Preventive Care Doctors</h4>
+                </div>
+                <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/niladri.jpg" alt="Dr. Niladri Bose">
+                            <h4 class="doctor-name">Dr. Niladri Bose</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Child Specialist & Paediatrician</h5>
+                            <span></span>
+                            <p>MD (Pediatrics), DNB</p>
+                            <p>Newborn & Child Specialist</p>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-niladri-bose">Book Appointment</a>
+                    </div>
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/afjal.png" alt="Dr. Afzal Hussain">
+                            <h4 class="doctor-name">Dr. Afzal Hussain</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatrician & Neonatologist</h5>
+                            <span></span>
+                            <p>MD (Pediatrics), Fellowship in Neonatology</p>
+                            <p>Consultant Paediatrician</p>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-afzal-hussain">Book Appointment</a>
+                    </div>
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/sulagna.jpg" alt="Dr. Sulagna Dutta">
+                            <h4 class="doctor-name">Dr. Sulagna Dutta</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatrics & Neonatology</h5>
+                            <span></span>
+                            <p>MD (Pediatrics), DNB (Pediatrics)</p>
+                            <p>Consultant Paediatric Specialist</p>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-sulagna-dutta">Book Appointment</a>
+                    </div>
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/somenath.png" alt="Dr. Somenath Gorain">
+                            <h4 class="doctor-name">Dr. Somenath Gorain</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatrics & Paediatric Intensivist</h5>
+                            <span></span>
+                            <p>MD (Pediatrics), Fellowship Pediatric Intensive Care</p>
+                            <p>PICU In-Charge & Consultant Paediatrician</p>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-somenath-gorain">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- special doctors sec end -->
+
+<!-- Enquiry Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel">Book Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Callback Modal -->
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-labelledby="requestcallbackLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestcallbackLabel">Request a Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+$(document).ready(function() {
+    // Initialize Doctor Slider
+    if ($('#doctorSliderWp').length) {
+        $('#doctorSliderWp').owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                576: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 4 }
+            }
+        });
+    }
+
+    // Two-step appointment form handling
+    const step1Form = document.getElementById('book-appointment-form-step-1');
+    const step2Form = document.getElementById('book-appointment-form-step-2');
+    const step1Div = document.getElementById('booking-step-1');
+    const step2Div = document.getElementById('booking-step-2');
+    const ind1 = document.getElementById('step-indicator-1');
+    const ind2 = document.getElementById('step-indicator-2');
+    const prevBtn = document.getElementById('step2-prev-btn');
+
+    if (step1Form) {
+        step1Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fname').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            if (!name || !mobile) {
+                alert('Please enter patient name and mobile number.');
+                return;
+            }
+
+            step1Div.style.display = 'none';
+            step2Div.style.display = 'block';
+            ind1.classList.remove('active');
+            ind1.classList.add('done');
+            ind2.classList.add('active');
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            step2Div.style.display = 'none';
+            step1Div.style.display = 'block';
+            ind2.classList.remove('active');
+            ind1.classList.remove('done');
+            ind1.classList.add('active');
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loading = document.getElementById('loading_appointment_img');
+            const msg = document.getElementById('mess_appointment');
+            
+            const formData = {
+                fname: document.getElementById('fname').value,
+                mobile: document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                department: document.getElementById('department').value,
+                consultant: document.getElementById('consultant').value,
+                preffered_date: document.getElementById('preffered_date').value,
+                hospital_center: '<%= siteInfo.hospitalCentre %>'
+            };
+
+            loading.style.display = 'block';
+            msg.innerHTML = '';
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.rettype === 'success') {
+                    msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our team will contact you shortly.</div>';
+                    step2Form.reset();
+                    step1Form.reset();
+                    setTimeout(() => {
+                        window.location.href = '/thank-you-for-appointment';
+                    }, 2000);
+                } else {
+                    msg.innerHTML = '<div class="alert alert-danger">' + (data.retmessage || 'Submission failed. Please try again.') + '</div>';
+                }
+            })
+            .catch(() => {
+                loading.style.display = 'none';
+                msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our hospital staff will call you shortly.</div>';
+            });
+        });
+    }
+
+    // Modal popup triggers for enquiry & callback
+    $(document).on('click', '.open_modal_enquiry', function(e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function(data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="p-4 text-center"><h5>Book Appointment</h5><p class="text-muted">Child Vaccination & Preventive Care</p><p>Please call our hospital desk at <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>"><%= siteInfo.emergencyNumbers[0] %></a> or submit the appointment form on this page.</p></div>');
+        });
+    });
+
+    $(document).on('click', '.open_modal_callback', function(e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('requestcallback'));
+        $('#modal-body2').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function(data) {
+            $('#modal-body2').html(data);
+        }).fail(function() {
+            $('#modal-body2').html('<div class="p-3 text-center"><h5>Request a Callback</h5><p>Call our emergency desk at <a href="tel:<%= siteInfo.emergencyNumbers[1] %>"><%= siteInfo.emergencyNumbers[1] %></a>.</p></div>');
+        });
+    });
+});
+</script>

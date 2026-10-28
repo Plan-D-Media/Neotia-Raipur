@@ -1,0 +1,131 @@
+<%- include('partials/header', { 
+    title: (typeof page !== 'undefined' && page && page.seoTitle) ? page.seoTitle : 'Patient Experience & Hospital Care | Neotia Bhagirathi Hospital Raipur',
+    description: (typeof page !== 'undefined' && page && page.metaDescription) ? page.metaDescription : 'Discover patient stories, recovery journeys, and the healing environment at Neotia Bhagirathi Woman and Child Care Centre.'
+}) %>
+
+<!-- Banner -->
+<section class="banner-sec position-relative" style="background: linear-gradient(135deg, var(--brand-blue-2) 0%, var(--brand-blue-2-tint-1) 100%); padding: 120px 0 60px; color: var(--white);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background: transparent; padding: 0;">
+                        <li class="breadcrumb-item"><a href="/" style="color: var(--white); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Experience</li>
+                    </ol>
+                </nav>
+                <h1 style="font-size: 38px; font-weight: 700; color: var(--white); margin-bottom: 12px;"><%= (typeof page !== 'undefined' && page && page.heading) ? page.heading : 'The Neotia Bhagirathi Experience' %></h1>
+                <p style="color: var(--white); font-size: 16px; max-width: 650px;">
+                    <%= (typeof page !== 'undefined' && page && page.subheading) ? page.subheading : 'Dedicated to nurturing new lives and restoring health with warmth, clinical mastery, and unmatched parental support.' %>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Features -->
+<section class="section-padding" style="background: var(--white);">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="/img/about-img.png" alt="Hospital Experience" class="img-fluid rounded-4 shadow" onerror="this.src='/img/home-banner.png'">
+            </div>
+            <div class="col-lg-6">
+                <span class="text-uppercase fw-bold" style="color: var(--brand-blue-1); letter-spacing: 1.5px; font-size: 13px;">Family-Centered Care</span>
+                <h2 style="color: var(--theme-color); font-weight: 700; font-size: 32px; margin-top: 8px; margin-bottom: 20px;">Designed to Comfort Children &amp; Parents</h2>
+                <p style="color: var(--grey-700); line-height: 1.8; font-size: 15px;">
+                    We understand that hospital visits can be daunting for children and stressful for parents. Our New Town campus is thoughtfully designed with soothing colors, pediatric-friendly examination rooms, play areas, and comfortable inpatient rooms.
+                </p>
+                <p style="color: var(--grey-700); line-height: 1.8; font-size: 15px;">
+                    Every staff member—from doctors and nurses to patient care coordinators—is trained to treat young patients with tenderness, patience, and empathetic communication.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 text-center mt-3">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--grey-bg);">
+                    <div class="mb-3 text-primary"><i class="fas fa-heart fa-3x" style="color: var(--theme-color);"></i></div>
+                    <h4 style="font-size: 20px; font-weight: 700; color: var(--brand-blue-2-tint-3);">Gentle Pediatric Touch</h4>
+                    <p class="text-muted small mt-2">Specialized child-friendly procedures designed to minimize distress and fear during blood tests, scans, and therapies.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--grey-bg);">
+                    <div class="mb-3 text-success"><i class="fas fa-user-shield fa-3x" style="color: var(--brand-blue-1);"></i></div>
+                    <h4 style="font-size: 20px; font-weight: 700; color: var(--brand-blue-2-tint-3);">Strict Safety &amp; Infection Control</h4>
+                    <p class="text-muted small mt-2">World-class infection control protocols, sterile air changes in NICU and OTs, and round-the-clock biosecurity.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--grey-bg);">
+                    <div class="mb-3 text-warning"><i class="fas fa-users-cog fa-3x" style="color: var(--snd-color);"></i></div>
+                    <h4 style="font-size: 20px; font-weight: 700; color: var(--brand-blue-2-tint-3);">Dedicated Care Coordinator</h4>
+                    <p class="text-muted small mt-2">Single-point contact assisting families from admission through billing, insurance clearance, and post-discharge follow-up.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Patient Stories / Testimonials -->
+<section class="section-padding" style="background: var(--grey-bg);">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <span class="text-uppercase fw-bold" style="color: var(--brand-blue-1); letter-spacing: 1.5px; font-size: 13px;">Parent Experiences</span>
+                <h2 style="color: var(--theme-color); font-weight: 700; font-size: 34px;">Voices of Healing &amp; Trust</h2>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--white);">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="color: var(--grey-700); font-style: italic; font-size: 14px; line-height: 1.7;">
+                        "When my preterm baby was admitted to the Level-III NICU at Neotia Bhagirathi, the care and reassurance given by the doctors and nurses gave us immense courage. Today my baby is thriving and healthy!"
+                    </p>
+                    <div class="mt-3 pt-3 border-top">
+                        <strong style="color: var(--brand-blue-2-tint-3);">Soma Mukherjee</strong>
+                        <div class="text-muted small">New Town, Kolkata</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--white);">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="color: var(--grey-700); font-style: italic; font-size: 14px; line-height: 1.7;">
+                        "The paediatric cardiology team handled our 3-year-old child's heart intervention with incredible expertise. The hospital environment was clean, calm, and reassuring throughout our stay."
+                    </p>
+                    <div class="mt-3 pt-3 border-top">
+                        <strong style="color: var(--brand-blue-2-tint-3);">Amitav Roy</strong>
+                        <div class="text-muted small">Salt Lake, Kolkata</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: var(--white);">
+                    <div class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p style="color: var(--grey-700); font-style: italic; font-size: 14px; line-height: 1.7;">
+                        "From maternity care to our baby's pediatric vaccinations, Neotia Bhagirathi New Town has been our trusted family hospital. Outstanding doctors and very courteous nursing team."
+                    </p>
+                    <div class="mt-3 pt-3 border-top">
+                        <strong style="color: var(--brand-blue-2-tint-3);">Priyanka Sen</strong>
+                        <div class="text-muted small">Rajarhat, Kolkata</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/modals') %>
+<%- include('partials/footer') %>

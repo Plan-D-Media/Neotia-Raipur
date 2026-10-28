@@ -1,0 +1,201 @@
+<%- include('partials/header', { 
+    title: (typeof page !== 'undefined' && page && page.seoTitle) ? page.seoTitle : 'Contact Us | Location & Emergency Numbers | Neotia Bhagirathi Raipur',
+    description: (typeof page !== 'undefined' && page && page.metaDescription) ? page.metaDescription : 'Get in touch with Neotia Bhagirathi Woman and Child Care Centre, Raipur. Emergency numbers, OPD enquiries, and address.'
+}) %>
+
+<!-- Banner -->
+<section class="banner-sec position-relative overflow-hidden" style="background: var(--grey-bg); padding: 60px 0 0; color: var(--brand-blue-2-tint-3);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-6 pb-5">
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 14px;">
+                        <li class="breadcrumb-item"><a href="/" style="color: var(--grey-700); text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item active fw-semibold" style="color: var(--brand-blue-2);" aria-current="page">Contact Us</li>
+                    </ol>
+                </nav>
+                <h1 style="font-size: 42px; font-weight: 700; color: var(--brand-blue-2); line-height: 1.25; margin-bottom: 18px;">
+                    <%= (typeof page !== 'undefined' && page && page.heading) ? page.heading : 'We’re always here to listen.' %>
+                </h1>
+                <p style="color: var(--brand-blue-2-tint-3); font-size: 16px; line-height: 1.65; max-width: 480px; margin-bottom: 28px;">
+                    <%= (typeof page !== 'undefined' && page && page.subheading) ? page.subheading : 'Whether you seek guidance, care, or clarity, reach out to us. Every conversation begins with compassion and ends with comfort.' %>
+                </p>
+                <a href="<%= (typeof page !== 'undefined' && page && page.ctaLink) ? page.ctaLink : '/book-an-appointment' %>" class="btn" style="color: var(--brand-blue-2); border: 1.5px solid var(--brand-blue-2); background: transparent; padding: 12px 30px; font-size: 16px; font-weight: 700; border-radius: 6px; transition: all 0.3s ease;" onmouseover="this.style.background='var(--brand-blue-2)'; this.style.color='var(--white)';" onmouseout="this.style.background='transparent'; this.style.color='var(--brand-blue-2)';">
+                    <%= (typeof page !== 'undefined' && page && page.ctaText) ? page.ctaText : 'Book Appointment' %>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-6 text-center text-md-end align-self-end">
+                <img src="/img/cute_10yo_girl_doctor_listening.jpg" alt="We're always here to listen - Little Doctor" class="img-fluid" style="max-height: 480px; width: auto; max-width: 100%; object-fit: contain; vertical-align: bottom; display: inline-block;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Cards Section -->
+<section class="section-padding" style="background: var(--grey-bg);">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center" style="border-radius: 16px; background: var(--white);">
+                    <div class="d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 64px; height: 64px; border-radius: 50%; background: var(--grey-bg); color: var(--brand-orange); font-size: 24px;">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h5 style="color: var(--brand-blue-2-tint-3); font-weight: 700;">24x7 Emergency Line</h5>
+                    <p class="text-muted small mb-3">Paediatric Emergency &amp; Ambulance dispatch</p>
+                    <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>" class="btn btn-outline-primary fw-bold mb-2" style="border-radius: 20px;">
+                        <%= siteInfo.emergencyNumbers[0] %>
+                    </a>
+                    <a href="tel:<%= siteInfo.emergencyNumbers[1] %>" class="text-primary fw-bold d-block" style="text-decoration: none;">
+                        <%= siteInfo.emergencyNumbers[1] %>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center" style="border-radius: 16px; background: var(--white);">
+                    <div class="d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 64px; height: 64px; border-radius: 50%; background: var(--grey-bg); color: var(--brand-blue-1); font-size: 24px;">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h5 style="color: var(--brand-blue-2-tint-3); font-weight: 700;">OPD &amp; Appointments</h5>
+                    <p class="text-muted small mb-3">Schedule specialist doctor consultations</p>
+                    <a href="tel:<%= siteInfo.appointmentNumber %>" class="btn btn-outline-primary fw-bold mb-2" style="border-radius: 20px;">
+                        <%= siteInfo.appointmentNumber %>
+                    </a>
+                    <div class="small text-muted">OPD Desk: <a href="tel:<%= siteInfo.opdEnquiriesNumber %>" class="text-primary fw-bold"><%= siteInfo.opdEnquiriesNumber %></a></div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm p-4 text-center" style="border-radius: 16px; background: var(--white);">
+                    <div class="d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 64px; height: 64px; border-radius: 50%; background: var(--grey-bg); color: var(--brand-orange); font-size: 24px;">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h5 style="color: var(--brand-blue-2-tint-3); font-weight: 700;">Email &amp; Connect</h5>
+                    <p class="text-muted small mb-3">Patient feedback &amp; general enquiries</p>
+                    <a href="mailto:<%= siteInfo.email %>" class="text-dark fw-bold d-block mb-2" style="text-decoration: none; word-break: break-all;">
+                        <%= siteInfo.email %>
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=<%= siteInfo.whatsappNumber %>" class="text-success fw-bold small" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp me-1"></i> WhatsApp: <%= siteInfo.whatsappNumber %>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form & Map Row -->
+        <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 p-md-5 h-100" style="border-radius: 16px; background: var(--white);">
+                    <h3 style="color: var(--theme-color); font-weight: 700; font-size: 24px; margin-bottom: 10px;">
+                        Send Us a Message
+                    </h3>
+                    <p class="text-muted small mb-4">Fill out the form below and our patient care team will get back to you shortly.</p>
+
+                    <div id="contactFormMessage"></div>
+
+                    <form id="contactPageForm" action="/form-sub/enquiry_submit.php" method="POST" onsubmit="handleContactSubmit(event)">
+                        <input type="hidden" name="source" value="Contact Us Page">
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 400;">Full Name <span class="text-danger">*</span></label>
+                            <input type="text" name="name" required class="form-control" placeholder="Enter Full Name" style="border-radius: 8px; padding: 12px 16px;">
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-weight: 400;">Mobile Number <span class="text-danger">*</span></label>
+                                <input type="tel" name="phone" id="contactPhone" required pattern="[0-9]{10}" class="form-control" placeholder="10-digit Mobile" style="border-radius: 8px; padding: 12px 16px;">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" style="font-weight: 400;">Email Address</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email Address" style="border-radius: 8px; padding: 12px 16px;">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="font-weight: 400;">Department of Interest</label>
+                            <select name="department" class="form-select" style="border-radius: 8px; padding: 12px 16px;">
+                                <option value="General Enquiry">General Enquiry</option>
+                                <% departments.forEach(dept => { %>
+                                    <option value="<%= dept.name %>"><%= dept.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" style="font-weight: 400;">Your Message / Query <span class="text-danger">*</span></label>
+                            <textarea name="message" required class="form-control" rows="4" placeholder="How can we help you?" style="border-radius: 8px; padding: 12px 16px;"></textarea>
+                        </div>
+                        <button type="submit" id="contactSubmitBtn" class="btn w-100 py-3" style="background: var(--snd-color); color: var(--brand-blue-2-tint-3); font-weight: 700; border-radius: 30px; font-size: 16px; border: none;">
+                            Submit Message <i class="fas fa-paper-plane ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 p-md-5 h-100 d-flex flex-column justify-content-between" style="border-radius: 16px; background: var(--white);">
+                    <div>
+                        <h3 style="color: var(--theme-color); font-weight: 700; font-size: 24px; margin-bottom: 12px;">Hospital Location</h3>
+                        <p style="color: var(--grey-700); line-height: 1.6; font-size: 15px;">
+                            <strong><%= siteInfo.hospitalName %></strong><br>
+                            <%= siteInfo.address %>
+                        </p>
+                    </div>
+
+                    <!-- Map: shown once siteInfo.mapEmbedUrl holds the Raipur embed URL -->
+                    <% if (siteInfo.mapEmbedUrl) { %>
+                    <div class="rounded-4 overflow-hidden mt-3 border" style="height: 350px;">
+                        <iframe src="<%= siteInfo.mapEmbedUrl %>" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+async function handleContactSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contactSubmitBtn');
+    const msgDiv = document.getElementById('contactFormMessage');
+    const phoneInput = document.getElementById('contactPhone').value.trim();
+
+    if (!/^[0-9]{10}$/.test(phoneInput)) {
+        msgDiv.innerHTML = '<div class="alert alert-warning py-2 mb-3"><i class="fas fa-exclamation-triangle me-2"></i> Please enter a valid 10-digit mobile number.</div>';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Submitting...';
+
+    const formData = new FormData(e.target);
+    try {
+        const res = await fetch('/form-sub/enquiry_submit.php', {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.rettype === 'success') {
+            msgDiv.innerHTML = '<div class="alert alert-success d-flex align-items-center gap-3 p-3 mb-4" style="border-radius: 12px; background: var(--grey-bg); border: 1px solid var(--ui-success);"><i class="fas fa-check-circle fa-2x text-success"></i> <div><strong class="text-success d-block" style="font-size: 16px;">Thank You! Your message has been sent.</strong><span class="text-muted small">Our healthcare desk has logged your enquiry (Lead #' + (data.enquiryId || '') + ') and will call you back shortly.</span></div></div>';
+            e.target.reset();
+            msgDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+            msgDiv.innerHTML = '<div class="alert alert-danger py-2 mb-3"><i class="fas fa-exclamation-circle me-2"></i> ' + (data.retmessage || 'Error sending message') + '</div>';
+        }
+    } catch(err) {
+        msgDiv.innerHTML = '<div class="alert alert-danger py-2 mb-3"><i class="fas fa-exclamation-circle me-2"></i> Error submitting message. Please call our hospital helpline directly.</div>';
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Submit Message <i class="fas fa-paper-plane ms-2"></i>';
+    }
+}
+</script>
+
+<%- include('partials/modals') %>
+<%- include('partials/footer') %>

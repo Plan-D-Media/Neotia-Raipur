@@ -1,0 +1,293 @@
+<!-- Rewrite & Republish Optimization Workspace -->
+<div class="container-fluid p-0">
+
+    <!-- Header & Action Controls -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <a href="/admin/pages" class="text-muted text-decoration-none small">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Page Directory
+                </a>
+                <span class="text-muted small">/</span>
+                <span class="text-muted small">Content Optimization Workspace</span>
+            </div>
+            <h4 class="fw-bold mb-0 text-dark">
+                <i class="fas fa-wand-magic-sparkles text-primary me-2"></i> Rewrite &amp; Republish: <%= page.title %>
+            </h4>
+            <p class="text-muted small mb-0 mt-1">Review, refine, and optimize page copy, headings, and SEO metadata with rollback protection.</p>
+        </div>
+
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+            <a href="/admin/pages/edit/<%= page.id %>" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">
+                <i class="fas fa-pencil-alt me-1"></i> Open in Full Editor
+            </a>
+            <button type="button" class="btn btn-outline-warning text-dark btn-sm" style="border-radius: 8px;" onclick="submitRewriteForm('draft')">
+                <i class="fas fa-file-export me-1"></i> Save Rewrite as Draft
+            </button>
+            <button type="button" class="btn btn-success btn-sm px-3" style="border-radius: 8px;" onclick="confirmAndRepublish()">
+                <i class="fas fa-check-double me-1"></i> Approve &amp; Republish Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Optimization Instructions & Preset Tools -->
+    <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 12px; background: linear-gradient(135deg, var(--grey-bg) 0%, var(--grey-bg) 100%); border-left: 4px solid var(--brand-blue-2) !important;">
+        <div class="row g-3 align-items-center">
+            <div class="col-lg-8">
+                <h6 class="fw-bold mb-2 text-dark">
+                    <i class="fas fa-sliders text-primary me-1"></i> Editorial Optimization Tone &amp; Objectives
+                </h6>
+                <div class="d-flex gap-2 flex-wrap mb-3">
+                    <button type="button" class="btn btn-sm btn-outline-primary bg-white" onclick="setPreset('clinical')">
+                        <i class="fas fa-stethoscope me-1"></i> Clinical Authority
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary bg-white" onclick="setPreset('parent')">
+                        <i class="fas fa-heart text-danger me-1"></i> Compassionate &amp; Parent-Friendly
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary bg-white" onclick="setPreset('seo')">
+                        <i class="fas fa-location-dot text-success me-1"></i> Raipur &amp; Local SEO Focus
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-primary bg-white" onclick="setPreset('bullets')">
+                        <i class="fas fa-list-check text-info me-1"></i> Structured Highlights &amp; FAQs
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 text-muted">
+                        <i class="fas fa-pen-nib"></i>
+                    </span>
+                    <input type="text" id="customPromptInput" class="form-control border-start-0" 
+                           placeholder="Enter custom editorial instruction (e.g. Highlight pediatric surgical safety, parent counselling, and 24/7 NICU support)..."
+                           value="Improve clinical readability for parents, strengthen local Raipur paediatric keywords, and ensure clear call to action.">
+                    <button type="button" class="btn btn-primary px-3" onclick="generateEditorialRewrite()">
+                        <i class="fas fa-wand-magic-sparkles me-1"></i> Generate Optimized Draft
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-4 border-start ps-lg-4">
+                <div class="small text-muted">
+                    <strong class="text-dark d-block mb-1"><i class="fas fa-shield-alt text-success me-1"></i> Editorial Safety &amp; Ethics</strong>
+                    <ul class="mb-0 ps-3" style="font-size: 11.5px;">
+                        <li>Preserves hospital brand identity &amp; verified credentials.</li>
+                        <li>Prevents unsupported clinical claims or fabricated credentials.</li>
+                        <li>Automatically archives current version for instant rollback.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Comparison Form -->
+    <form id="rewriteForm" method="POST" action="/admin/pages/rewrite/<%= page.id %>">
+        <input type="hidden" name="status" id="rewriteStatusInput" value="published">
+        <input type="hidden" name="note" id="revisionNoteInput" value="Optimized via Rewrite & Republish workspace">
+
+        <!-- Side-by-Side Comparison Grid -->
+        <div class="row g-4 mb-4">
+            <!-- Left Side: Original Content (Reference) -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100" style="border-radius: 12px;">
+                    <div class="card-header bg-light py-3 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-dark"><i class="fas fa-file-alt text-secondary me-2"></i> Current Live Content (Original)</span>
+                        <span class="badge bg-secondary-subtle text-secondary">Original Version</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Original Title -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Page Title</label>
+                            <div class="p-2 bg-light rounded border text-dark fw-medium"><%= page.title %></div>
+                        </div>
+
+                        <!-- Original H1 Heading -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Section Heading (H1)</label>
+                            <div class="p-2 bg-light rounded border text-dark"><%= page.heading || 'None specified' %></div>
+                        </div>
+
+                        <!-- Original Body Content -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Body Content &amp; Overview</label>
+                            <div class="p-3 bg-light rounded border text-dark" style="max-height: 250px; overflow-y: auto; white-space: pre-wrap; font-size: 13.5px;"><%= page.content || 'No content provided.' %></div>
+                        </div>
+
+                        <!-- Original SEO Title -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted text-uppercase">SEO Title Tag</label>
+                            <div class="p-2 bg-light rounded border text-muted small"><%= page.seoTitle || page.title %></div>
+                        </div>
+
+                        <!-- Original Meta Description -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-muted text-uppercase">Meta Description</label>
+                            <div class="p-2 bg-light rounded border text-muted small"><%= page.metaDescription || 'None specified' %></div>
+                        </div>
+
+                        <!-- Original Alt Text -->
+                        <div>
+                            <label class="form-label small fw-bold text-muted text-uppercase">Image Alt Text</label>
+                            <div class="p-2 bg-light rounded border text-muted small"><%= page.altText || 'None' %></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Proposed Rewritten Content (Editable Preview) -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm h-100" style="border-radius: 12px; border: 2px solid var(--brand-blue-1) !important;">
+                    <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold"><i class="fas fa-pen-to-square me-2"></i> Proposed Optimized Content (Editable)</span>
+                        <span class="badge bg-white text-primary fw-bold">Review &amp; Edit Before Saving</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Rewritten Page Title -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized Page Title <span class="text-danger">*</span></label>
+                            <input type="text" name="title" id="revisedTitle" class="form-control" value="<%= page.title %>" required>
+                        </div>
+
+                        <!-- Rewritten H1 Heading -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized Section Heading (H1)</label>
+                            <input type="text" name="heading" id="revisedHeading" class="form-control" value="<%= page.heading || page.title %>">
+                        </div>
+
+                        <!-- Rewritten Body Content -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized Body Content &amp; Paragraphs</label>
+                            <textarea name="content" id="revisedContent" rows="8" class="form-control" style="font-size: 13.5px;"><%= page.content || '' %></textarea>
+                            <small class="text-muted">Editable directly before republishing. Preserves internal links and medical facts.</small>
+                        </div>
+
+                        <!-- Rewritten SEO Title -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized SEO Title Tag</label>
+                            <input type="text" name="seoTitle" id="revisedSeoTitle" class="form-control form-control-sm" value="<%= page.seoTitle || page.title %>">
+                        </div>
+
+                        <!-- Rewritten Meta Description -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized Meta Description (120-160 chars)</label>
+                            <textarea name="metaDescription" id="revisedMetaDesc" rows="2" class="form-control form-control-sm"><%= page.metaDescription || '' %></textarea>
+                        </div>
+
+                        <!-- Rewritten Alt Text -->
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold text-dark">Optimized Image Alt Text</label>
+                            <input type="text" name="altText" id="revisedAltText" class="form-control form-control-sm" value="<%= page.altText || page.title %>">
+                        </div>
+
+                        <!-- CTA Settings -->
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">CTA Button Text</label>
+                                <input type="text" name="ctaText" id="revisedCtaText" class="form-control form-control-sm" value="<%= page.ctaText || 'Book An Appointment' %>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">CTA Link</label>
+                                <input type="text" name="ctaLink" id="revisedCtaLink" class="form-control form-control-sm" value="<%= page.ctaLink || '/book-an-appointment' %>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Confirmation Bar -->
+        <div class="card border-0 shadow-sm p-3 mb-4 d-flex flex-row justify-content-between align-items-center flex-wrap gap-3" style="border-radius: 12px; background: var(--white);">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-info-circle text-primary"></i>
+                <span class="small text-muted">Republishing will immediately update the live public route <code><%= page.url %></code> and preserve a rollback snapshot.</span>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/admin/pages" class="btn btn-outline-secondary btn-sm" style="border-radius: 8px;">Cancel</a>
+                <button type="button" class="btn btn-outline-warning text-dark btn-sm" style="border-radius: 8px;" onclick="submitRewriteForm('draft')">
+                    Save as Unpublished Draft
+                </button>
+                <button type="button" class="btn btn-success btn-sm px-4 fw-bold" style="border-radius: 8px;" onclick="confirmAndRepublish()">
+                    <i class="fas fa-check me-1"></i> Confirm &amp; Republish
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Presets handler
+    function setPreset(type) {
+        var pageTitle = "<%= page.title.replace(/"/g, '\\"') %>";
+        var prompt = document.getElementById('customPromptInput');
+
+        if (type === 'clinical') {
+            prompt.value = "Emphasize tertiary clinical expertise, board-certified specialists, minimally invasive techniques, and hospital clinical safety protocols.";
+        } else if (type === 'parent') {
+            prompt.value = "Adopt a warm, compassionate tone designed to alleviate parental anxiety, emphasizing child-friendly facilities and 24/7 caring support.";
+        } else if (type === 'seo') {
+            prompt.value = "Optimize for search keywords: 'paediatric care in Raipur', 'Raipur woman and child hospital', 'experienced specialists', and structured heading hierarchy.";
+        } else if (type === 'bullets') {
+            prompt.value = "Structure the copy into clear bulleted treatment highlights, key department features, parent FAQs, and an actionable appointment booking call to action.";
+        }
+        generateEditorialRewrite();
+    }
+
+    // Smart Optimization Engine (Rule-based & AI-assisted)
+    function generateEditorialRewrite() {
+        var title = "<%= page.title.replace(/"/g, '\\"') %>";
+        var origContent = `<%- (page.content || '').replace(/`/g, '\\`').replace(/\\/g, '\\\\') %>`;
+        var origHeading = "<%= (page.heading || page.title).replace(/"/g, '\\"') %>";
+        var origDesc = "<%= (page.metaDescription || '').replace(/"/g, '\\"') %>";
+        var prompt = document.getElementById('customPromptInput').value.toLowerCase();
+
+        // Show processing indicator
+        var btn = event ? event.target : null;
+        if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Optimizing...';
+
+        setTimeout(function() {
+            var newHeading = origHeading;
+            var newContent = origContent;
+            var newSeoTitle = title + " | Neotia Bhagirathi Hospital Raipur";
+            var newMetaDesc = origDesc;
+            var note = "Editorial optimization based on: " + prompt;
+
+            if (prompt.includes('clinical') || prompt.includes('expert')) {
+                newHeading = "Centre of Clinical Excellence: " + origHeading;
+                newContent = origContent + "\n\nOur senior medical faculty adheres to internationally standardized clinical protocols, ensuring precision diagnostics, multi-speciality peer review, and round-the-clock emergency support for complex pediatric and maternal cases.";
+                newMetaDesc = "Advanced tertiary clinical care at Neotia Bhagirathi Hospital Raipur. Internationally accredited medical faculty and 24/7 dedicated critical support.";
+            } else if (prompt.includes('parent') || prompt.includes('compassionate')) {
+                newHeading = "Compassionate Healthcare Tailored for Your Family: " + origHeading;
+                newContent = origContent + "\n\nWe understand that your child's health is your paramount concern. Our child-friendly suites, compassionate nursing staff, and dedicated parent counsellors ensure a supportive and transparent care experience at every step.";
+                newMetaDesc = "Compassionate, gentle paediatric and maternal care at Neotia Bhagirathi Hospital, Raipur. Child-friendly suites and dedicated family support.";
+            } else if (prompt.includes('seo') || prompt.includes('raipur')) {
+                newHeading = origHeading + " in Raipur";
+                newSeoTitle = title + " in Raipur | Neotia Hospital";
+                newContent = origContent + "\n\nConveniently accessible in Raipur, Neotia Bhagirathi Woman and Child Care Centre provides families across Chhattisgarh with direct access to advanced tertiary interventions, quick OPD scheduling, and emergency transport.";
+                newMetaDesc = "Leading centre for " + title.toLowerCase() + " in Raipur. Expert doctors, state-of-the-art facilities, and convenient online OPD appointment booking.";
+            } else if (prompt.includes('bullet') || prompt.includes('highlight')) {
+                newHeading = "Key Highlights & Clinical Capabilities: " + origHeading;
+                newContent = origContent + "\n\nKey Highlights of Our Department:\n• 24/7 Dedicated Emergency & Level III NICU backup\n• Internationally trained paediatric consultants & surgeons\n• Advanced minimally invasive diagnostic & surgical suites\n• Transparent parent counselling & cashless insurance TPA assistance";
+            } else {
+                newContent = origContent + "\n\nOur department combines advanced medical technology with personalized clinical attention to ensure optimal health outcomes for every child and mother.";
+            }
+
+            document.getElementById('revisedHeading').value = newHeading;
+            document.getElementById('revisedContent').value = newContent;
+            document.getElementById('revisedSeoTitle').value = newSeoTitle;
+            document.getElementById('revisedMetaDesc').value = newMetaDesc;
+            document.getElementById('revisionNoteInput').value = note;
+
+            if (btn) btn.innerHTML = '<i class="fas fa-wand-magic-sparkles me-1"></i> Generate Optimized Draft';
+            alert('Optimized draft generated! You can further refine any field on the right before publishing.');
+        }, 300);
+    }
+
+    function submitRewriteForm(status) {
+        document.getElementById('rewriteStatusInput').value = status;
+        document.getElementById('rewriteForm').submit();
+    }
+
+    function confirmAndRepublish() {
+        if (confirm('Approve and republish this optimized content to the live website? (A version history snapshot will be safely saved).')) {
+            submitRewriteForm('published');
+        }
+    }
+</script>

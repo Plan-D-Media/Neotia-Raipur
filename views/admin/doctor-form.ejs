@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="table-card p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h5 class="mb-0 fw-bold"><%= isEdit ? 'Edit Doctor Profile' : 'Add New Doctor' %></h5>
+                <a href="/admin/doctors" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Doctors
+                </a>
+            </div>
+
+            <form action="<%= isEdit ? '/admin/doctors/' + doctor.id + '/edit' : '/admin/doctors/new' %>" method="POST">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Doctor Full Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control" value="<%= doctor.name || '' %>" placeholder="e.g. Dr. Aritra Mukherji" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">URL Slug <span class="text-danger">*</span></label>
+                        <input type="text" name="slug" class="form-control" value="<%= doctor.slug || '' %>" placeholder="e.g. dr-aritra-mukherji" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Speciality <span class="text-danger">*</span></label>
+                        <select name="speciality" class="form-select" required>
+                            <option value="">Select Speciality</option>
+                            <% departments.forEach(dept => { %>
+                                <option value="<%= dept.name %>" <%= doctor.speciality === dept.name ? 'selected' : '' %>><%= dept.name %></option>
+                            <% }); %>
+                            <option value="Paediatric & Neonatal Surgery" <%= doctor.speciality === 'Paediatric & Neonatal Surgery' ? 'selected' : '' %>>Paediatric &amp; Neonatal Surgery</option>
+                            <option value="Paediatric and Foetal Cardiology" <%= doctor.speciality === 'Paediatric and Foetal Cardiology' ? 'selected' : '' %>>Paediatric and Foetal Cardiology</option>
+                            <option value="Paediatric and Congenital Cardiac Surgery" <%= doctor.speciality === 'Paediatric and Congenital Cardiac Surgery' ? 'selected' : '' %>>Paediatric and Congenital Cardiac Surgery</option>
+                            <option value="Cardiac Anaesthesia and Critical Care" <%= doctor.speciality === 'Cardiac Anaesthesia and Critical Care' ? 'selected' : '' %>>Cardiac Anaesthesia and Critical Care</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Designation</label>
+                        <input type="text" name="designation" class="form-control" value="<%= doctor.designation || '' %>" placeholder="e.g. Senior Consultant">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold small">Medical Qualifications &amp; Registration</label>
+                    <input type="text" name="qualifications" class="form-control" value="<%= doctor.qualifications || '' %>" placeholder="e.g. MBBS, MD (Paediatrics), FNB (Paediatric Cardiology)">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold small">Doctor Photo URL or Path</label>
+                    <input type="text" name="image" class="form-control" value="<%= doctor.image || '' %>" placeholder="e.g. /upload/fileManager/test2/DrAritra-list.png or https://...">
+                    <small class="text-muted">You can specify a local static path (starting with <code>/img/</code> or <code>/upload/</code>) or an image URL.</small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label font-weight-bold small">Overview / Biography (HTML or Text)</label>
+                    <textarea name="overview" class="form-control" rows="6" placeholder="Doctor career summary, achievements, and clinical focus..."><%= doctor.overview || '' %></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/admin/doctors" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary font-weight-bold px-4">
+                        <%= isEdit ? 'Save Changes' : 'Create Doctor' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

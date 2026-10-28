@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Secrets and local settings (copy .env.example to .env)
+.env
+.env.*
+!.env.example
+
+# Live data: real appointments, enquiries and admin accounts.
+# A fresh clone creates it from data/database.seed.json on first run.
+data/database.json
+data/*.unreadable-*.json
+
+# Files uploaded through the admin page editor (user-generated; the folder is recreated on start)
+public/upload/pages/
+
+# Logs and temp files
+*.log
+npm-debug.log*
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Test and browser-automation output
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+coverage/
+.nyc_output/
+
+# Local Claude Code settings
+.claude/

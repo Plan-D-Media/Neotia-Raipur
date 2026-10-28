@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2021.5 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="64" height="64" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="900 900 6200 6200"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil2 {fill:#F39314}
+    .fil1 {fill:#185CA6}
+    .fil0 {fill:#27488D}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2928097008240">
+   <polygon class="fil0" points="5000.77,5000.04 5000.77,7000.2 3000.64,7000.2 3000.64,5000.04 "/>
+   <polygon class="fil1" points="5000.77,999.8 5000.77,1025.56 5000.77,4996.48 5000.77,5000.04 3000.64,5000.04 3000.64,4990.77 3000.64,1005.66 3000.64,999.8 "/>
+   <polygon class="fil2" points="5000.77,2999.93 5009.35,2999.93 7000,2999.93 7000,5000.07 5002.72,5000.07 5000.77,5000.07 1000,5000.07 1000,2999.93 3000.65,2999.93 5000.77,5000.07 "/>
+  </g>
+ </g>
+</svg>

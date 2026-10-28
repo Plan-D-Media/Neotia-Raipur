@@ -1,0 +1,715 @@
+<%- include('partials/header', { 
+    title: "Pediatric Dentistry in New Town, Kolkata | Neotia Bhagirathi",
+    description: "Neotia Bhagirathi provides gentle pediatric dental care in New Town, Kolkata. Expert treatments for healthy teeth & smiles for children of all ages.",
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Header clearance so top menu is never disturbed */
+.banner-sec {
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+    position: relative;
+    background: var(--grey-bg);
+}
+@media (max-width: 991px) {
+    .banner-sec {
+        padding-top: 105px !important;
+        padding-bottom: 40px !important;
+    }
+}
+.banner-area .banner-img img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-1-rgb), 0.12);
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+}
+
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey-400);
+    font-size: 14px;
+    font-weight: 400;
+}
+.step-item.active {
+    color: var(--grey-900);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--brand-blue-1);
+}
+
+/* Doctor card modern styling */
+.sec00-doctorwp .item {
+    margin: 10px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--grey-100);
+    transition: all 0.3s ease;
+}
+.sec00-doctorwp .item:hover {
+    box-shadow: 0 8px 24px rgba(var(--brand-blue-1-rgb), 0.12);
+    transform: translateY(-4px);
+}
+.sec00-doctorwp .img-doctor img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    border: 3px solid var(--grey-100);
+}
+.sec00-doctorwp .doctor-content h5 {
+    color: var(--brand-blue-1);
+    font-size: 15px;
+    font-weight: 700;
+}
+.sec00-doctorwp .book-app {
+    display: inline-block;
+    background: var(--brand-blue-1);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 6px;
+    margin-top: 12px;
+    font-weight: 400;
+    transition: all 0.3s;
+}
+.sec00-doctorwp .book-app:hover {
+    background: var(--brand-blue-2);
+    color: var(--white);
+}
+.speciality_banner {
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.06);
+}
+.doctors-sec .right-plus {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(var(--white-rgb), 0.9);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.15);
+}
+.doctors-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 480px;
+}
+.doctors-item img.img-fluid {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
+}
+.doctors-item:hover img.img-fluid {
+    transform: scale(1.03);
+}
+</style>
+
+<section class="banner-sec">
+        <div class="banner-area">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-5 col-lg-5">
+                        <h1 class="fadeInUp animatable">Expert Paediatric Dentistry in Kolkata | Caring for Your Child’s Smile</h1>
+                        <p class="fadeInUp animatable">Pain-free, child-friendly dental care that builds trust, confidence and long-term oral health.</p>
+                        <a href="/book-an-appointment/paediatric-dentistry" class="book-app fadeInUp animatable">Book Appointment</a>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="banner-img text-center">
+                            <img src="/img/cute_boy_dentist_girl_patient_banner.jpg" alt="Paediatric Dentistry - Little Doctor and Patient" class="img-fluid" style="max-height: 460px; width: auto; max-width: 100%; object-fit: cover; border-radius: 20px; box-shadow: 0 15px 35px rgba(var(--brand-blue-2-rgb), 0.12);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="content-tabs-sec section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="panels">
+<section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+<h3 class="fadeInUp animatable">Paediatric Dentistry</h3>
+<p class="fadeInUp animatable">Our Paediatric Dentistry Department is dedicated to the oral health of infants, children, and adolescents, including those with complex medical conditions or special healthcare needs. With a child-centred approach, advanced dental technologies, and a focus on preventive care, we ensure that every child receives gentle, comprehensive, and developmentally appropriate dental treatment.</p>
+<p class="pt-4 fadeInUp animatable">Our Specialised Services Include:</p>
+<div class="workup-sec mt-3">
+<h4 class="py-3 fadeInUp animatable">Diagnostic Work Up</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable first_class">
+<div class="mb-2">
+<h5>Comprehensive Dental Assessment</h5>
+</div>
+<div class="mb-2">
+<p>Detailed evaluation of teeth, gums, bite, oral hygiene habits, and jaw development to identify early signs of decay, enamel defects, gum disease, and orthodontic concerns.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Digital Dental Imaging</h5>
+</div>
+<div class="mb-2">
+<p>Low-radiation paediatric X-rays, panoramic imaging, and intraoral scanners to detect cavities, assess developing teeth, and plan precise treatments.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div>
+<h5>Growth and Development Monitoring</h5>
+</div>
+<div class="mb-2">
+<p>Regular assessments to track tooth eruption, bite alignment, jaw growth, and early orthodontic needs.</p>
+</div>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Preventive Dental Care</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Fluoride Treatments</h5>
+</div>
+<div class="mb-2">
+<p>Professional fluoride applications to strengthen enamel and prevent early childhood caries.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div>
+<h5>Dental Sealants</h5>
+</div>
+<div class="mb-2">
+<p>Protective coatings applied to molars to reduce the risk of decay in deep grooves and pits.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Oral Hygiene Education</h5>
+</div>
+<p>Personalised brushing and flossing guidance for children and parents to establish long-term healthy habits.</p>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Dietary Counselling</h5>
+</div>
+<p>Advice on nutrition and feeding practices that support oral health, including caries prevention in infants and toddlers.</p>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Interventional and Advanced Management</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable speciality_banner_no"><img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/PaediatricDentistry.png"></li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Restorative Dentistry</h5>
+</div>
+<div class="mb-2">
+<p>Management of tooth decay using child-friendly materials and techniques, including composite fillings, stainless steel crowns, and aesthetic restorations.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Pulp Therapy</h5>
+</div>
+<div class="mb-2">
+<p>Treatment of infected or traumatised primary teeth through pulpotomy or pulpectomy, preserving natural tooth function.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Management of Dental Trauma</h5>
+</div>
+<div class="mb-2">
+<p>Urgent and ongoing care for chipped, fractured, dislodged, or knocked-out teeth, including splinting and follow-up rehabilitation.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Extractions</h5>
+</div>
+<div class="mb-2">
+<p>Safe removal of severely decayed, impacted, or non-restorable teeth, performed with careful consideration of future dental development.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Space Maintainers</h5>
+</div>
+<div class="mb-2">
+<p>Custom-made devices to preserve arch space after early tooth loss and prevent future alignment issues.</p>
+</div>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Sedation and Behavioural Management</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Behaviour Guidance Techniques</h5>
+</div>
+<div class="mb-2">
+<p>Non-pharmacological strategies such as tell-show-do, desensitisation, and positive reinforcement to reduce anxiety and build trust.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Inhalation Sedation (Nitrous Oxide)</h5>
+</div>
+<div class="mb-2">
+<p>A safe, mild sedative option to help anxious children undergo dental procedures comfortably.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>General Anaesthesia Dental Care</h5>
+</div>
+<div class="mb-2">
+<p>Comprehensive dental treatment under general anaesthesia for children with extensive dental needs, severe anxiety, or special healthcare requirements.</p>
+</div>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Medical Management and Specialised Clinics</h4>
+<ul class="listing-apps">
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Early Childhood Caries Clinic</h5>
+</div>
+<div class="mb-2">
+<p>Focused care for infants and toddlers with severe or recurrent dental decay, incorporating treatment and parental education.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Special Needs Dentistry</h5>
+</div>
+<div class="mb-2">
+<p>Tailored dental care for children with developmental, behavioural, or medical conditions, ensuring accessibility, safety, and continuity of care.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Orthodontic Screening and Interceptive Care</h5>
+</div>
+<div class="mb-2">
+<p>Early detection of bite problems and implementation of interceptive measures such as habit-breaking appliances, expanders, and growth guidance.</p>
+</div>
+</li>
+<li class="fadeInUp animatable">
+<div class="mb-2">
+<h5>Oral Medicine and Soft Tissue Disorders</h5>
+</div>
+<div class="mb-2">
+<p>Diagnosis and management of oral ulcers, gum diseases, mucosal lesions, and congenital abnormalities affecting the tongue, lips, and oral cavity.</p>
+</div>
+</li>
+</ul>
+<h4 class="py-3 mt-4 fadeInUp animatable">Rehabilitation, Follow-Up and Family Support</h4>
+<p class="fadeInUp animatable">We provide ongoing follow-up to maintain oral health, monitor tooth development, and prevent relapse of dental conditions. Our team emphasises family education, early intervention, and a holistic approach to ensure every child enjoys lasting oral health and a positive dental experience.</p>
+</div>
+<div class="mt-5 fadeInUp animatable">
+<h4>We have dedicated clinic for</h4>
+</div>
+<div class="clientoo1 owl-carousel">
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Inflammatory Bowel Disease (IBD)</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Coeliac Disease and Food Allergies/Intolerances</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Chronic Constipation and Soiling (Encopresis)</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Liver Diseases (Hepatology)</div>
+<div class="cli001-item fadeInUp animatable">
+<div class="clients-icon"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" class="injected-svg" data-src="https://cdn.hugeicons.com/icons/doctor-01-stroke-standard.svg?v=2.0" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#ffffff"> <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path> <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </svg></div>
+Intestinal Failure and Nutritional Support</div>
+</div>
+</section>
+<section id="tab2" class="panel" role="tabpanel" aria-labelledby="t2">
+<h3>Nutrition and Dietetics</h3>
+<p class="fadeInUp animated">Our dedicated paediatric dietitians work closely with the medical team to ensure optimal growth and development.</p>
+<p class="pt-4 fadeInUp animated">Our Specialised Services include:</p>
+<ul class="listing-apps second_tabb">
+<li class="fadeInUp animated">
+<div class="mb-2">
+<h5>Faltering Growth (Failure to Thrive)</h5>
+</div>
+<div class="mb-2">
+<p>Detailed assessment and intervention for poor weight gain.</p>
+</div>
+</li>
+<li class="fadeInUp animated">
+<div>
+<h5>Therapeutic Diets</h5>
+</div>
+<div class="mb-2">
+<p>Guidance for specific medical needs, such as ketogenic diets, low FODMAP diets and exclusion diets for allergies or IBD.</p>
+</div>
+</li>
+<li class="fadeInUp animated">
+<div class="mb-2">
+<h5>Enteral and Parenteral Feeding Regimens</h5>
+</div>
+<p>Planning and monitoring of all forms of artificial nutritional support.</p>
+</li>
+</ul>
+</section>
+<section id="tab3" class="panel" role="tabpanel" aria-labelledby="t3">
+<h3>Endoscopy and Interventional Gastroenterology</h3>
+</section>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+<section class="app-sec p-bottom">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class=" mb-4 text-center fade-up animatable">
+                        <h2 class="step_heading">Book Your Appointment</h2>
+                    </div>
+                    <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+                <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required="">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+
+                                <input type="hidden" name="hlink" value="/paediatric-dentistry">
+                                <input type="hidden" name="ip" value="116.193.136.40">
+                                <input name="step" type="hidden" value="1">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
+                                <button type="submit" id="appointsubmitTriger" class="submit-btn">Next →</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics start -->
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required="">
+
+                                                                    <select class="form-select " disabled="">
+                                    <option value="17##Paediatric Dentistry" selected="">Paediatric Dentistry</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="17##Paediatric Dentistry">
+                                 
+                            </div>
+
+                            <div class="col-lg-6">
+                                                                    <select class="form-select " name="consultant" id="consultant" required="">
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option><option value="18##Dr. Rima Nandi">Dr. Rima Nandi</option>    
+                                    </select>
+
+                                  
+
+                                <div class="date-wrapper position-relative">
+                                    <input type="date" class="form-control" placeholder="Date" min="2026-10-19" name="preffered_date" id="preffered_date" required="">
+                                    <span class="calendar-icon"><i class="fa-solid fa-calendar-days calendar-icon"></i></span>
+                                </div>
+
+                                <input type="hidden" name="hospital_center" class="form-control readonly-field" value="NBWCCC, New Town" readonly="">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-between appoint">
+                                <input name="step" type="hidden" value="2">
+                                <input name="getanappointment" type="hidden" value="1">
+                                <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details End -->
+                        
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+<section class="special-doctor-sec p-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="workup-sec fadeInUp animatable">
+                        <h4 class="">Paediatric Dentistry Doctors</h4>
+                    </div>
+                    <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor"><img src="/upload/fileManager/doctor/dr_rima_nandi.jpg" alt="Dr. Rima Nandi">
+                            <h4 class="doctor-name">Dr. Rima Nandi </h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Dentistry</h5>
+                            <span></span>
+                            <p>BDS (HONS), MDS (Paediatric Dentistry), F.A.G.E.</p>
+                            <p></p></div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="book-an-appointment-popup/dr-rima-nandi">Book Appointment</a>
+                    </div>                        
+                    
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Modal Container for Doctor Booking Popups -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modal-body">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 2-Step Appointment Form Logic
+    const step1Form = document.getElementById('appointmentFormStep1');
+    const step2Form = document.getElementById('appointmentFormStep2');
+    const step1Div = document.getElementById('appointment_step_1');
+    const step2Div = document.getElementById('appointment_step_2');
+    const nextBtn = document.getElementById('appointsubmitTriger_1');
+    const prevBtn = document.getElementById('appointPrevTriger_2');
+    const ind1 = document.getElementById('step_indicator_1');
+    const ind2 = document.getElementById('step_indicator_2');
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fname = document.getElementById('fname') ? document.getElementById('fname').value.trim() : '';
+            const mobile = document.getElementById('mobile') ? document.getElementById('mobile').value.trim() : '';
+            const email = document.getElementById('email') ? document.getElementById('email').value.trim() : '';
+            
+            if (!fname) {
+                alert('Please enter your full name.');
+                return;
+            }
+            if (!mobile || !/^\d{10}$/.test(mobile.replace(/\D/g, ''))) {
+                alert('Please enter a valid 10-digit mobile number.');
+                return;
+            }
+            
+            if (step1Div) step1Div.style.display = 'none';
+            if (step2Div) step2Div.style.display = 'block';
+            if (ind1) {
+                ind1.classList.remove('active');
+                ind1.classList.add('done');
+            }
+            if (ind2) {
+                ind2.classList.add('active');
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            if (step2Div) step2Div.style.display = 'none';
+            if (step1Div) step1Div.style.display = 'block';
+            if (ind2) ind2.classList.remove('active');
+            if (ind1) {
+                ind1.classList.remove('done');
+                ind1.classList.add('active');
+            }
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loading = document.getElementById('loading_appointment_img');
+            const msg = document.getElementById('mess_appointment');
+            
+            const formData = {
+                fname: document.getElementById('fname') ? document.getElementById('fname').value : '',
+                mobile: document.getElementById('mobile') ? document.getElementById('mobile').value : '',
+                email: document.getElementById('email') ? document.getElementById('email').value : '',
+                department: document.getElementById('department') ? document.getElementById('department').value : "17##Paediatric Dentistry",
+                consultant: document.getElementById('consultant') ? document.getElementById('consultant').value : '',
+                preffered_date: document.getElementById('preffered_date') ? document.getElementById('preffered_date').value : '',
+                hospital_center: 'NBWCCC, Raipur'
+            };
+
+            if (loading) loading.style.display = 'block';
+            if (msg) msg.innerHTML = '';
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted successfully.</div>';
+                }
+                step2Form.reset();
+                if (step1Form) step1Form.reset();
+                setTimeout(() => {
+                    if (step2Div) step2Div.style.display = 'none';
+                    if (step1Div) step1Div.style.display = 'block';
+                    if (ind2) ind2.classList.remove('active');
+                    if (ind1) {
+                        ind1.classList.remove('done');
+                        ind1.classList.add('active');
+                    }
+                }, 4000);
+            })
+            .catch(err => {
+                if (loading) loading.style.display = 'none';
+                if (msg) {
+                    msg.innerHTML = '<div class="alert alert-success">Thank you! Your appointment request has been submitted.</div>';
+                }
+            });
+        });
+    }
+
+    // Modal remote loading & Owl Carousel
+    if (window.jQuery) {
+        $(document).on('click', '.open_modal_enquiry', function() {
+            var url = $(this).data('remote');
+            $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+            $('#enquiryModal').modal('show');
+            $.get(url, function(data) {
+                $('#modal-body').html(data);
+            }).fail(function() {
+                $('#modal-body').html('<div class="alert alert-danger">Unable to load appointment form. Please try calling us directly.</div>');
+            });
+        });
+
+        if ($('.doctors-area').length && $.fn.owlCarousel) {
+            $('.doctors-area').owlCarousel({
+                loop: false,
+                margin: 20,
+                nav: true,
+                dots: false,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 }
+                }
+            });
+        }
+        if ($('.sec00-doctorwp').length && $.fn.owlCarousel) {
+            $('.sec00-doctorwp').owlCarousel({
+                loop: false,
+                margin: 20,
+                nav: true,
+                dots: false,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 },
+                    1200: { items: 4 }
+                }
+            });
+        }
+    }
+});
+</script>

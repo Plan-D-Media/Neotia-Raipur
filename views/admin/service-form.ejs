@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="table-card p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                <h5 class="mb-0 fw-bold"><%= isEdit ? 'Edit Clinical Service' : 'Add New Clinical Service' %></h5>
+                <a href="/admin/services" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Services
+                </a>
+            </div>
+
+            <form action="<%= isEdit ? '/admin/services/' + department.id + '/edit' : '/admin/services/new' %>" method="POST">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">Department Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" class="form-control" value="<%= department.name || '' %>" placeholder="e.g. Paediatric Cardiac Science" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label font-weight-bold small">URL Slug <span class="text-danger">*</span></label>
+                        <input type="text" name="slug" class="form-control" value="<%= department.slug || '' %>" placeholder="e.g. paediatric-cardiac-science" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold small">Icon Path or URL</label>
+                    <input type="text" name="icon" class="form-control" value="<%= department.icon || '' %>" placeholder="e.g. /img/cardio.png or /upload/fileManager/icon/...">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label font-weight-bold small">Meta Description / Summary</label>
+                    <textarea name="metaDescription" class="form-control" rows="2" placeholder="Brief 1-2 sentence description for search engines and cards..."><%= department.metaDescription || '' %></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label font-weight-bold small">Overview Content (HTML or Text)</label>
+                    <textarea name="overview" class="form-control" rows="6" placeholder="Detailed department overview and clinical capabilities..."><%= department.overview || '' %></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/admin/services" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary font-weight-bold px-4">
+                        <%= isEdit ? 'Save Changes' : 'Create Department' %>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

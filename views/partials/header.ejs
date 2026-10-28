@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="<%= typeof currentLang !== 'undefined' ? currentLang : 'en' %>">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= typeof title !== 'undefined' ? title : 'Paediatric & Child Hospital in Raipur | Neotia Bhagirathi' %></title>
+    <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Looking for a pediatric or child hospital in Raipur? Neotia Bhagirathi provides expert pediatricians advanced child care & compassionate treatment in Raipur.' %>" />
+    <meta name="keywords" content="Best PICU Hospital in Kolkata, Pediatric Hospital in New Town, Best PICU Hospital in New Town, Best Child Specialist Hospital in New Town" />
+    
+    <%# Canonical / og:url only once the Raipur domain is set (siteInfo.siteUrl or the SITE_URL env var) %>
+    <% if (typeof siteUrl !== 'undefined' && siteUrl) { %>
+    <link rel="canonical" href="<%= siteUrl %><%= (typeof page !== 'undefined' && page && page.canonicalUrl) ? page.canonicalUrl : currentPath %>">
+    <meta property="og:url" content="<%= siteUrl %><%= currentPath %>">
+    <% } %>
+    <script>window.NEOTIA_CONFIG = { recaptchaSiteKey: <%- JSON.stringify(typeof recaptchaSiteKey !== 'undefined' ? recaptchaSiteKey : '') %> };</script>
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+    <!-- Brand web typeface (Brand Manual 3.9-3.10): Zen Maru Gothic Regular + Bold only -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <%# Devanagari fallback is only requested for Hindi; i18n.js adds it when switching languages client-side %>
+    <% if (typeof currentLang !== 'undefined' && currentLang === 'hi') { %>
+    <link id="font-hindi" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <% } %>
+
+    <!-- Multilingual SEO Alternate Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="<%= typeof currentPath !== 'undefined' ? currentPath : '/' %>?lang=en" />
+    <link rel="alternate" hreflang="hi" href="<%= typeof currentPath !== 'undefined' ? currentPath : '/' %>?lang=hi" />
+    <link rel="alternate" hreflang="x-default" href="<%= typeof currentPath !== 'undefined' ? currentPath : '/' %>" />
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+    <link rel="stylesheet" href="/css/brand-tokens.css?v=6.0">
+    <link rel="stylesheet" href="/css/style.css?v=6.0">
+    <link rel="stylesheet" href="/css/responsive.css?v=6.0">
+    <link rel="stylesheet" href="/css/i18n.css?v=6.0">
+    <link rel="stylesheet" href="/css/brand.css?v=6.0">
+
+    <style>
+      .go-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+        line-height: 48px;
+        text-align: center;
+        background-color: var(--brand-blue-2-tint-3);
+        color: var(--white);
+        border-radius: 50%;
+        text-decoration: none;
+        z-index: 999;
+        display: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        box-shadow: 0 4px 10px rgba(var(--black-rgb), 0.15);
+      }
+      .go-top:hover {
+        background-color: var(--brand-blue-1);
+        color: var(--white);
+      } 
+      @media (max-width: 576px) {
+        .go-top {
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+          line-height: 40px;
+          bottom: 45px;
+          right: 15px;
+        }
+      }
+      .whatsapp-float {
+        position: fixed;
+        width: 48px;
+        height: 48px;
+        bottom: 80px;
+        right: 20px;
+        background-color: var(--brand-blue-1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 4px 10px rgba(var(--black-rgb), 0.3);
+        z-index: 1000;
+        color: var(--white);
+      }
+      .whatsapp-float i {
+        font-size: 28px;
+      }
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        transition: 0.2s;
+        color: var(--white);
+      }
+      @media (max-width: 576px) {
+        .whatsapp-float {
+          width: 40px;
+          height: 40px;
+          bottom: 100px;
+          right: 15px;
+        }
+      }
+      /* Search Dropdown / Suggestion Box */
+      #suggestions {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(var(--black-rgb), 0.18);
+        z-index: 1050;
+        display: none;
+        max-height: 380px;
+        overflow-y: auto;
+        padding: 15px 20px;
+        text-align: left;
+        margin-top: 8px;
+      }
+      #suggestions h4 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--theme-color);
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--grey-100);
+        padding-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      #suggestions ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+      }
+      #suggestions ul li a {
+        display: block;
+        padding: 6px 10px;
+        color: var(--grey-800);
+        font-size: 14px;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      #suggestions ul li a:hover {
+        background: var(--grey-bg);
+        color: var(--theme-color);
+      }
+      .tag-details span a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px;
+        border-radius: 8px;
+        color: var(--grey-800);
+        transition: background 0.2s;
+        text-decoration: none;
+      }
+      .tag-details span a:hover {
+        background: var(--grey-bg);
+      }
+      .search_doctor_image {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .tag-details small {
+        display: block;
+        color: var(--grey-600);
+        font-size: 12px;
+      }
+    </style>
+</head>
+<body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>" id="<%= typeof bodyId !== 'undefined' ? bodyId : '' %>">
+
+    <header id="mainHeader">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="menu-navbar">
+                        <div class="row">
+                            <div class="col-5 col-lg-3">
+                                <div class="logo-part">
+                                    <a class="navbar-brand" href="/">
+                                        <img src="/img/neotia-raipur-logo.svg" alt="Neotia Bhagirathi Woman and Child Care Centre Raipur Logo" width="195" height="80" class="site-logo">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-7 col-lg-9">
+                                <div class="call-box-area d-flex align-items-center justify-content-end">
+                                    <p class="mb-0">Call Emergency <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>"><%= siteInfo.emergencyNumbers[0] %></a> <a href="tel:<%= siteInfo.emergencyNumbers[1] %>"><%= siteInfo.emergencyNumbers[1] %></a></p>
+                                    
+                                    <img src="/img/footer-logo.png" alt="Ambuja Neotia Logo" class="d-none d-lg-inline-block">
+                                    <button type="button" class="header-search-toggle" aria-label="Search doctors and specialities" aria-expanded="false" aria-controls="actionBar">
+                                        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="menu-bar" role="button" tabindex="0" aria-label="Open menu">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="M4 5L16 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M4 12L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M4 19L12 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="close-menu">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                
+                                <!-- Mobile Navigation Drawer -->
+                                <ul class="navbar-nav-mobile">
+                                    <!-- Mobile Language Switcher -->
+                                    <li class="mobile-lang-container lang-selector-wrapper">
+                                        <div class="mobile-lang-title">
+                                            <i class="fas fa-globe text-primary"></i> <span>Language / भाषा</span>
+                                        </div>
+                                        <div class="mobile-lang-grid">
+                                            <a href="javascript:void(0)" class="mobile-lang-btn lang-option <%= (!currentLang || currentLang === 'en') ? 'active' : '' %>" data-lang="en">
+                                                <span>English</span> <span class="badge bg-light text-dark">EN</span>
+                                            </a>
+                                            <a href="javascript:void(0)" class="mobile-lang-btn lang-option <%= (currentLang === 'hi') ? 'active' : '' %>" data-lang="hi">
+                                                <span>हिन्दी</span> <span class="badge bg-light text-dark">HI</span>
+                                            </a>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item"><a class="nav-link" href="/book-an-appointment">Appointment</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/specialised-services">Specialised Services <span><i class="fa-solid fa-angle-down"></i></span></a>
+                                        <button class="dropdown-toggle" aria-label="Toggle dropdown"><i class="fa-solid fa-angle-down"></i></button>
+                                        <ul class="dropdown">
+                                            <% departments.forEach(dept => { %>
+                                                <li class="nav-item"><a class="nav-link" href="/<%= dept.slug %>"><%= dept.name %></a></li>
+                                            <% }); %>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="/find-a-doctor">Find Doctor</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/experience">Experience</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/blog">Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                                </ul>
+
+                                <!-- Desktop Navigation Bar with Mega Menu -->
+                                <ul class="navbar-nav">
+                                    <li class="nav-item"><a class="nav-link" href="/book-an-appointment">Appointment</a></li>
+                                    <li class="nav-item mega-wrapper">
+                                        <a class="nav-link mega-trigger" href="/specialised-services">Specialised Services <span><i class="fa-solid fa-angle-down"></i></span></a>
+                                        <div class="mega-panel">
+                                            <div class="mega-grid">
+                                                <%# One column per sitemap group; items come from the published departments %>
+                                                <% ['woman', 'child', 'support'].forEach(group => { const items = departments.filter(d => d.group === group); if (!items.length) return; %>
+                                                <div>
+                                                    <ul>
+                                                        <% items.forEach(dept => { %>
+                                                        <li><a class="mega-item" href="/<%= dept.slug %>"><div class="icon-box"><img alt="<%= dept.name %>" src="<%= dept.menuIcon %>"></div><%= dept.name %></a></li>
+                                                        <% }); %>
+                                                    </ul>
+                                                </div>
+                                                <% }); %>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="/find-a-doctor">Find Doctor</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+
+                                    <!-- Main Navbar Language Selector (Matches Attachment) -->
+                                    <li class="nav-item neotia-lang-nav-item neotia-lang-wrapper d-inline-flex align-items-center" style="display: inline-flex !important; position: relative !important;">
+                                        <button type="button" class="neotia-lang-pill" id="langPillNav" aria-expanded="false" aria-label="Select Language">
+                                            <svg class="neotia-globe-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                            </svg>
+                                            <span class="neotia-lang-text"><%= (typeof currentLang !== 'undefined' && currentLang) ? currentLang.toUpperCase() : 'EN' %></span>
+                                            <svg class="neotia-caret-svg" width="9" height="7" viewBox="0 0 10 8" fill="currentColor">
+                                                <path d="M0 1.5L5 7.5L10 1.5H0Z"></path>
+                                            </svg>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 neotia-lang-menu" aria-labelledby="langPillNav">
+                                            <li class="dropdown-header">Select Language / भाषा</li>
+                                            <li><a class="dropdown-item lang-option <%= (!currentLang || currentLang === 'en') ? 'active' : '' %>" href="javascript:void(0)" data-lang="en"><span class="lang-native">English</span><span class="badge">EN</span></a></li>
+                                            <li><a class="dropdown-item lang-option <%= (currentLang === 'hi') ? 'active' : '' %>" href="javascript:void(0)" data-lang="hi"><span class="lang-native">हिन्दी (Hindi)</span><span class="badge">HI</span></a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <%- include('action-bar') %>

@@ -1,0 +1,496 @@
+<%- include('partials/header', { 
+    title: (typeof page !== 'undefined' && page && page.seoTitle) ? page.seoTitle : 'Paediatric & Child Hospital in Raipur | Neotia Bhagirathi',
+    description: (typeof page !== 'undefined' && page && page.metaDescription) ? page.metaDescription : 'Looking for a pediatric or child hospital in Raipur? Neotia Bhagirathi provides expert pediatricians advanced child care & compassionate treatment in Raipur.',
+    bodyClass: 'index-main',
+    bodyId: 'home-page'
+}) %>
+
+<!-- ========================================== -->
+<!-- 1. HERO BANNER SECTION WITH VIDEO           -->
+<!-- ========================================== -->
+<section class="banner-sec" id="home-banner">
+    <div class="banner-area">
+        <video autoplay="" muted="" loop="" playsinline="" poster="/img/home-banner.png" style="width: 100%; object-fit: cover;">
+            <source src="/img/banner_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="banner-overley">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-12">
+                        <div class="home-banner-text">
+                            <h1 class="fadeInUp animatable" style="color: var(--white) !important;"><%= (typeof page !== 'undefined' && page && page.heading) ? page.heading : 'Eastern India’s Trusted Name in Child Care' %></h1>
+                            <div class="banner-main-form">
+                                <form class="banner-form" id="searchform" name="searchform" action="/find-a-doctor" method="GET">
+                                    <input type="text" id="searchInput" name="search" autocomplete="off" placeholder="Search For Doctor & Specialties...">
+                                    <button type="submit" class="srh-btn" aria-label="Search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" fill="#ffffff">
+                                            <path d="m40.9 39.485-7.813-7.812a14.878 14.878 0 0 0 3.72-9.865c0-4.007-1.56-7.774-4.393-10.607s-6.6-4.393-10.606-4.393S14.034 8.368 11.2 11.2s-4.393 6.6-4.393 10.607 1.56 7.773 4.393 10.606 6.6 4.394 10.607 4.394c3.67 0 7.13-1.323 9.865-3.721l7.812 7.812a.997.997 0 0 0 1.414 0 1 1 0 0 0 0-1.414zM12.614 31c-2.455-2.456-3.807-5.72-3.807-9.192s1.352-6.737 3.807-9.193c2.456-2.455 5.72-3.807 9.193-3.807S28.544 10.16 31 12.615c2.455 2.456 3.808 5.72 3.808 9.193S33.455 28.544 31 31c-2.456 2.455-5.72 3.808-9.192 3.808S15.07 33.455 12.615 31z"></path>
+                                        </svg>
+                                    </button>
+                                </form>
+                                <!-- Trending Suggestions Box -->
+                                <div class="trending-box" id="trendingBox">
+                                    <div class="tags" id="suggestions"></div>
+                                    <div class="tags" id="initial_srch_div">
+                                        <h4>Specialties</h4>
+                                        <div class="tag-details">
+                                            <% departments.slice(0, 10).forEach(dept => { %>
+                                                <span><a href="/<%= dept.slug %>"><%= dept.name %></a></span>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="from-pera home_button">
+                                <a href="<%= (typeof page !== 'undefined' && page && page.ctaLink) ? page.ctaLink : '/book-an-appointment' %>"><%= (typeof page !== 'undefined' && page && page.ctaText) ? page.ctaText : 'Book Appointment' %></a>
+                                <a href="javascript:void(0)" class="home_call open_modal_callback" data-bs-toggle="modal" data-bs-target="#requestcallback">Request a Callback</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 2. ABOUT US SECTION WITH PLAY VIDEO MODAL   -->
+<!-- ========================================== -->
+<section class="about-sec section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h2 class="section-heading mb-3 fadeInUp animatable">
+                        <% if (typeof page !== 'undefined' && page && page.subheading) { %>
+                            <%= page.subheading %>
+                        <% } else { %>
+                            East India's Trusted <br>
+                            Destination for Woman <br>
+                            <span>&amp; Child Care</span>
+                        <% } %>
+                    </h2>
+                    <div class="about-text-content">
+                        <% if (typeof page !== 'undefined' && page && page.content) { %>
+                            <% page.content.split('\n').map(p => p.trim()).filter(Boolean).forEach(para => { %>
+                                <p class="fadeInUp animatable mb-3"><%= para %></p>
+                            <% }); %>
+                        <% } else { %>
+                            <p class="fadeInUp animatable">
+                                Your journey to safe motherhood and a healthy childhood starts here. We offer advanced maternity services, specialised paediatric care and a wide range of treatments tailored to children’s unique needs. Our expert teams provide personalised support, underpinned by the latest medical technology and evidence-based practices.
+                            </p>
+                            <p class="fadeInUp animatable">
+                                Proudly recognised as the Best Child Specialist Hospital in East India, we are dedicated to delivering clinical excellence with empathy, ensuring the best possible outcomes for both mothers and children.
+                            </p>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-img fadeInUp animatable position-relative">
+                    <img src="<%= (typeof page !== 'undefined' && page && page.heroImage) ? page.heroImage : '/img/about-img.png' %>" alt="<%= (typeof page !== 'undefined' && page && page.altText) ? page.altText : 'East India\'s Trusted Destination for Woman & Child Care' %>" class="img-fluid" onerror="this.src='/img/landing.webp'">
+                    <a class="play-btn" data-fancybox="about-video" href="https://youtu.be/VAnJaaz0EaI?si=diXF7PHw3Tpizw_E" aria-label="Play Hospital Introduction Video"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="/img/big-plus.png" alt="big plus" class="abs-1">
+    <img src="/img/opacity-plus.png" alt="opacity plus" class="abs-2">
+</section>
+
+<!-- ========================================== -->
+<!-- 3. PAEDIATRIC & WOMAN CARE TABS SECTION    -->
+<!-- ========================================== -->
+<section class="about-tab-section p-bottom position-relative">
+    <%- include('partials/speciality-tabs', { animClass: 'animatable' }) %>
+    <img src="/img/testi-bg.png" alt="" class="img-testi img-fluid">
+</section>
+
+<!-- ========================================== -->
+<!-- 4. WHY CHOOSE NEOTIA HOSPITALS NEW TOWN    -->
+<!-- ========================================== -->
+<section class="why-choose section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="section-heading fadeInUp animatable">Why Choose Neotia Hospitals- <span>New Town</span></h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/upload/fileManager/new/Excellence.png" alt="Excellence" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>Proven Excellence in Woman &amp; Child Healthcare</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/upload/fileManager/new/Award-winning.png" alt="Award" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>Award-winning Clinical Care in the East</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/upload/fileManager/new/State-of-the-art.png" alt="Facilities" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>State-of-the-art Facilities, especially in Child Care</p>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/upload/fileManager/new/Holistic.png" alt="Holistic" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>Holistic &amp; Specialist Paediatric Care</p>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/img/Recognised.png" alt="Recognised" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>Recognised for Safety and Sustainability</p>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="feature-card fadeInUp animatable">
+                    <div class="icon">
+                        <img class="img-resposive why_icon" src="/upload/fileManager/new/Patient-centred.png" alt="Patient Centred" onerror="this.src='/img/big-plus.png'">
+                    </div>
+                    <p>Warm, patient-centred environment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 5. OUR DOCTORS CAROUSEL SECTION             -->
+<!-- ========================================== -->
+<section class="home-testimonial section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-4 fadeInUp animatable">
+                <h2 class="section-heading">Our Doctors</h2>
+                <p>Choose the speciality- Find &amp; select the doctor- Book an appointment</p>
+            </div>
+            <div class="sec00-doctor owl-carousel mt-0">
+                <% doctors.forEach(doc => { %>
+                    <div class="sec001-item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="<%= doc.image ? (doc.image.startsWith('http') ? doc.image : (doc.image.startsWith('/') ? doc.image : '/' + doc.image)) : '/img/about-img.png' %>" alt="<%= doc.name %>" onerror="this.src='/img/about-img.png'">
+                            <h4 class="doctor-name"><%= doc.name %></h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5><%= doc.speciality %></h5>
+                            <% if (doc.experience && doc.experience.trim()) { %>
+                                <span><%= doc.experience %></span>
+                            <% } %>
+                            <% if (doc.qualifications) { %>
+                                <p><%= doc.qualifications %></p>
+                            <% } %>
+                            <% if (doc.regNo && doc.regNo.trim()) { %>
+                                <p><%= doc.regNo %></p>
+                            <% } %>
+                            <a href="/doctor/<%= doc.slug %>">View Profile</a>
+                        </div>
+                        <a href="/book-an-appointment?doctor=<%= encodeURIComponent(doc.name) %>" class="book-app">Book Appointment</a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 6. CALL NUMBERS & ACTION BOXES SECTION     -->
+<!-- ========================================== -->
+<section class="call_number section-padding">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-3 col-sm-6">
+                <a href="tel:<%= siteInfo.emergencyNumbers[0].replace(/\s+/g, '') %>">
+                    <div class="call_number_box">
+                        <div class="icon">
+                            <img class="img-fluid" src="/img/emergency.png" alt="emergency">
+                        </div>
+                        <div class="call_content_box">
+                            <p>Emergency No.</p>
+                            <h2><%= siteInfo.emergencyNumbers.join(', ') %></h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="tel:<%= siteInfo.appointmentNumber.replace(/[^0-9+]/g, '') %>">
+                    <div class="call_number_box1">
+                        <div class="icon">
+                            <img class="img-fluid" src="/img/appoinment.png" alt="appoinment">
+                        </div>
+                        <div class="call_content_box">
+                            <p>Appoinment No.</p>
+                            <h2><%= siteInfo.appointmentNumberDisplay %></h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="tel:<%= siteInfo.opdEnquiriesNumber.replace(/[^0-9+]/g, '') %>">
+                    <div class="call_number_box1 fourth">
+                        <div class="icon">
+                            <img class="img-fluid" src="/img/opd.png" alt="opd">
+                        </div>
+                        <div class="call_content_box">
+                            <p>OPD No.</p>
+                            <h2><%= siteInfo.opdEnquiriesNumber %></h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a href="tel:<%= siteInfo.diagnosticsNumber.replace(/[^0-9+]/g, '') %>">
+                    <div class="call_number_box2">
+                        <div class="icon">
+                            <img class="img-fluid" src="/img/diagnostic.png" alt="diagnostic">
+                        </div>
+                        <div class="call_content_box">
+                            <p>Diagnostic No.</p>
+                            <h2><%= siteInfo.diagnosticsNumber %></h2>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 7. MEDIA COVERAGE SECTION                  -->
+<!-- ========================================== -->
+<section class="media_coverage">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-12 text-center mb-4 fadeInUp animated">
+                <h2 class="section-heading">Media Coverage of NBWCCC - New Town</h2>
+                <p>Expansion of Paediatric Multispecialty Services Draws Local and Regional Media Attention</p>
+            </div>
+            
+            <div class="owl-carousel media-carousel">
+                <div class="item">
+                    <a href="https://thebengal.in/2026/02/26/nbwccc-cochlear-implant-clinic-newtown/" target="_blank" class="book-media">
+                        <div class="modern-card d-flex">
+                            <div class="col-5 modern-card-img">
+                                <img src="/upload/fileManager/media/the-bengal-cochlear.png" alt="Cochlear Implant Clinic" onerror="this.src='/img/landing.webp'">
+                            </div>
+                            <div class="col-7 modern-card-content">
+                                <div class="modern-date">26<sup>th</sup>&nbsp;February,&nbsp;2026</div>
+                                <div class="modern-title publication">Publication: The Bengal</div>
+                                <div class="modern-title">Neotia Bhagirathi Launches Advanced Cochlear Implant Clinic in New Town</div>
+                                <span class="explore-link">Explore</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="https://theinsightwire.in/neotia-bhagirathi-woman-and-child-care-centre-launches-advanced-cochlear-implant-clinic-in-new-town/" target="_blank" class="book-media">
+                        <div class="modern-card d-flex">
+                            <div class="col-5 modern-card-img">
+                                <img src="/upload/fileManager/media/the-insight-wire-cochlear.png" alt="Cochlear Clinic" onerror="this.src='/img/landing.webp'">
+                            </div>
+                            <div class="col-7 modern-card-content">
+                                <div class="modern-date">26<sup>th</sup>&nbsp;February,&nbsp;2026</div>
+                                <div class="modern-title publication">Publication: The Insight Wire</div>
+                                <div class="modern-title">Neotia Bhagirathi Woman and Child Care Centre Launches Advanced Cochlear Implant Clinic</div>
+                                <span class="explore-link">Explore</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="https://newtown.neotiahospital.com/upload/fileManager/media/news1.jpg" data-fancybox="media-gallery" data-caption="Healthcare facility for children launched" class="book-media">
+                        <div class="modern-card d-flex">
+                            <div class="col-5 modern-card-img">
+                                <img src="/upload/fileManager/media/news1_listi.jpg" alt="Child Healthcare Facility" onerror="this.src='/img/landing.webp'">
+                            </div>
+                            <div class="col-7 modern-card-content">
+                                <div class="modern-date">16<sup>th</sup>&nbsp;December,&nbsp;2025</div>
+                                <div class="modern-title publication">Publication: Healthcare India</div>
+                                <div class="modern-title">Healthcare facility for children launched at Neotia Bhagirathi Women &amp; Child Care Centre</div>
+                                <span class="explore-link">Explore</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="https://newtown.neotiahospital.com/upload/fileManager/media/news3deatil.jpg" data-fancybox="media-gallery" data-caption="Comprehensive child care under one roof" class="book-media">
+                        <div class="modern-card d-flex">
+                            <div class="col-5 modern-card-img">
+                                <img src="/upload/fileManager/media/news2_listi.jpg" alt="The Telegraph Feature" onerror="this.src='/img/landing.webp'">
+                            </div>
+                            <div class="col-7 modern-card-content">
+                                <div class="modern-date">15<sup>th</sup>&nbsp;December,&nbsp;2025</div>
+                                <div class="modern-title publication">Publication: The Telegraph</div>
+                                <div class="modern-title">Comprehensive child care under one roof in New Town</div>
+                                <span class="explore-link">Explore</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 8. WHAT'S NEW AT NBWCCC (HEALTH BLOGS)     -->
+<!-- ========================================== -->
+<section class="whats-new section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-4 fadeInUp animatable">
+                <h2 class="section-heading">What’s New At NBWCCC - New Town</h2>
+                <p>Discover the latest updates, expert insights and patient stories from Neotia Hospitals</p>
+            </div>
+            
+            <div class="whats-new-area owl-carousel">
+                <% blogs.forEach(b => { %>
+                    <div class="card custom-card fadeInUp animatable">
+                        <img src="<%= b.image ? (b.image.startsWith('http') ? b.image : (b.image.startsWith('/') ? b.image : '/' + b.image)) : '/img/landing.webp' %>" class="card-img" alt="<%= b.title %>" onerror="this.src='/img/landing.webp'">
+                        <div class="card-overlay">
+                            <div class="card-date"><%- b.date %></div>
+                            <div class="card-title text-uppercase"><%= b.title %></div>
+                            <a href="/blog-details/<%= b.slug %>" class="explore-link">Explore</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/blog" class="blog_view_more">View More</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- 9. RAINBOW BRIDGE SOCIAL WELFARE BANNER    -->
+<!-- ========================================== -->
+<section class="width-banner-sec py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="full-banner">
+                    <img src="/img/landing.webp" alt="Rainbow Bridge Social Welfare Initiative" class="img-fluid dask-view">
+                    <div class="full-banner-overley">
+                        <h2 class="section-heading fadeInUp animatable">Rainbow Bridge</h2>
+                        <p class="fadeInUp animatable" style="color: var(--brand-blue-1); font-weight: 700;">Social Welfare Initiative</p>
+                        <p class="fadeInUp animatable">
+                            To extend support to the needy and underprivileged through comprehensive healthcare services focusing on mothers and children, our initiative encompasses three key wings providing hope, medical care, and developmental support.
+                        </p>
+                        <a target="_blank" href="https://neotiahospital.com/social-responsibility" class="explore-link fadeInUp animatable">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/modals') %>
+<%- include('partials/footer') %>
+
+<!-- Carousel and Video initialization -->
+<script>
+$(document).ready(function () {
+    // 1. Paediatric Care Services Carousel
+    $(".area-card-about").owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        smartSpeed: 1200,
+        responsive: {
+            0: { items: 1, margin: 10 },
+            480: { items: 2, margin: 10 },
+            768: { items: 3, margin: 15 },
+            992: { items: 4, margin: 20 }
+        }
+    });
+
+    // 2. Doctor Carousel (if not handled by custom.js)
+    if (!$(".sec00-doctor").hasClass("owl-loaded")) {
+        $(".sec00-doctor").owlCarousel({
+            dots: true,
+            nav: false,
+            margin: 15,
+            autoplay: true,
+            autoplaySpeed: 1000,
+            smartSpeed: 1500,
+            loop: true,
+            responsive: {
+                0: { items: 1 },
+                600: { items: 2 },
+                992: { items: 3 }
+            }
+        });
+    }
+
+    // 3. Media Coverage Carousel
+    if (!$(".media-carousel").hasClass("owl-loaded")) {
+        $(".media-carousel").owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            smartSpeed: 800,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 1 },
+                992: { items: 2 }
+            }
+        });
+    }
+
+    // 4. What's New Blogs Carousel
+    $(".whats-new-area").owlCarousel({
+        loop: true,
+        margin: 25,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 4500,
+        smartSpeed: 800,
+        responsive: {
+            0: { items: 1 },
+            600: { items: 2 },
+            992: { items: 3 }
+        }
+    });
+
+    // 5. Initialize Fancybox for video popups
+    if (window.Fancybox) {
+        Fancybox.bind("[data-fancybox]", {
+            Thumbs: false,
+            Toolbar: true
+        });
+    }
+});
+</script>

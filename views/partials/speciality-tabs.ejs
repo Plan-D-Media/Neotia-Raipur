@@ -1,0 +1,51 @@
+<%#
+  Speciality tabs + cards, shared by the homepage and /specialised-services.
+  Rendered from the published departments (data/database.json, already in sitemap order),
+  grouped as in the Raipur sitemap: Woman Care -> Child Care -> Support.
+  Optional: animClass ('animatable' animates on scroll, 'animated' shows immediately).
+%>
+<%
+  const anim = typeof animClass !== 'undefined' ? animClass : 'animatable';
+  const groups = [
+      { key: 'women', group: 'woman', label: 'Woman Care',
+        description: 'Our Women’s Health Department provides personalised, compassionate care at every stage of life. Combining the latest medical advancements with a team of experts we focus on empowering women through expert guidance, proactive health management and treatments designed to promote overall well-being and vitality.' },
+      { key: 'child', group: 'child', label: 'Child Care',
+        description: 'Our Paediatric Speciality Department delivers comprehensive, compassionate and expert care. Supported by cutting-edge technology and a team of highly skilled paediatricians and sub-specialists, we uphold the highest standards of clinical excellence, ensuring every child receives top-notch care.' },
+      { key: 'support', group: 'support', label: 'Support', description: '' }
+  ].map(g => ({ ...g, items: departments.filter(d => d.group === g.group) })).filter(g => g.items.length);
+%>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Tabs -->
+                <div class="about-tabs fadeInUp <%= anim %>">
+                    <% groups.forEach((g, i) => { %>
+                    <button class="tab-link<%= i === 0 ? ' active' : '' %>" data-tab="<%= g.key %>"><%= g.label %></button>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% groups.forEach((g, i) => { %>
+    <div class="about-panel<%= i === 0 ? ' active' : '' %>" id="<%= g.key %>" style="display: <%= i === 0 ? 'block' : 'none' %>;">
+        <div class="container">
+            <% if (g.description) { %>
+            <p class="about-desc fadeInUp <%= anim %>"><%= g.description %></p>
+            <% } %>
+            <div class="row about-cards justify-content-center">
+                <% g.items.forEach(dept => { %>
+                <div class="col-6 col-lg-3">
+                    <a class="spl" href="/<%= dept.slug %>">
+                        <div class="about-card fadeInUp <%= anim %>">
+                            <div class="icon mb-3"><img class="img-resposive women_child_icon" src="<%= dept.menuIcon %>" alt="<%= dept.name %>"></div>
+                            <h4><%= dept.name %></h4>
+                            <% if (dept.tagline) { %><p><%= dept.tagline %></p><% } %>
+                        </div>
+                    </a>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <% }); %>

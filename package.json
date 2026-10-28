@@ -1,0 +1,29 @@
+{
+  "name": "neotia-raipur",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "npm run test:routes && npm run test:admin && npm run test:cms && npm run test:i18n && npm run test:booking && npm run test:leads",
+    "test:routes": "node tests/test_routes.js",
+    "test:admin": "node tests/test_admin.js",
+    "test:cms": "node tests/test_cms_pages.js",
+    "test:i18n": "node tests/test_i18n.js",
+    "test:booking": "node tests/test_booking_flow.js",
+    "test:leads": "node tests/test_lead_flow.js",
+    "check:assets": "node tools/checks/verify_assets.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.6.1",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "multer": "^2.4.0"
+  }
+}

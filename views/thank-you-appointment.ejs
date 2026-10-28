@@ -1,0 +1,42 @@
+<%- include('partials/header', { 
+    title: 'Thank You for Your Appointment Request | Neotia Bhagirathi Raipur',
+    description: 'Appointment request received at Neotia Bhagirathi Hospital.'
+}) %>
+
+<section class="section-padding text-center" style="padding-top: 140px; padding-bottom: 90px; background: var(--grey-bg);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm p-5" style="border-radius: 20px; background: var(--white);">
+                    <div class="d-inline-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px; border-radius: 50%; background: var(--grey-bg); color: var(--ui-success); font-size: 36px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 style="color: var(--theme-color); font-weight: 700; font-size: 32px; margin-bottom: 12px;">Appointment Request Received!</h2>
+                    <p style="color: var(--grey-700); font-size: 16px; line-height: 1.7; margin-bottom: 24px;">
+                        Thank you for reaching out to Neotia Bhagirathi Woman and Child Care Centre, Raipur. Our OPD coordination team has received your appointment details and will call you shortly to confirm your consultation timing.
+                    </p>
+
+                    <div class="p-3 rounded-3 mb-4 text-start" style="background: var(--grey-bg); border: 1px solid var(--brand-blue-1);">
+                        <h6 style="color: var(--theme-color); font-weight: 700; margin-bottom: 6px;"><i class="fas fa-info-circle me-1"></i> What to expect next:</h6>
+                        <ul class="small text-muted mb-0 ps-3">
+                            <li>Our coordinator will verify doctor availability and slot timing.</li>
+                            <li>You will receive an SMS and telephone confirmation with your token number.</li>
+                            <li>Please arrive 15 minutes prior to your scheduled consultation slot.</li>
+                        </ul>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="/" class="btn" style="background: var(--theme-color); color: var(--white); font-weight: 700; border-radius: 25px; padding: 10px 28px;">
+                            <i class="fas fa-home me-2"></i> Return to Homepage
+                        </a>
+                        <a href="/find-a-doctor" class="btn btn-outline-primary" style="font-weight: 700; border-radius: 25px; padding: 10px 24px;">
+                            View Doctors
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

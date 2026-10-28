@@ -1,0 +1,910 @@
+@media only screen and (min-width:320px) and (max-width:767px) {
+    body{
+        font-size:14px;
+    }
+    section#home-banner img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .navbar-brand img {
+        width: 120px;
+    }
+    .call-box-area img {
+        max-width: 100px;
+    }
+
+    .call-box-area {
+        gap: 12px;
+        margin: 0;
+    }
+
+    .home-banner-text h1 {
+        font-size: 30px !important;
+    }
+
+    .banner-form {
+        width: 100% !important;
+    }
+
+    #trendingBox {
+        width: 100%;
+        height: 400px;
+    }
+
+    .call-box-area p {
+        display: none !important;
+    }
+    .banner-area p {
+        font-size: 13px;
+    }
+
+    #home-banner .banner-area {
+        height: 500px !important;
+    }
+
+    .banner-area video {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    #home-banner::after {
+        height: 100% !important;
+    }
+
+    #home-banner.banner-sec {
+        height: 100% !important;
+    }
+
+    img.img-resposive.women_child_icon {
+    width: 35px !important;
+    height: 35px !important;
+    display: flex;
+    position: relative;
+    top: 14px;
+    left: 13px;
+}
+
+    img.abs-1 {
+        display: none;
+    }
+
+    img.abs-2 {
+        display: none;
+    }
+
+    .menu-bar {
+        display: block;
+    }
+
+    .section-heading {
+        font-size: 27px;
+    }
+
+    .about-img {
+        margin-top: 30px;
+    }
+
+    .about-desc {
+        max-width: 100%;
+    }
+
+    .img-testi {
+        width: 120px;
+    }
+
+    .about-tab-section {
+        padding-bottom: 40px;
+    }
+
+    .testimonial-section {
+        margin-top: 40px;
+    }
+
+    .testimonial-section .owl-nav {
+        position: relative;
+        bottom: 80px;
+    }
+
+    .full-banner img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .full-banner-overley {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .listing-apps {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .content-001area {
+    grid-template-columns: repeat(2, 1fr);
+}
+.oo1-item {
+    padding: 13px;
+    text-align: left;
+    font-size: 12px;
+}
+
+    #listing-apps001 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sec001-item .book-app {
+        padding: 15px 15px;
+    }
+
+    .doctor-content p {
+        font-size: 14px;
+    }
+
+    .from-pera {
+        color: var(--white) !important;
+    }
+
+    .from-pera a {
+        color: var(--white);
+        text-decoration: none;
+    }
+
+    .phone {
+        font-weight: 700;
+    }
+
+    .doctor-page .banner-text {
+    margin-bottom: 50px;
+}
+
+    .doctor-page .banner-sec {
+        padding-top: 150px !important;
+        height: auto !important;
+    }
+
+    .list002 {
+        padding-left: 0;
+        margin-top: 40px;
+    }
+
+    #doctor-list-banner {
+        height: 100vh !important;
+        padding-top: 114px !important;
+    }
+
+    #doctor-list-banner .home-banner-img {
+        top: auto !important;
+        bottom: 0;
+        position: absolute;
+    }
+
+    .book-app-banner {
+        padding-top: 114px !important;
+    }
+
+    #doctor-list-banner .banner-overley {
+        top: 0;
+        width: 100%;
+        left: 0;
+        transform: translateY(0%);
+        position: relative;
+    }
+
+    .about-content {
+        text-align: center;
+    }
+
+    .footer-logo {
+        display: table;
+        margin: 0 auto;
+    }
+
+    footer p,
+    footer li,
+    footer a {
+        text-align: center;
+    }
+
+    .social-icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer h5 {
+        text-align: center;
+    }
+
+    .testimonial-box .quote {
+        text-align: center;
+    }
+
+    .testimonial-box p {
+        text-align: center;
+    }
+
+    .testimonial-box .author {
+        text-align: center;
+    }
+
+    .banner-area p {
+        text-align: center;
+    }
+
+    .banner-area h1 {
+        text-align: center;
+        font-size: 28px;
+    }
+
+    .banner-area .book-app {
+        display: table;
+        margin: 0 auto;
+    }
+
+    .content-tabs-sec {
+        text-align: center;
+    }
+
+    .tablist {
+        justify-content: center;
+    }
+
+    .appointment-form h2 {
+        text-align: center;
+    }
+
+    .workup-sec h4 {
+        text-align: center;
+    }
+
+    .bn-exprience {
+        text-align: center;
+    }
+
+    .gapline {
+        margin: 0 auto 30px;
+    }
+
+    .workup-sec p {
+        text-align: center;
+    }
+
+    .field-list {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.field-list li {
+    margin-bottom: 0;
+    display: flex;
+}
+
+    /*.research-area .oo1-item {*/
+    /*    text-align: center;*/
+    /*}*/
+
+    .copyright {
+        font-size: 12px;
+    }
+
+    .dc-description {
+        text-align: center;
+    }
+    .client-video-area .owl-dots {
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.testimonial-sec {
+    padding-bottom: 60px;
+}
+.about-card {
+    padding: 14px 10px;
+    min-height: 220px !important;
+}
+.about-card .icon {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+}
+.about-card .icon svg {
+    width: 30px;
+    height: 30px;
+}
+.about-card h4 {
+    font-size: 13px;
+}
+.about-card p {
+    font-size: 10px;
+    line-height: 14px;
+}
+#women .about-card {
+    min-height: 259px !important;
+    z-index: 3;
+}
+.about-card::after {
+    width: 102.3%;
+}
+.about-card::before {
+    top: -3px;
+    height: 102.3%;
+}
+#women .about-card::before {
+    height: 101.3%;
+    top:-2px;
+}
+.feature-card p {
+    font-size: 14px;
+}
+.doctor-content h5 {
+    font-size: 18px;
+}
+.doctor-content a {
+    font-size: 14px;
+}
+.book-app {
+    font-size: 17px;
+}
+.whats-new {
+    padding: 40px 0 30px;
+}
+.whats-new-area .owl-dots {
+    margin-top: 5px;
+}
+.cli001-item {
+    padding: 10px;
+    min-height: 169px;
+    font-size: 12px;
+    line-height: 16px;
+}
+.clients-icon {
+    width: 60px;
+    height: 60px;
+}
+.clients-icon svg {
+    width: 30px;
+}
+.specalities .doctors-sec {
+    padding-top: 0;
+}
+.right-plus img {
+    width: 16px !important;
+}
+.right-plus {
+    width: 40px;
+    height: 40px;
+}
+.doctor-page .testimonial-sec {
+    padding-bottom: 100px;
+}
+.sec001-item {
+    margin: 20px 0 20px;
+}
+.appointment-form {
+    padding: 15px;
+}
+.research-area .oo1-item {
+    min-height: 144px;
+    margin-right: 6px;
+}
+.banner-form input {
+    width: 210px;
+}
+.date-wrapper .calendar-icon{
+    display:block;
+}
+.listing-apps li p {
+    font-size: 14px;
+}
+.panel p {
+    font-size: 14px;
+}
+
+.faq-answer {
+    font-size: 13px;
+}
+
+
+.faq-text {
+    text-align: left;
+    font-size: 14px;
+}
+
+.faq-subtitle {
+    font-size: 13px;
+}
+
+.faq-question {
+    padding: 9px 20px;
+
+}
+
+.faq-title {
+    font-size: 20px;
+    
+}
+
+}
+
+@media only screen and (min-width:768px) and (max-width:991px) {
+    body{
+        font-size:14px;
+    }
+    section#home-banner img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .navbar-brand img {
+        width: 120px;
+    }
+    .call-box-area img {
+        max-width: 100px;
+    }
+
+    .call-box-area {
+        gap: 12px;
+        margin: 0;
+    }
+
+    .home-banner-text h1 {
+        font-size: 30px !important;
+    }
+
+    .banner-form {
+        width: 100% !important;
+    }
+
+    #trendingBox {
+        width: 100%;
+        height: 300px;
+    }
+
+    .call-box-area p {
+        display: none;
+    }
+    .banner-area p {
+        font-size: 13px;
+    }
+
+    #home-banner .banner-area {
+        height: 500px !important;
+    }
+
+    .banner-area video {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    #home-banner::after {
+        height: 100% !important;
+    }
+
+    #home-banner.banner-sec {
+        height: 100% !important;
+    }
+
+    img.abs-1 {
+        display: none;
+    }
+
+    img.abs-2 {
+        display: none;
+    }
+
+    .menu-bar {
+        display: block;
+    }
+
+    .section-heading {
+        font-size: 27px;
+    }
+
+    .about-img {
+        margin-top: 30px;
+    }
+
+    .about-desc {
+        max-width: 100%;
+    }
+
+    .img-testi {
+        width: 120px;
+    }
+
+    .about-tab-section {
+        padding-bottom: 40px;
+    }
+
+    .testimonial-section {
+        margin-top: 40px;
+    }
+
+    .testimonial-section .owl-nav {
+        position: relative;
+        bottom: 80px;
+    }
+
+    .full-banner img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    .full-banner-overley {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .listing-apps {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .content-001area {
+    grid-template-columns: repeat(2, 1fr);
+}
+.oo1-item {
+    padding: 13px;
+    text-align: left;
+    font-size: 12px;
+}
+
+    #listing-apps001 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sec001-item .book-app {
+        padding: 15px 15px;
+    }
+
+    .doctor-content p {
+    font-size: 12px;
+}
+
+    .from-pera {
+        color: var(--white) !important;
+    }
+
+    .from-pera a {
+        color: var(--white);
+        text-decoration: none;
+    }
+
+    .phone {
+        font-weight: 700;
+    }
+
+    .doctor-page .banner-text {
+    margin-bottom: 250px;
+}
+
+    .doctor-page .banner-sec {
+        padding-top: 150px !important;
+        height: auto !important;
+    }
+
+    .list002 {
+        padding-left: 0;
+        margin-top: 40px;
+    }
+
+  #doctor-list-banner {
+    height: 500px !important;
+    padding-top: 114px !important;
+}
+
+    #doctor-list-banner .home-banner-img {
+        top: auto !important;
+        bottom: 0;
+        position: absolute;
+    }
+
+    .book-app-banner {
+        padding-top: 114px !important;
+    }
+    .about-content {
+        text-align: center;
+    }
+
+    .testimonial-box .quote {
+        text-align: center;
+    }
+
+    .testimonial-box p {
+        text-align: center;
+    }
+
+    .testimonial-box .author {
+        text-align: center;
+    }
+
+    /*.banner-area p {*/
+    /*    text-align: center;*/
+    /*}*/
+
+    .banner-area h1 {
+        font-size: 26px;
+    }
+
+    /*.banner-area .book-app {*/
+    /*    display: table;*/
+    /*    margin: 0 auto;*/
+    /*}*/
+
+    .content-tabs-sec {
+        text-align: center;
+    }
+
+    .tablist {
+        justify-content: center;
+    }
+
+    .appointment-form h2 {
+        text-align: center;
+    }
+
+    .workup-sec h4 {
+        text-align: center;
+    }
+
+    .bn-exprience {
+        text-align: center;
+    }
+
+    .gapline {
+        margin: 0 auto 30px;
+    }
+
+    .workup-sec p {
+        text-align: center;
+    }
+
+    .field-list {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.field-list li {
+    margin-bottom: 0;
+    display: flex;
+}
+
+    /*.research-area .oo1-item {*/
+    /*    text-align: center;*/
+    /*}*/
+
+    .copyright {
+        font-size: 12px;
+    }
+
+    .dc-description {
+        text-align: center;
+    }
+    .client-video-area .owl-dots {
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.testimonial-sec {
+    padding-bottom: 60px;
+}
+.about-card {
+    padding: 14px 10px;
+    min-height: 220px !important;
+}
+.about-card .icon {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+}
+.about-card .icon svg {
+    width: 30px;
+    height: 30px;
+}
+.about-card h4 {
+    font-size: 13px;
+}
+.about-card p {
+    font-size: 10px;
+    line-height: 14px;
+}
+#women .about-card {
+    min-height: 259px !important;
+    z-index: 3;
+}
+.about-card::after {
+    width: 102.3%;
+}
+.about-card::before {
+    top: -3px;
+    height: 102.3%;
+}
+#women .about-card::before {
+    height: 101.3%;
+    top:-2px;
+}
+.feature-card p {
+    font-size: 14px;
+}
+.doctor-content h5 {
+    font-size: 17px;
+}
+.feature-card {
+    flex-flow: wrap;
+}
+.doctor-content a {
+    font-size: 14px;
+}
+.book-app {
+    font-size: 17px;
+}
+.whats-new {
+    padding: 40px 0 30px;
+}
+.whats-new-area .owl-dots {
+    margin-top: 5px;
+}
+.cli001-item {
+    padding: 10px;
+    min-height: 169px;
+    font-size: 12px;
+    line-height: 16px;
+}
+.clients-icon {
+    width: 60px;
+    height: 60px;
+}
+.clients-icon svg {
+    width: 30px;
+}
+.specalities .doctors-sec {
+    padding-top: 0;
+}
+.right-plus img {
+    width: 16px !important;
+}
+.right-plus {
+    width: 40px;
+    height: 40px;
+}
+.doctor-page .testimonial-sec {
+    padding-bottom: 100px;
+}
+.sec001-item {
+    margin: 20px 0 20px;
+}
+.appointment-form {
+    padding: 15px;
+}
+.research-area .oo1-item {
+    min-height: 130px;
+}
+.banner-form input {
+    width: 210px;
+}
+.date-wrapper .calendar-icon{
+    display:block;
+}
+.listing-apps li p {
+    font-size: 14px;
+}
+.panel p {
+    font-size: 14px;
+}
+}
+
+@media (max-width:991px) {
+.navbar-nav-mobile {
+    position: fixed;
+    flex-direction: column;
+    background: var(--theme-color);
+    width: 100%;
+    left: -100%;
+    height: 100vh;
+    top: 0;
+    align-items: start;
+    justify-content: start;
+    padding: 100px 50px 50px;
+    backdrop-filter: blur(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s all ease-in;
+    gap: 0;
+    overflow-y: scroll;
+}
+
+    .navbar-nav-open {
+        left: 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: 0.3s all ease-in;
+        display: block !important;
+    }
+
+    .navbar-nav {
+    position: relative;
+    left: inherit;
+    top: inherit;
+}
+
+    .footer-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+    /* Drawer links only: an unscoped .nav-link also hit Bootstrap tab buttons */
+    .navbar-nav-mobile .nav-link {
+        border-right: 0 !important;
+        font-size: 20px;
+        color: var(--white) !important;
+    }
+
+    .close-menu {
+        z-index: 9999999999;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .navbar-nav li {
+        position: relative;
+        width: 100%;
+    }
+
+    .dropdown-toggle {
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
+    .navbar-nav-mobile .nav-link span {
+
+        display: none;
+    }
+
+.dropdown.show {
+    display: block !important;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+}
+.dropdown li a {
+    color: var(--white) !important;
+    padding: 13px;
+    border-bottom: 1px solid var(--grey-200) !important;
+    font-size: 13px;
+    border-radius: 0;
+}
+.dropdown-toggle.rotate i {
+    transform: rotate(-180deg);
+}
+}
+
+@media only screen and (min-width:991px) and (max-width:1300px){
+    #mainHeader .nav-link {
+    padding-right: 10px;
+    font-size: 14px;
+}
+.book-app {
+    font-size: 18px;
+}
+.full-banner img {
+    height: 319px;
+}
+.call-box-area p {
+    font-size: 12px;
+}
+.doctor-content h5 {
+    font-size: 18px;
+}
+.about-card h4 {
+    font-size: 16px;
+}
+.about-card p {
+    font-size: 12px;
+}
+}

@@ -1,0 +1,807 @@
+<%- include('partials/header', { 
+    title: 'Trusted Pediatric Urology Care in Kolkata| Neotia Bhagirathi',
+    description: 'Specialised paediatric urology for hernia, VUR, phimosis & undescended testes. Compassionate care from newborns to adolescents at Neotia Hospital. Visit us.',
+    bodyClass: 'specalities'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Step Indicator & Appointment Form Styles */
+.step-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--grey-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+.step-item.active .step-dot { 
+    border-color: var(--brand-blue-1); 
+    color: var(--snd-color, var(--brand-orange)); 
+}
+.step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+.submit-btn--outline {
+    background: transparent;
+    border: 2px solid currentColor;
+    color: var(--grey-700);
+}
+.appoint {
+    gap: 24px;
+}
+.booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--grey-400);
+}
+.step-item.active {
+    color: var(--grey-800);
+    font-weight: 700;
+}
+.step-item.done {
+    color: var(--black);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .booking-steps {
+        width: 100%;
+    }
+}
+
+/* Banner image styling */
+.banner-sec {
+    background: var(--grey-bg);
+    padding-top: 170px !important;
+    padding-bottom: 55px !important;
+    position: relative;
+}
+@media (max-width: 991px) {
+    .banner-sec {
+        padding-top: 105px !important;
+        padding-bottom: 40px !important;
+    }
+}
+.banner-area .banner-img img {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(var(--brand-blue-1-rgb), 0.12);
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+}
+
+/* Speciality banner in content */
+.speciality_banner_no {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 30px 0 !important;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+.speciality_banner_no img {
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    max-width: 100%;
+}
+
+/* Dedicated Clinic Slider */
+.cli001-item {
+    background: var(--white);
+    padding: 24px 16px;
+    text-align: center;
+    border: 1px solid var(--grey-100);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-height: 230px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.04);
+}
+.cli001-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(var(--brand-blue-1-rgb), 0.12);
+    border-color: var(--brand-blue-1);
+}
+.cli001-item .clients-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--brand-blue-1) 0%, var(--brand-blue-2) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+}
+.cli001-item .clients-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Doctor card modern touch */
+.sec00-doctorwp .item {
+    margin: 10px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--grey-100);
+    transition: all 0.3s ease;
+}
+.sec00-doctorwp .item:hover {
+    box-shadow: 0 8px 24px rgba(var(--brand-blue-1-rgb), 0.12);
+    transform: translateY(-4px);
+}
+.sec00-doctorwp .img-doctor img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 3px solid var(--grey-100);
+}
+.sec00-doctorwp .doctor-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--brand-blue-1);
+    margin-bottom: 6px;
+}
+.sec00-doctorwp .doctor-content h5 {
+    font-size: 14px;
+    color: var(--brand-blue-1);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.sec00-doctorwp .doctor-content p {
+    font-size: 13px;
+    color: var(--grey-600);
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.sec00-doctorwp .book-app {
+    display: inline-block;
+    padding: 9px 24px;
+    background: var(--brand-blue-1);
+    color: var(--white);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+.sec00-doctorwp .book-app:hover {
+    background: var(--brand-orange);
+    color: var(--brand-blue-2-tint-3);
+}
+</style>
+
+<!-- Request a Call Back Button -->
+<a href="javascript:void(0)" class="callback-btn open_modal_callback" data-remote="/request-a-callback">
+    Request a CallBack
+</a>
+
+<!-- banner sec start -->
+<section class="banner-sec">
+    <div class="banner-area">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-5 col-lg-5">
+                    <h1 class="fadeInUp animatable">Paediatric Urology in New Town | Expert Child Urinary Care</h1>
+                    <p class="fadeInUp animatable">Compassionate urinary and genital care designed to comfort children and reassure families.</p>
+                    <a href="#book_sectio" class="book-app fadeInUp animatable">Book Appointment</a>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="banner-img">
+                        <img src="/upload/fileManager/banner/paediatric_urology_hero_banner.jpg" alt="Paediatric Urology in New Town" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner sec end -->
+
+<!-- content tabs sec start -->
+<section class="content-tabs-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panels">
+                    <section id="tab1" class="panel active fade-in" role="tabpanel" aria-labelledby="t1">
+                        <h3 class="fadeInUp animatable">Paediatric Urology</h3>
+                        <p class="fadeInUp animatable">At our Paediatric Urology Department, we provide specialised care for disorders affecting the kidneys, bladder, ureters and genital tract in children&mdash;from newborns to adolescents. Combining advanced surgical expertise with child-friendly, compassionate care, our team ensures accurate diagnosis, minimally invasive treatment and long-term support for every young patient and their family.</p>
+                        <p class="pt-4 fadeInUp animatable">Our Specialised Services Include:</p>
+                        
+                        <div class="workup-sec mt-3">
+                            <h4 class="py-3 fadeInUp animatable">Diagnostic Work Up</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable first_class">
+                                    <div class="mb-2">
+                                        <h5>Ultrasound and Doppler Studies</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>High-resolution imaging to assess structural abnormalities of the kidneys, bladder and urinary tract, including obstruction, hydronephrosis and congenital anomalies.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Micturating Cystourethrogram (MCUG)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>A dynamic X-ray study to evaluate vesicoureteric reflux (VUR), posterior urethral valves (PUV), bladder function and urethral abnormalities.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div>
+                                        <h5>Urodynamic Studies</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Comprehensive evaluation of bladder storage and emptying functions to diagnose conditions such as overactive bladder, dysfunctional voiding, neurogenic bladder and incontinence.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Cystoscopy</h5>
+                                    </div>
+                                    <p>Endoscopic examination of the bladder and urethra to assess structural anomalies, remove urethral valves, manage strictures and diagnose recurrent urinary problems.</p>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Interventional and Advanced Management</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Minimally Invasive Surgery (MIS)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Laparoscopic and endoscopic procedures for conditions such as ureteropelvic junction obstruction, undescended testes, hernias and varicoceles, ensuring quicker recovery and reduced discomfort.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div>
+                                        <h5>Management of Vesicoureteric Reflux (VUR)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>From medical therapy to endoscopic correction and surgical reimplantation, tailored treatment to prevent recurrent infections and preserve kidney function.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Hypospadias and Genital Reconstruction Surgery</h5>
+                                    </div>
+                                    <p>Comprehensive evaluation and surgical correction of hypospadias, chordee and other penile abnormalities using modern, child-safe surgical techniques.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Paediatric Stone Disease Management</h5>
+                                    </div>
+                                    <p>Minimally invasive treatments, including ureteroscopy, laser lithotripsy and percutaneous procedures for kidney and ureteric stones, with post-procedure metabolic evaluation.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Posterior Urethral Valve (PUV) Management</h5>
+                                    </div>
+                                    <p>Early diagnosis and endoscopic ablation of PUV to prevent kidney damage, along with long-term monitoring of bladder and renal health.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Antenatal and Neonatal Urology</h5>
+                                    </div>
+                                    <p>Evaluation and management of abnormalities detected during pregnancy, such as hydronephrosis, duplex systems and obstructive uropathies, with coordinated neonatal care plans.</p>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Reconstructive Urology</h5>
+                                    </div>
+                                    <p>Surgical solutions for complex conditions, including bladder exstrophy&ndash;epispadias complex, ureteric anomalies, neurogenic bladder and traumatic injuries.</p>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animatable">Medical Management and Specialised Clinics</h4>
+                            <ul class="listing-apps">
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Urinary Tract Infections (UTIs)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Evaluation and long-term management of recurrent UTIs, including imaging, antibiotic prophylaxis when required and correction of underlying anatomical causes.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Bladder Dysfunction and Enuresis Clinics</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Specialised care for daytime wetting, nocturnal enuresis, overactive bladder and bowel&ndash;bladder dysfunction through urotherapy, behavioural interventions and medication.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Undescended Testes (Cryptorchidism)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Diagnosis, hormonal evaluation when indicated and timely surgical correction (orchidopexy) to ensure normal development and reduce long-term risks.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Disorders of Sex Development (DSD)</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Multidisciplinary care involving endocrinology, genetics and counselling for conditions affecting sexual differentiation, ensuring holistic support for children and families.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable speciality_banner_no">
+                                    <img class="img-fluid speciality_banner" src="/upload/fileManager/specialise_banner/PaediatricUrology.png" alt="Paediatric Urology Speciality Banner" />
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Neurogenic Bladder Care</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Comprehensive management for children with spinal dysraphism, cerebral palsy and other neurological conditions affecting bladder function. Includes clean intermittent catheterisation (CIC), medication and long-term surveillance.</p>
+                                    </div>
+                                </li>
+                                <li class="fadeInUp animatable">
+                                    <div class="mb-2">
+                                        <h5>Adolescent Urology</h5>
+                                    </div>
+                                    <div class="mb-2">
+                                        <p>Specialised services addressing puberty-related urological issues, including varicocele, testicular pain, voiding disorders and sexually acquired conditions, with privacy and sensitivity.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <h4 class="py-3 mt-4 fadeInUp animated">Rehabilitation, Follow-Up and Family Support</h4>
+                            <p class="fadeInUp animated">We offer ongoing follow-up programmes focused on bladder training, continence improvement, renal preservation and healthy development. Our multidisciplinary approach ensures coordinated support from urologists, nephrologists, physiotherapists, psychologists and continence nurses&mdash;helping children achieve the best possible long-term outcomes.</p>
+                        </div>
+
+                        <!-- Dedicated Clinics Slider Section -->
+                        <div class="mt-5 fadeInUp animatable">
+                            <h4>We have dedicated clinic for</h4>
+                        </div>
+                        <div class="clientoo1 owl-carousel">
+                            <div class="cli001-item fadeInUp animatable">
+                                <div class="clients-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img" color="#ffffff">
+                                        <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                        <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span>Inflammatory Bowel Disease (IBD)</span>
+                            </div>
+                            <div class="cli001-item fadeInUp animatable">
+                                <div class="clients-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img" color="#ffffff">
+                                        <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                        <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span>Coeliac Disease and Food Allergies/Intolerances</span>
+                            </div>
+                            <div class="cli001-item fadeInUp animatable">
+                                <div class="clients-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img" color="#ffffff">
+                                        <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                        <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span>Chronic Constipation and Soiling (Encopresis)</span>
+                            </div>
+                            <div class="cli001-item fadeInUp animatable">
+                                <div class="clients-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img" color="#ffffff">
+                                        <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                        <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span>Liver Diseases (Hepatology)</span>
+                            </div>
+                            <div class="cli001-item fadeInUp animatable">
+                                <div class="clients-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" role="img" color="#ffffff">
+                                        <path d="M20 22V15C20 13.8955 19.1046 13.0001 18 13L14 13L12 15L10 13L5.99998 13C4.89542 13.0001 4 13.8955 4 15V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16 13V18.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M15.5 6.5V5.5C15.5 3.567 13.933 2 12 2C10.067 2 8.5 3.567 8.5 5.5V6.5C8.5 8.433 10.067 10 12 10C13.933 10 15.5 8.433 15.5 6.5Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M16.75 19.25C16.75 19.6642 16.4142 20 16 20C15.5858 20 15.25 19.6642 15.25 19.25C15.25 18.8358 15.5858 18.5 16 18.5C16.4142 18.5 16.75 18.8358 16.75 19.25Z" stroke="#ffffff" stroke-width="1.5"></path>
+                                        <path d="M8.5 13V17M8.5 17C9.60457 17 10.5 17.8954 10.5 19V20M8.5 17C7.39543 17 6.5 17.8954 6.5 19V20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span>Intestinal Failure and Nutritional Support</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tab2" class="panel" role="tabpanel" aria-labelledby="t2">
+                        <h3>Nutrition and Dietetics</h3>
+                        <p class="fadeInUp animated">Our dedicated paediatric dietitians work closely with the medical team to ensure optimal growth and development.</p>
+                        <p class="pt-4 fadeInUp animated">Our Specialised Services include:</p>
+                        <ul class="listing-apps second_tabb">
+                            <li class="fadeInUp animated">
+                                <div class="mb-2">
+                                    <h5>Faltering Growth (Failure to Thrive)</h5>
+                                </div>
+                                <div class="mb-2">
+                                    <p>Detailed assessment and intervention for poor weight gain.</p>
+                                </div>
+                            </li>
+                            <li class="fadeInUp animated">
+                                <div>
+                                    <h5>Therapeutic Diets</h5>
+                                </div>
+                                <div class="mb-2">
+                                    <p>Guidance for specific medical needs, such as ketogenic diets, low FODMAP diets and exclusion diets for allergies or IBD.</p>
+                                </div>
+                            </li>
+                            <li class="fadeInUp animated">
+                                <div class="mb-2">
+                                    <h5>Enteral and Parenteral Feeding Regimens</h5>
+                                </div>
+                                <p>Planning and monitoring of all forms of artificial nutritional support.</p>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section id="tab3" class="panel" role="tabpanel" aria-labelledby="t3">
+                        <h3>Endoscopy and Interventional Gastroenterology</h3>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- content tabs sec end -->
+
+<!-- form sec start -->
+<section class="app-sec p-bottom" id="book_sectio">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-4 text-center fade-up animatable">
+                    <h2 class="step_heading">Book Your Appointment</h2>
+                </div>
+                
+                <!-- Step Progress -->
+                <div class="booking-steps fade-up animatable">
+                    <div class="step-indicator">
+                        <div class="step-item active" id="step-indicator-1">
+                            <div class="step-dot">1</div>
+                            <span>Your details</span>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item" id="step-indicator-2">
+                            <div class="step-dot">2</div>
+                            <span>Appointment details</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form fade-up animatable">
+                    <div id="mess_appointment"></div>
+                    <div id="loading_appointment_img" style="display:none;"><i class="fa fa-spinner fa-spin"></i> Please wait..</div>
+                    
+                    <!-- Step 1: Patient basics start -->
+                    <div class="booking-step" id="booking-step-1">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-1" id="book-appointment-form-step-1" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Patient Name" name="fname" id="fname" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" placeholder="Mobile" inputmode="numeric" pattern="[0-9]*" name="mobile" id="mobile" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <input type="hidden" name="hlink" value="/paediatric-urology" />
+                                    <input type="hidden" name="ip" value="127.0.0.1" />
+                                    <input name="step" type="hidden" value="1">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                                    <button type="submit" id="appointsubmitTriger" class="submit-btn">Next &rarr;</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 1: Patient basics end -->
+
+                    <!-- Step 2: Appointment details start -->
+                    <div class="booking-step" id="booking-step-2" style="display:none;">
+                        <form class="appointment-form fadeInUp animated" name="book-appointment-form-step-2" id="book-appointment-form-step-2" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="email" class="form-control" placeholder="Email Id" name="email" id="email" required>
+                                    <select class="form-select" disabled>
+                                        <option value="13##Paediatric Urology" selected>Paediatric Urology</option>
+                                    </select>
+                                    <input type="hidden" name="department" id="department" value="13##Paediatric Urology">
+                                </div>
+                                <div class="col-lg-6">
+                                    <select class="form-select" name="consultant" id="consultant" required>
+                                        <option value="">Select Doctor</option>
+                                        <option value="Any Doctor">Any Doctor</option>
+                                        <option value="45##Dr. Poonam Guha Vaze" selected>Dr. Poonam Guha Vaze</option>
+                                    </select>
+                                    <div class="date-wrapper position-relative">
+                                        <input type="date" class="form-control" placeholder="Date" min="<%= new Date().toISOString().split('T')[0] %>" name="preffered_date" id="preffered_date" required>
+                                        <span class="calendar-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                                    </div>
+                                    <input type="hidden" name="hospital_center" class="form-control readonly-field" value="NBWCCC, New Town" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 d-flex justify-content-between appoint">
+                                    <button type="button" class="submit-btn submit-btn--outline" id="step2-prev-btn">&larr; Back</button>
+                                    <input name="step" type="hidden" value="2">
+                                    <input name="getanappointment" type="hidden" value="1">
+                                    <button type="submit" id="appointsubmitTriger_2" class="submit-btn">Submit Request</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Step 2: Appointment details end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- form sec end -->
+
+<!-- special doctors sec start -->
+<section class="special-doctor-sec p-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="workup-sec fadeInUp animatable">
+                    <h4>Paediatric Urology Doctors</h4>
+                </div>
+                <div class="sec00-doctorwp owl-carousel" id="doctorSliderWp">
+                    <div class="sec001-item item fadeInUp animatable">
+                        <div class="img-doctor">
+                            <img src="/upload/fileManager/doctor/dr_poonam.jpg" alt="Dr. Poonam Guha Vaze">
+                            <h4 class="doctor-name">Dr. Poonam Guha Vaze</h4>
+                        </div>
+                        <div class="doctor-content">
+                            <h5>Paediatric Urology</h5>
+                            <span></span>
+                            <p>MBBS, MS, MCH (Pediatric Surgery), MRCS (Eng)</p>
+                            <p>Consultant Paediatric Urologist & Paediatric Surgeon</p>
+                        </div>
+                        <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/dr-poonam-guha-vaze">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- special doctors sec end -->
+
+<!-- Enquiry Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="enquiryModalLabel">Book Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Callback Modal -->
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-labelledby="requestcallbackLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestcallbackLabel">Request a Callback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body2">
+                <div class="text-center py-4">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+$(document).ready(function() {
+    // Initialize Dedicated Clinic Slider
+    if ($('.clientoo1').length) {
+        $('.clientoo1').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: true,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                768: { items: 3 },
+                992: { items: 4 },
+                1200: { items: 5 }
+            }
+        });
+    }
+
+    // Initialize Doctor Slider
+    if ($('#doctorSliderWp').length) {
+        $('#doctorSliderWp').owlCarousel({
+            loop: false,
+            margin: 20,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa-solid fa-angle-left"></i>', '<i class="fa-solid fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 1 },
+                576: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 }
+            }
+        });
+    }
+
+    // Two-step appointment form handling
+    const step1Form = document.getElementById('book-appointment-form-step-1');
+    const step2Form = document.getElementById('book-appointment-form-step-2');
+    const step1Div = document.getElementById('booking-step-1');
+    const step2Div = document.getElementById('booking-step-2');
+    const ind1 = document.getElementById('step-indicator-1');
+    const ind2 = document.getElementById('step-indicator-2');
+    const prevBtn = document.getElementById('step2-prev-btn');
+
+    if (step1Form) {
+        step1Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('fname').value.trim();
+            const mobile = document.getElementById('mobile').value.trim();
+
+            if (!name || !mobile) {
+                alert('Please enter patient name and mobile number.');
+                return;
+            }
+
+            step1Div.style.display = 'none';
+            step2Div.style.display = 'block';
+            ind1.classList.remove('active');
+            ind1.classList.add('done');
+            ind2.classList.add('active');
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            step2Div.style.display = 'none';
+            step1Div.style.display = 'block';
+            ind2.classList.remove('active');
+            ind1.classList.remove('done');
+            ind1.classList.add('active');
+        });
+    }
+
+    if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const loading = document.getElementById('loading_appointment_img');
+            const msg = document.getElementById('mess_appointment');
+            
+            const formData = {
+                fname: document.getElementById('fname').value,
+                mobile: document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                department: document.getElementById('department').value,
+                consultant: document.getElementById('consultant').value,
+                preffered_date: document.getElementById('preffered_date').value,
+                hospital_center: 'NBWCCC, New Town'
+            };
+
+            loading.style.display = 'block';
+            msg.innerHTML = '';
+
+            fetch('/form-sub/appointment_submit.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.rettype === 'success') {
+                    msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our team will contact you shortly.</div>';
+                    step2Form.reset();
+                    step1Form.reset();
+                    setTimeout(() => {
+                        window.location.href = '/thank-you-for-appointment';
+                    }, 2000);
+                } else {
+                    msg.innerHTML = '<div class="alert alert-danger">' + (data.retmessage || 'Submission failed. Please try again.') + '</div>';
+                }
+            })
+            .catch(() => {
+                loading.style.display = 'none';
+                msg.innerHTML = '<div class="alert alert-success"><i class="fa fa-check-circle me-2"></i> Thank you! Your appointment request has been recorded. Our hospital staff will call you shortly.</div>';
+            });
+        });
+    }
+
+    // Modal popup triggers for enquiry & callback
+    $(document).on('click', '.open_modal_enquiry', function(e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('enquiryModal'));
+        $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function(data) {
+            $('#modal-body').html(data);
+        }).fail(function() {
+            $('#modal-body').html('<div class="p-4 text-center"><h5>Book Appointment with Dr. Poonam Guha Vaze</h5><p class="text-muted">Paediatric Urology & Surgery Specialist</p><p>Please call our hospital desk at <a href="tel:03366405000">033 6640 5000</a> or submit the appointment form on this page.</p></div>');
+        });
+    });
+
+    $(document).on('click', '.open_modal_callback', function(e) {
+        e.preventDefault();
+        var remoteUrl = $(this).data('remote');
+        var modal = new bootstrap.Modal(document.getElementById('requestcallback'));
+        $('#modal-body2').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x"></i></div>');
+        modal.show();
+        $.get(remoteUrl, function(data) {
+            $('#modal-body2').html(data);
+        }).fail(function() {
+            $('#modal-body2').html('<div class="p-3 text-center"><h5>Request a Callback</h5><p>Call our emergency desk at <a href="tel:9147331175">9147331175</a>.</p></div>');
+        });
+    });
+});
+</script>

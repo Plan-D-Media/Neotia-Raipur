@@ -1,0 +1,652 @@
+<%- include('partials/header', { 
+    title: 'Find a Doctor | Specialist Doctors & Surgeons | Neotia Bhagirathi Raipur',
+    description: 'Looking for top doctors in Raipur? Find expert Pediatricians, Gynecologists & more at Neotia Bhagirathi. View profiles & book',
+    bodyClass: 'doctor-list-page'
+}) %>
+
+<link rel="stylesheet" href="/css/inner_style.css">
+
+<style>
+/* Transparent header sitting naturally over banner, matching live site */
+/* Full Screen Banner Section with New Bengali Female Doctor + Cute Girl */
+#doctor-list-banner.banner-sec {
+    background-color: var(--grey-bg);
+    padding-top: 0 !important;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+#doctor-list-banner .banner-area {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.home-banner-img.dask-view {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right bottom;
+    z-index: 1;
+}
+.home-banner-img.mob-view {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    z-index: 1;
+}
+.banner-overley {
+    position: relative;
+    width: 100%;
+    z-index: 5;
+    padding-top: 60px;
+}
+.home-banner-text {
+    text-align: center;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.home-banner-text h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--brand-blue-1);
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+/* The banner photo is pale: the shared white hero heading would vanish, so use Blue 2 here */
+#doctor-list-banner .home-banner-text h1 {
+    color: var(--brand-blue-2) !important;
+    text-shadow: none !important;
+}
+#doctor-list-banner .home-banner-text p {
+    font-size: 18px;
+    color: var(--grey-700);
+    font-weight: 400;
+    margin-bottom: 28px;
+}
+.banner-form {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border-radius: 40px;
+    padding: 6px 10px;
+    width: 680px;
+    max-width: 95%;
+    margin: auto;
+    box-shadow: 0 4px 22px rgba(var(--black-rgb), 0.08);
+    border: 1px solid rgba(var(--brand-blue-1-rgb), 0.12);
+    z-index: 10;
+    position: relative;
+}
+.banner-form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 22px;
+    border-radius: 40px;
+    font-size: 15px;
+    color: var(--brand-blue-2-tint-3);
+    background: transparent;
+}
+.banner-form input::placeholder {
+    color: var(--brand-blue-2-tint-1);
+    font-size: 15px;
+}
+.banner-form .srh-btn {
+    background: var(--brand-orange);
+    border: none;
+    outline: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(var(--brand-orange-rgb), 0.3);
+}
+.banner-form .srh-btn:hover {
+    background: var(--brand-orange);
+    transform: scale(1.05);
+    color: var(--brand-blue-2-tint-3);
+}
+.banner-form .srh-btn svg {
+    fill: var(--white);
+}
+
+/* Trending & Suggestion Box */
+.banner-main-form {
+    position: relative;
+}
+.trending-box {
+    display: none;
+    position: absolute;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px 22px;
+    width: 680px;
+    max-width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    box-shadow: 0 12px 35px rgba(var(--black-rgb), 0.15);
+    z-index: 100;
+    text-align: left;
+}
+.trending-box h4 {
+    font-size: 14px;
+    color: var(--grey-600);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+.tag-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tag-details span a {
+    display: inline-block;
+    background: var(--grey-bg);
+    color: var(--brand-blue-2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.tag-details span a:hover {
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+
+/* Floating Callback Button */
+.callback-btn {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right center;
+    background-color: var(--brand-blue-1);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px 8px 0 0;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.2);
+    z-index: 999;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+}
+.callback-btn:hover {
+    background-color: var(--brand-blue-2-tint-3);
+    color: var(--white) !important;
+}
+
+/* Doctor Listing Section */
+.doction-lise-sec {
+    background: var(--grey-bg);
+    padding: 60px 0 80px;
+}
+.doction-lise-sec .section-heading {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--brand-blue-2);
+    margin-bottom: 8px;
+}
+.doction-lise-sec p.section-subheading {
+    color: var(--grey-600);
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+.doction-lise-sec .sec001-item {
+    margin: 0;
+    margin-top: 30px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 4px 16px rgba(var(--black-rgb), 0.06);
+    transition: 0.3s all ease-in;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 30px);
+    border: 1px solid var(--grey-100);
+}
+.doction-lise-sec .sec001-item:hover {
+    box-shadow: 0 12px 28px rgba(var(--brand-blue-1-rgb), 0.16);
+    transform: translateY(-5px);
+}
+.doction-lise-sec .sec001-item .img-doctor {
+    position: relative;
+    overflow: hidden;
+    background: var(--grey-bg);
+    text-align: center;
+}
+.doction-lise-sec .sec001-item .img-doctor img {
+    width: 100%;
+    height: 252px;
+    object-fit: contain;
+    object-position: bottom center;
+    transform: scale(1);
+    transition: 0.6s ease all;
+    display: block;
+    margin: 0 auto;
+}
+.doction-lise-sec .sec001-item:hover .img-doctor img {
+    transform: scale(1.08);
+}
+.doction-lise-sec .doctor-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--brand-orange);
+    padding: 10px 16px;
+    clip-path: polygon(0 0, 80% 0, 90% 100%, 0% 100%);
+    font-size: 16px;
+    color: var(--brand-blue-2-tint-3);
+    font-weight: 700;
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+}
+/* Zen Maru Gothic runs wider than the old face: let long names wrap instead of cutting them off */
+@media (max-width: 1199px) {
+    .doction-lise-sec .doctor-name {
+        white-space: normal;
+        padding-right: 22%;
+        line-height: 1.25;
+    }
+}
+.doction-lise-sec .doctor-content {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid var(--grey-100);
+    border-top: none;
+    background: var(--white);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 230px;
+}
+.doction-lise-sec .doctor-content h5 {
+    color: var(--brand-blue-2-tint-3);
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 8px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.3;
+}
+.doction-lise-sec .doctor-content span.exp-badge {
+    color: var(--brand-blue-1);
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+}
+.doction-lise-sec .doctor-content p {
+    color: var(--grey-600);
+    font-size: 13.5px;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+.doction-lise-sec .doctor-content a.profile-link {
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--brand-blue-1);
+    transition: color 0.2s ease;
+}
+.doction-lise-sec .doctor-content a.profile-link:hover {
+    color: var(--brand-blue-1);
+    text-decoration: underline;
+}
+.doction-lise-sec .sec001-item .book-app {
+    display: block;
+    width: 100%;
+    background: var(--brand-blue-1);
+    color: var(--white) !important;
+    text-align: center;
+    padding: 12px 20px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 1px solid var(--brand-blue-1);
+    border-top: 0;
+    transition: background 0.3s ease;
+}
+.doction-lise-sec .sec001-item .book-app:hover {
+    background: var(--brand-blue-2);
+    border-color: var(--brand-blue-2);
+}
+
+@media (max-width: 991px) {
+    #doctor-list-banner.banner-sec,
+    #doctor-list-banner .banner-area {
+        min-height: 70vh;
+    }
+    .home-banner-img {
+        object-position: 80% bottom;
+    }
+}
+@media (max-width: 767px) {
+    .dask-view { display: none !important; }
+    .mob-view { display: block !important; }
+    #doctor-list-banner.banner-sec,
+    #doctor-list-banner .banner-area {
+        min-height: 480px;
+        height: auto;
+        padding-top: 90px;
+    }
+    .home-banner-text h1 { font-size: 32px; }
+    .callback-btn { display: none; }
+}
+@media (min-width: 768px) {
+    .dask-view { display: block !important; }
+    .mob-view { display: none !important; }
+}
+</style>
+
+<!-- Floating Request a CallBack Button -->
+<a href="javascript:void(0)" class="callback-btn open_modal_callback" data-bs-toggle="modal" data-bs-target="#requestcallback">Request a CallBack</a>
+
+<!-- Banner Section with New Bengali Female Doctor + Cute Girl -->
+<section class="banner-sec" id="doctor-list-banner">
+    <div class="banner-area">
+        <img src="/img/bengali_doctor_girl_banner_desk.png" alt="Find a doctor banner" class="img-fluid home-banner-img dask-view">
+        <img src="/img/bengali_doctor_girl_banner_mob.png" alt="Find a doctor banner" class="img-fluid home-banner-img mob-view">
+        
+        <div class="banner-overley">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-12">
+                        <div class="home-banner-text">
+                            <h1 class="fadeInUp animatable">Your Health, Your Choice</h1>
+                            <p class="fadeInUp animatable">Find the right doctor near you.</p>
+                            <div class="banner-main-form">
+                                <form class="banner-form" id="searchform" name="searchform" method="GET" action="/find-a-doctor">
+                                    <input type="text" id="searchInput" name="search_keyword" autocomplete="off" placeholder="Search For Doctor &amp; Specialties..." value="<%= typeof query !== 'undefined' && (query.search || query.search_keyword) ? (query.search || query.search_keyword) : '' %>">
+                                    <input type="hidden" name="search_redir_doc" value="1">
+                                    <button type="submit" class="srh-btn" aria-label="Search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                                            <g>
+                                                <path d="m40.9 39.485-7.813-7.812a14.878 14.878 0 0 0 3.72-9.865c0-4.007-1.56-7.774-4.393-10.607s-6.6-4.393-10.606-4.393S14.034 8.368 11.2 11.2s-4.393 6.6-4.393 10.607 1.56 7.773 4.393 10.606 6.6 4.394 10.607 4.394c3.67 0 7.13-1.323 9.865-3.721l7.812 7.812a.997.997 0 0 0 1.414 0 1 1 0 0 0 0-1.414zM12.614 31c-2.455-2.456-3.807-5.72-3.807-9.192s1.352-6.737 3.807-9.193c2.456-2.455 5.72-3.807 9.193-3.807S28.544 10.16 31 12.615c2.455 2.456 3.808 5.72 3.808 9.193S33.455 28.544 31 31c-2.456 2.455-5.72 3.808-9.192 3.808S15.07 33.455 12.615 31z" fill="#ffffff" opacity="1"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                </form>
+                                <!-- Trending Box -->
+                                <div class="trending-box" id="trendingBox">
+                                    <div class="tags" id="suggestions"></div>
+                                    <div class="tags" id="initial_srch_div">
+                                        <h4>Popular Specialties</h4>
+                                        <div class="tag-details">
+                                            <% departments.forEach(dept => { %>
+                                            <span><a href="/find-a-doctor/<%= dept.slug %>"><%= dept.name %></a></span>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Doctor Listing Section -->
+<section class="doction-lise-sec section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-4">
+                <h2 class="section-heading">Our Doctors</h2>
+                <p class="section-subheading">Choose the speciality - Find &amp; select the doctor - Book an appointment</p>
+                <% if (typeof query !== 'undefined' && (query.search || query.search_keyword || query.speciality)) { %>
+                    <div class="mt-2">
+                        <span class="badge bg-primary px-3 py-2" style="font-size: 13px;">
+                            Filtering by: <%= query.search || query.search_keyword || query.speciality %>
+                        </span>
+                        <a href="/find-a-doctor" class="badge bg-secondary text-decoration-none px-3 py-2 ms-2" style="font-size: 13px;">Clear Filter</a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="scroll scrollList" id="page_list_content">
+            <div class="row" id="doctorItemsGrid">
+                <% if (doctors && doctors.length > 0) { %>
+                    <% doctors.forEach(function(doctor) { %>
+                    <div class="col-md-6 col-lg-4 doctor-card-col mb-4" data-name="<%= doctor.name.toLowerCase() %>" data-speciality="<%= (doctor.speciality || '').toLowerCase() %>" data-qual="<%= (doctor.qualifications || doctor.qualification || '').toLowerCase() %>">
+                        <div class="sec001-item fadeInUp">
+                            <div class="img-doctor">
+                                <img src="<%= doctor.image %>" alt="<%= doctor.name %>" loading="lazy" onerror="this.onerror=null; this.src='/upload/fileManager/test2/DrSanjiban-list.png';">
+                                <h4 class="doctor-name"><%= doctor.name %></h4>
+                            </div>
+                            <div class="doctor-content">
+                                <h5><%= doctor.speciality %></h5>
+                                <% if (doctor.experience) { %>
+                                    <span class="exp-badge"><%= doctor.experience %></span>
+                                <% } else { %>
+                                    <span class="exp-badge">15+ years experience</span>
+                                <% } %>
+                                <% if (doctor.qualifications || doctor.qualification) { %>
+                                    <p><%= doctor.qualifications || doctor.qualification %></p>
+                                <% } %>
+                                <% if (doctor.regNo) { %>
+                                    <p><%= doctor.regNo.startsWith('Reg') ? doctor.regNo : 'Reg. No. : ' + doctor.regNo %></p>
+                                <% } %>
+                                <% if (doctor.timing) { %>
+                                    <p><%= doctor.timing %></p>
+                                <% } %>
+                                <a href="/doctor/<%= doctor.slug %>" class="profile-link">View Profile</a>
+                            </div>
+                            <a href="javascript:void(0)" class="book-app open_modal_enquiry" data-remote="/book-an-appointment-popup/<%= doctor.slug %>">Book Appointment</a>
+                        </div>
+                    </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="col-12 text-center py-5">
+                        <div class="alert alert-info py-4">
+                            <h4>No Doctors Found</h4>
+                            <p class="mb-3">We couldn't find any doctors matching your search query.</p>
+                            <a href="/find-a-doctor" class="btn btn-primary" style="background: var(--brand-blue-1); border: none;">View All Doctors</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Container for Doctor Booking Popups -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" id="modal-body">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Container for Request Callback -->
+<div class="modal fade" id="requestcallback" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title text-white">Request A Callback</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div id="callbackFormStatus"></div>
+                <form id="callbackForm" method="POST" action="/form-sub/enquiry_submit.php">
+                    <input type="hidden" name="source" value="Find a Doctor Callback Modal">
+                    <div class="mb-3">
+                        <label class="form-label font-weight-bold">Your Name *</label>
+                        <input type="text" class="form-control" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label font-weight-bold">Phone Number *</label>
+                        <input type="tel" class="form-control" name="phone" required pattern="[0-9]{10}" placeholder="Enter 10-digit mobile number">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label font-weight-bold">Department / Query</label>
+                        <select class="form-select" name="department">
+                            <option value="">Select Speciality</option>
+                            <% departments.forEach(dept => { %>
+                            <option value="<%= dept.name %>"><%= dept.name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <button type="submit" id="btnSubmitCallback" class="btn btn-primary w-100 py-2" style="background: var(--brand-orange); border: none; font-weight: 700; color: var(--brand-blue-2-tint-3);">Request Callback Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const trendingBox = document.getElementById('trendingBox');
+    const doctorCols = document.querySelectorAll('.doctor-card-col');
+
+    if (searchInput) {
+        // Show trending box on focus
+        searchInput.addEventListener('focus', function() {
+            if (trendingBox) trendingBox.style.display = 'block';
+        });
+
+        // Hide trending box when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#searchInput, #trendingBox')) {
+                if (trendingBox) trendingBox.style.display = 'none';
+            }
+        });
+
+        // Real-time client-side doctor filtering
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            if (!doctorCols.length) return;
+
+            let visibleCount = 0;
+            doctorCols.forEach(function(col) {
+                const name = col.getAttribute('data-name') || '';
+                const spec = col.getAttribute('data-speciality') || '';
+                const qual = col.getAttribute('data-qual') || '';
+
+                if (name.includes(query) || spec.includes(query) || qual.includes(query)) {
+                    col.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    col.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Modal popup loading via jQuery
+    if (window.jQuery) {
+        $(document).on('click', '.open_modal_enquiry', function(e) {
+            e.preventDefault();
+            const remoteUrl = $(this).data('remote');
+            const modalEl = document.getElementById('enquiryModal');
+            if (!modalEl) return;
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+
+            $('#modal-body').html('<div class="text-center py-4"><i class="fa fa-spinner fa-spin fa-2x text-primary"></i><p class="mt-2 text-muted">Loading appointment form...</p></div>');
+            modal.show();
+
+            $.get(remoteUrl, function(data) {
+                $('#modal-body').html(data);
+            }).fail(function() {
+                $('#modal-body').html('<div class="alert alert-danger">Unable to load appointment form. Please try calling us directly.</div>');
+            });
+        });
+    }
+
+    const callbackForm = document.getElementById('callbackForm');
+    if (callbackForm) {
+        callbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitCallback');
+            const statusDiv = document.getElementById('callbackFormStatus');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> Submitting...';
+
+            const formData = new FormData(callbackForm);
+            const params = new URLSearchParams(formData);
+
+            fetch(callbackForm.action, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString()
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                if (data.status === 'success' || data.success) {
+                    statusDiv.innerHTML = '<div class="alert alert-success d-flex align-items-center mb-3"><i class="fas fa-check-circle me-2 fs-5"></i><div><strong>Thank You!</strong> Callback request submitted. Our team will contact you shortly.</div></div>';
+                    callbackForm.reset();
+                    setTimeout(function() {
+                        const modalEl = document.getElementById('callbackModal');
+                        if (modalEl && window.bootstrap) {
+                            const modal = bootstrap.Modal.getInstance(modalEl);
+                            if (modal) modal.hide();
+                        }
+                    }, 2500);
+                } else {
+                    statusDiv.innerHTML = '<div class="alert alert-danger mb-3">' + (data.message || 'Error submitting request. Please try again.') + '</div>';
+                }
+            })
+            .catch(err => {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                statusDiv.innerHTML = '<div class="alert alert-danger mb-3">Network error. Please try again or call our hotline.</div>';
+            });
+        });
+    }
+});
+</script>
