@@ -45,7 +45,8 @@ async function runTests() {
     if (!cookieHeader) {
         throw new Error('Failed to get session cookie on login');
     }
-    const sessionCookie = cookieHeader[0].split(';')[0];
+    // Signed cookie sessions set two cookies (value + .sig); send them all back
+    const sessionCookie = cookieHeader.map(c => c.split(';')[0]).join('; ');
     console.log('✓ Admin authenticated successfully. Cookie received.');
 
     // 2. GET /admin/pages

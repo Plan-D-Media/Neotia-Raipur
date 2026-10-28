@@ -5,7 +5,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 
@@ -23,6 +23,10 @@ if (missingSettings.length) {
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
 
 const db = require('./database');
+
+// Read-only review mode: on Vercel (VERCEL is set by the platform) or with PREVIEW_MODE=true
+const PREVIEW_MODE = db.isPreview();
+const PREVIEW_MESSAGE = "Preview mode: changes aren't saved";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -68,7 +72,8 @@ const upload = multer();
 
 // Multer disk storage for page media uploads
 const pageUploadDir = path.join(__dirname, 'public', 'upload', 'pages');
-if (!fs.existsSync(pageUploadDir)) {
+// Vercel's filesystem is read-only, and uploads are disabled in preview mode anyway
+if (!PREVIEW_MODE && !fs.existsSync(pageUploadDir)) {
     fs.mkdirSync(pageUploadDir, { recursive: true });
 }
 const pageStorage = multer.diskStorage({
@@ -88,6 +93,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
+// Preview mode: keep the review site out of search engines, and tell the templates
+app.use((req, res, next) => {
+    res.locals.previewMode = PREVIEW_MODE;
+    if (PREVIEW_MODE) res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    next();
+});
+// Local static files. On Vercel, public/ is served by the CDN at the same URLs and this is skipped.
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
     const m = req.path.match(/^\/(find-a-doctor\/|book-an-appointment\/)?([a-z0-9-]+)\/?$/);
@@ -100,12 +112,38 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
+// Sessions live in a signed cookie (no server-side store), so admin login works on stateless hosts like Vercel
+if (process.env.VERCEL) app.set('trust proxy', 1);
+app.use(cookieSession({
+    name: 'neotia_session',
+    keys: [SESSION_SECRET],
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: !!process.env.VERCEL
 }));
+
+// Preview mode: admin can log in and look around, but every admin write is refused (before any upload is parsed)
+if (PREVIEW_MODE) {
+    app.use('/admin', (req, res, next) => {
+        res.locals.previewBlocked = req.query.preview_blocked === '1';
+        if (req.method === 'GET' || req.method === 'HEAD' || req.path === '/login') return next();
+        console.log(`[Preview mode] Blocked admin write: ${req.method} ${req.originalUrl}`);
+        const wantsJson = req.xhr || req.originalUrl.includes('/api/') || (req.get('accept') || '').includes('application/json');
+        if (wantsJson) {
+            return res.status(403).json({ success: false, message: PREVIEW_MESSAGE });
+        }
+        // Back to the page the form came from, with the preview banner highlighted
+        let back = '/admin';
+        try {
+            const ref = new URL(req.get('referer') || '', `${req.protocol}://${req.get('host')}`);
+            if (ref.host === req.get('host') && ref.pathname.startsWith('/admin')) back = ref.pathname + ref.search;
+        } catch (e) { /* no usable referer */ }
+        const url = new URL(back, 'http://local');
+        url.searchParams.set('preview_blocked', '1');
+        res.redirect(303, url.pathname + url.search);
+    });
+}
 
 // Global template locals (makes departments, siteInfo, doctors, i18n available everywhere)
 app.use((req, res, next) => {
@@ -603,9 +641,8 @@ app.post('/admin/login', (req, res) => {
 });
 
 app.get('/admin/logout', (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/admin/login');
-    });
+    req.session = null;
+    res.redirect('/admin/login');
 });
 
 // Admin Dashboard
@@ -1154,8 +1191,13 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Neotia Bhagirathi Hospital Server running live at: http://localhost:${PORT}`);
-    console.log(`Admin CMS Portal: http://localhost:${PORT}/admin (log in with ADMIN_USERNAME / ADMIN_PASSWORD from .env)`);
-});
+// Start the server locally. On Vercel the platform imports the exported app instead.
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Neotia Bhagirathi Hospital Server running live at: http://localhost:${PORT}`);
+        console.log(`Admin CMS Portal: http://localhost:${PORT}/admin (log in with ADMIN_USERNAME / ADMIN_PASSWORD from .env)`);
+        if (PREVIEW_MODE) console.log('Preview mode is ON: read-only, nothing is saved, pages are noindex.');
+    });
+}
+
+module.exports = app;

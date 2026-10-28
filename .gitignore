@@ -37,5 +37,8 @@ blob-report/
 coverage/
 .nyc_output/
 
+# Vercel CLI local link / build output
+.vercel/
+
 # Local Claude Code settings
 .claude/

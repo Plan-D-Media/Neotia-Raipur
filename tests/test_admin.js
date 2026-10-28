@@ -15,7 +15,8 @@ async function testAdmin() {
     redirect: 'manual'
   });
 
-  const cookie = loginRes.headers.get('set-cookie');
+  // Signed cookie sessions set two cookies (value + .sig); send back each name=value pair
+  const cookie = loginRes.headers.getSetCookie().map(c => c.split(';')[0]).join('; ');
   console.log('Login status:', loginRes.status, 'Cookie received:', !!cookie);
 
   if (!cookie) {

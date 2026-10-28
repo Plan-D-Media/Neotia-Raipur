@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Staff Login | Neotia Bhagirathi CMS</title>
+    <% if (typeof previewMode !== 'undefined' && previewMode) { %><meta name="robots" content="noindex, nofollow"><% } %>
     <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
     <link rel="icon" type="image/png" sizes="48x48" href="/img/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico">
@@ -66,6 +67,9 @@
         </div>
 
         <div class="login-body">
+            <% if (typeof previewMode !== 'undefined' && previewMode) { %>
+                <div class="alert alert-warning py-2 small mb-4"><i class="fas fa-eye me-1"></i> Preview mode: you can log in and look around, but changes aren't saved.</div>
+            <% } %>
             <% if (error) { %>
                 <div class="alert alert-danger py-2 small mb-4">
                     <i class="fas fa-exclamation-triangle me-1"></i> <%= error %>

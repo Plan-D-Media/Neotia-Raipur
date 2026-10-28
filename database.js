@@ -7,6 +7,10 @@ const crypto = require('crypto');
 const DB_FILE = path.join(__dirname, 'data', 'database.json');
 const SEED_FILE = path.join(__dirname, 'data', 'database.seed.json');
 
+// Preview mode (Vercel review link, or PREVIEW_MODE=true): read-only. The seed is loaded into memory,
+// nothing is ever written to disk, and form submissions are logged instead of stored.
+const PREVIEW_MODE = !!process.env.VERCEL || process.env.PREVIEW_MODE === 'true';
+
 // PASSWORD_SALT must stay the same once accounts exist, or stored hashes stop matching
 function hashPassword(password) {
   return crypto.createHash('sha256').update(password + (process.env.PASSWORD_SALT || '')).digest('hex');
@@ -63,6 +67,15 @@ class Database {
   }
 
   init() {
+    if (PREVIEW_MODE) {
+      const seed = fs.existsSync(SEED_FILE) ? JSON.parse(fs.readFileSync(SEED_FILE, 'utf8')) : {};
+      this.data = { ...this.data, ...seed, appointments: [], enquiries: [], admins: [] };
+      this.ensureAdmin();
+      this.initPages();
+      this.initCategories();
+      console.log('[Database] Preview mode: content loaded from data/database.seed.json; nothing will be saved.');
+      return;
+    }
     if (fs.existsSync(DB_FILE)) {
       try {
         const fileContent = fs.readFileSync(DB_FILE, 'utf8');
@@ -95,7 +108,12 @@ class Database {
     this.save();
   }
 
+  isPreview() {
+    return PREVIEW_MODE;
+  }
+
   save() {
+    if (PREVIEW_MODE) return;
     const dir = path.dirname(DB_FILE);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf8');
@@ -254,6 +272,12 @@ class Database {
   }
 
   createAppointment(appt) {
+    if (PREVIEW_MODE) {
+      // Same response shape as a real booking, but nothing is stored
+      const preview = { ...appt, id: Date.now(), status: 'New', createdAt: new Date().toISOString() };
+      console.log('[Preview mode] Appointment not saved:', JSON.stringify(preview));
+      return preview;
+    }
     appt.id = this.data.appointments.length ? Math.max(...this.data.appointments.map(a => a.id)) + 1 : 1;
     appt.status = appt.status || 'New';
     appt.createdAt = new Date().toISOString();
@@ -299,6 +323,11 @@ class Database {
   }
 
   createEnquiry(enq) {
+    if (PREVIEW_MODE) {
+      const preview = { ...enq, id: Date.now(), status: 'New', createdAt: new Date().toISOString() };
+      console.log('[Preview mode] Enquiry not saved:', JSON.stringify(preview));
+      return preview;
+    }
     enq.id = this.data.enquiries.length ? Math.max(...this.data.enquiries.map(e => e.id)) + 1 : 1;
     enq.status = enq.status || 'New';
     enq.createdAt = new Date().toISOString();

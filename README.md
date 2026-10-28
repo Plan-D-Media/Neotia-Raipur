@@ -44,6 +44,7 @@ All settings live in `.env` (template: `.env.example`).
 | `NODE_ENV` | no | `production` makes the app refuse to start if a required variable is missing |
 | `SITE_URL` | no | Public domain, e.g. `https://www.example.com`. Enables canonical / og:url tags. Blank = relative links |
 | `RECAPTCHA_SITE_KEY` | no | reCAPTCHA v3 site key for the forms |
+| `PREVIEW_MODE` | no (default `false`) | `true` = read-only review mode (see below). Always on when running on Vercel |
 
 Generate a random secret:
 
@@ -52,6 +53,39 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 Contact details (phones, address, map embed, email, social links, site domain) are edited in **/admin/settings** and stored in `siteInfo` in `data/database.json`.
+
+---
+
+## Deploy to Vercel (review link)
+
+The site can run on Vercel as a **read-only review link** for the client and designers. No `vercel.json` is needed.
+Vercel detects `server.js` as an Express app and serves everything in `public/` from its CDN at the same URLs.
+
+On Vercel, **preview mode is always on** (the platform sets `VERCEL=1`):
+
+- Content comes from `data/database.seed.json`, loaded into memory. Nothing is ever written to disk.
+- **Forms** (appointment, enquiry, callback, contact) show the normal thank-you response, but nothing is stored. Each submission is printed to the function logs.
+- **Admin:** you can log in and browse. Every change (save, edit, delete, status, settings, uploads) is refused with *"Preview mode: changes aren't saved"*, and a banner marks the admin as read-only.
+- **No indexing:** every response carries `X-Robots-Tag: noindex, nofollow`, and every page has `<meta name="robots" content="noindex, nofollow">`.
+- **Sessions** are signed cookies (`cookie-session`), so admin login works across Vercel's stateless instances.
+
+Steps:
+
+1. Import the GitHub repository in Vercel (**Add New → Project**). The framework is detected as **Express**; leave the build settings at their defaults.
+2. In **Settings → Environment Variables**, add:
+
+   | Variable | Required | Notes |
+   |---|---|---|
+   | `SESSION_SECRET` | yes | Long random string. Vercel runs with `NODE_ENV=production`, so the app refuses to start without it |
+   | `PASSWORD_SALT` | yes | Any random string (the review site has its own in-memory admin) |
+   | `ADMIN_USERNAME` | no (default `admin`) | Admin login for reviewers |
+   | `ADMIN_PASSWORD` | yes | Admin password for reviewers. Share it only with people who need the admin |
+   | `SITE_URL` | no | Leave blank on a review link |
+   | `RECAPTCHA_SITE_KEY` | no | Leave blank |
+
+3. Deploy. Content changes reach the review link by updating `data/database.seed.json` and pushing again.
+
+Try preview mode locally with `PREVIEW_MODE=true npm start` (PowerShell: `$env:PREVIEW_MODE="true"; npm start`). Your `data/database.json` is not read or changed while it is on.
 
 ---
 

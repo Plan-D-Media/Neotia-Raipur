@@ -41,5 +41,7 @@ This folder is not a git repo. Back up before bulk changes.
 
 ## Conventions
 
+- Preview mode (`PREVIEW_MODE=true`, always on Vercel) is read-only: `database.js` loads the seed into memory and never saves, forms are logged not stored, admin POSTs are refused in `server.js`. Any new write path must respect `db.isPreview()`.
+
 - Scripts in `tools/` and `tests/` build paths with `path.join(__dirname, '..', ...)` so they run from any directory. Keep it that way.
 - Tests hit `localhost:3000` (set `PORT=3001` to test another instance), and `test:booking`, `test:leads` and `test:cms` write records to `data/database.json`. Copy it first if it must stay clean.
