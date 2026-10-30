@@ -487,7 +487,8 @@ a.spl {
 }
 
 
-.banner-sec:not(#home-banner) .banner-area h1 {
+.banner-sec:not(#home-banner) .banner-area h1,
+.banner-area .banner-title {
     font-size: 38px;
     color: var(--theme-color);
     font-weight: 700;
@@ -3628,6 +3629,7 @@ p.from-pera.home_button a {
 }
 .owl-dots {
     display: flex;
+    flex-wrap: wrap; /* many slides (e.g. 32 doctors) must not widen the page on phones */
     align-items: center;
     justify-content: center;
     gap: 15px;
@@ -4998,5 +5000,111 @@ section.ddc-sec {
     }
     .hero-image-card {
         margin-top: 35px;
+    }
+}
+/* Speciality page booking form (views/partials/speciality-booking.ejs)
+   The first section on every speciality page, directly under the header and
+   action bar (body padding from public/js/action-bar.js clears both). Spacing is
+   kept tight so the H1 and the whole of step 1 sit above the fold. */
+.speciality-booking {
+    padding: 4px 0 40px;
+    background: var(--white);
+}
+
+.speciality-booking__title {
+    font-size: 34px;
+    line-height: 1.2;
+    color: var(--theme-color);
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.speciality-booking .step_heading {
+    font-size: 22px;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.speciality-booking .booking-steps {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.speciality-booking .step-item {
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--grey-600);
+}
+
+.speciality-booking .step-item.active {
+    color: var(--grey-900);
+    font-weight: 700;
+}
+
+.speciality-booking .step-item.done {
+    color: var(--brand-blue-1);
+}
+
+.speciality-booking .step-dot {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.speciality-booking .step-item.active .step-dot {
+    border-color: var(--brand-blue-1);
+    color: var(--snd-color, var(--brand-orange));
+    background: transparent;
+    box-shadow: none;
+}
+
+.speciality-booking .step-item.done .step-dot {
+    border-color: var(--brand-blue-1);
+    background: var(--brand-blue-1);
+    color: var(--white);
+}
+
+.speciality-booking .step-line {
+    height: 1px;
+    background: var(--grey-200);
+    margin: 0 12px;
+}
+
+.speciality-booking .submit-btn--outline {
+    border: 2px solid currentColor;
+}
+
+.speciality-booking .appoint {
+    gap: 24px;
+}
+
+.speciality-booking #loading_appointment_img {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    .speciality-booking__title {
+        font-size: 26px;
+    }
+
+    .speciality-booking .step_heading {
+        font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .speciality-booking .booking-steps {
+        width: 100%;
+        margin-bottom: 14px;
+    }
+
+    .speciality-booking .booking-form .form-control,
+    .speciality-booking .booking-form .form-select {
+        margin-bottom: 12px;
     }
 }

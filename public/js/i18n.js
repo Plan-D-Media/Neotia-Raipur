@@ -285,6 +285,49 @@
         'Back': {
             hi: 'वापस जाएं',
         },
+        // Speciality page booking form (views/partials/speciality-booking.ejs)
+        'Book Your Appointment': {
+            hi: 'अपना अपॉइंटमेंट बुक करें',
+        },
+        'Your details': {
+            hi: 'आपकी जानकारी',
+        },
+        'Appointment details': {
+            hi: 'अपॉइंटमेंट की जानकारी',
+        },
+        'Patient Name': {
+            hi: 'रोगी का नाम',
+        },
+        'Mobile': {
+            hi: 'मोबाइल',
+        },
+        'Email Id': {
+            hi: 'ईमेल आईडी',
+        },
+        'Speciality': {
+            hi: 'विशेषज्ञता',
+        },
+        'Doctor': {
+            hi: 'डॉक्टर',
+        },
+        'Any Doctor': {
+            hi: 'कोई भी डॉक्टर',
+        },
+        'Preferred date': {
+            hi: 'पसंदीदा तारीख',
+        },
+        'Next →': {
+            hi: 'आगे →',
+        },
+        '← Back': {
+            hi: '← वापस जाएं',
+        },
+        'Submit Request': {
+            hi: 'अनुरोध भेजें',
+        },
+        'Please wait..': {
+            hi: 'कृपया प्रतीक्षा करें..',
+        },
         'Submitting...': {
             hi: 'जमा हो रहा है...',
         },

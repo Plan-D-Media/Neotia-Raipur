@@ -49,12 +49,17 @@ function isHiddenDepartment(slug) {
     return !!dept && dept.status === 'draft';
 }
 
-// Doctors for a speciality page. getDoctors() falls back to every doctor when nothing matches,
-// which would list unrelated doctors; pages whose copy is still pending show none.
+// Doctors matched to a speciality name. getDoctors() falls back to every doctor when nothing
+// matches, which would list unrelated doctors; this returns [] instead.
+function matchedDoctors(specialityName) {
+    const list = db.getDoctors({ speciality: specialityName });
+    return list.length === db.getDoctors().length ? [] : list;
+}
+
+// Doctors for a speciality page; pages whose copy is still pending show none.
 function doctorsForDepartment(dept) {
     if (dept.copyPending) return [];
-    const list = db.getDoctors({ speciality: dept.name });
-    return list.length === db.getDoctors().length ? [] : list;
+    return matchedDoctors(dept.name);
 }
 
 // Old speciality URLs -> Raipur sitemap slugs (301)
@@ -379,6 +384,16 @@ app.post('/form-sub/get_doctors.php', upload.none(), (req, res) => {
     let deptName = deptVal;
     if (deptVal.includes('##')) {
         deptName = deptVal.split('##')[1];
+    }
+
+    // matched_only=1 (booking form on speciality pages): "Any Doctor" first, then only the doctors
+    // matched to the department, so a department with none shows just "Any Doctor"
+    if (req.body.matched_only === '1') {
+        let options = `<option value="">Select Doctor</option><option value="Any Doctor">Any Doctor</option>`;
+        matchedDoctors(deptName).forEach(doc => {
+            options += `<option value='${doc.id}##${doc.name}'>${doc.name}</option>`;
+        });
+        return res.send(options);
     }
 
     const doctors = deptName ? db.getDoctors({ speciality: deptName }) : db.getDoctors();
@@ -1109,19 +1124,25 @@ app.get('/:serviceSlug', (req, res, next) => {
         return next();
     }
     const specialityDoctors = doctorsForDepartment(dept);
+    // Doctor dropdown of the booking form at the top of the page (views/partials/speciality-booking.ejs):
+    // only the doctors matched to this speciality (none -> just "Any Doctor"), the same list
+    // /form-sub/get_doctors.php returns with matched_only=1
+    const bookingDoctors = matchedDoctors(dept.name);
 
     // Check if custom view exists for this service (e.g., paediatric-cardiac-science.ejs)
     const specificView = path.join(__dirname, 'views', `${req.params.serviceSlug}.ejs`);
     if (fs.existsSync(specificView)) {
         return res.render(req.params.serviceSlug, {
             department: dept,
-            specialityDoctors
+            specialityDoctors,
+            bookingDoctors
         });
     }
 
     res.render('service-detail', {
         department: dept,
-        specialityDoctors
+        specialityDoctors,
+        bookingDoctors
     });
 });
 

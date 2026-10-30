@@ -136,6 +136,23 @@
         }
     });
 
+    // Speciality pages open with the booking form (views/partials/speciality-booking.ejs):
+    // "Book An Appointment" scrolls back to it and focuses the first field instead of leaving the page
+    const bookingSection = document.querySelector('[data-speciality-booking]');
+    if (bookingSection) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        document.querySelectorAll('[data-booking-link]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                bookingSection.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+                // Patient Name on step 1; the first field of step 2 if the patient is already there
+                const step = [...bookingSection.querySelectorAll('.booking-step')].find(s => s.style.display !== 'none');
+                const field = step && step.querySelector('input:not([type="hidden"]), select');
+                if (field) field.focus({ preventScroll: true });
+            });
+        });
+    }
+
     // The hamburger is a div: make it work from the keyboard too
     const menuBar = header.querySelector('.menu-bar');
     if (menuBar) {

@@ -14,7 +14,8 @@ $(document).ready(function(){
       $.ajax({
         url: '/form-sub/get_doctors.php',
         type: 'POST',
-        data: {department_id: deptId},
+        // data-doctors="matched" (speciality pages): "Any Doctor" + only that department's doctors
+        data: $(this).data('doctors') === 'matched' ? {department_id: deptId, matched_only: 1} : {department_id: deptId},
         success: function(data){
           $(target).html(data); // update correct doctor select box
         }
@@ -120,7 +121,7 @@ book_appointment_form_step_2.addEventListener("submit", function (event) {
                 }
 
                 if (response.rettype === 'success') {
-                    window.location = 'thank-you-for-appointment' ;
+                    window.location = '/thank-you-for-appointment';
                 }
             })
             .catch(error => {
@@ -248,7 +249,7 @@ book_appointment_form_step_2.addEventListener("submit", function (event) {
             }
 
             // Redirect to thank-you page
-            window.location.href = 'thank-you-for-appointment';
+            window.location.href = '/thank-you-for-appointment';
           }
         })
         .catch(error => {
@@ -316,7 +317,7 @@ book_appointment_form.addEventListener("submit", function (event) {
                   //$('#myModal').modal('hide'); // Close the modal
                   // Close the modal
                     
-                    window.location = 'thank-you-for-appointment' ;
+                    window.location = '/thank-you-for-appointment';
                 }
             })
             .catch(error => {
@@ -392,7 +393,7 @@ book_appointment_form.addEventListener("submit", function (event) {
             }
 
             // Redirect to thank-you page
-            window.location.href = 'thank-you-for-appointment';
+            window.location.href = '/thank-you-for-appointment';
           }
         })
         .catch(error => {
@@ -472,7 +473,7 @@ book_appointment_form.addEventListener("submit", function (event) {
             }
 
             // Redirect to thank-you page
-            window.location.href = 'thank-you-for-enquiry';
+            window.location.href = '/thank-you-for-enquiry';
           }
         })
         .catch(error => {

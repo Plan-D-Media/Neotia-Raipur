@@ -12,6 +12,7 @@ This folder is not a git repo. Back up before bulk changes.
 | Change department / service data | `/admin/services`, or `data/database.json` (`departments`) |
 | Change the speciality list (names, order, groups, show/hide) | `data/database.json` `departments[]`: `name`, `order`, `group` (woman / child / support), `status` (`draft` hides it and returns 404), `menuIcon`, `tagline`. Nav, footer, homepage tabs, /specialised-services, booking and find-a-doctor all render from it. Renamed slugs 301 via `RENAMED_SPECIALITIES` in `server.js` |
 | Change service page copy | `views/<slug>.ejs` (e.g. `views/obstetrics-gynaecology.ejs`); specialities without their own view use `views/service-detail.ejs` (`copyPending: true` shows only the name, a placeholder line and the CTAs) |
+| Change the booking form at the top of every speciality page (H1 + 2-step form) | `views/partials/speciality-booking.ejs` (styles: `public/css/style.css` "Speciality page booking form"; submit: `public/js/custom_form.js`) |
 | Change header, nav, favicon links | `views/partials/header.ejs` (white header styles: `public/css/brand.css` §3) |
 | Change the sticky search / Book / Callback bar | `views/partials/action-bar.ejs`, `public/js/action-bar.js`, `public/css/brand.css` §4 |
 | Change footer | `views/partials/footer.ejs` |
